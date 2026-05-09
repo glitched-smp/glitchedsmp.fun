@@ -1,10 +1,12 @@
 {
+  "$schema": "https://glitchedsmp.fun/config.schema.json",
   "page_title": "Glitched SMP",
   "description": "Write description here",
   "public_links": {
     "/#home": "Home",
     "/#about": "About Us",
-    "/#ratings": "Ratings"
+    "/#ratings": "Ratings",
+    "/updates.html": "Updates"
   },
   "about_us": [
     "Paragraph #1",
@@ -65,6 +67,15 @@
     {
       "by": "#8",
       "rating": 1
+    }
+  ],
+  "updates": [
+    {
+      "type": "patchnote",
+      "name": "#1",
+      "added": [],
+      "removed": [],
+      "changed": []
     }
   ]
 }

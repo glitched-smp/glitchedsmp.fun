@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://glitchedsmp.fun",
+  "title": "Glitched SMP Website Config",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "page_title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "public_links": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "about_us": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "min_rating": {
+      "type": "integer"
+    },
+    "max_rating": {
+      "type": "integer"
+    },
+    "ratings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "by": {
+            "type": "string"
+          },
+          "rating": {
+            "type": "integer"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "by",
+          "rating"
+        ]
+      }
+    },
+    "updates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "patchnote",
+              "update"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "added": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "removed": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "changed": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "type",
+          "name",
+          "added",
+          "removed",
+          "changed"
+        ]
+      }
+    }
+  },
+  "required": [
+    "page_title",
+    "description",
+    "public_links",
+    "about_us",
+    "min_rating",
+    "max_rating",
+    "ratings",
+    "updates"
+  ]
+}
