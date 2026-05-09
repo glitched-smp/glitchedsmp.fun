@@ -57,26 +57,51 @@ import config from "../config.json";
 									<span class="text-xl">{rating.by}</span>
 									<div
 										title={`${rating.rating} out of ${config.max_rating} stars`}
-										class="flex gap-0.5 text-sm"
+										class="flex flex-col gap-0.5 text-sm"
 									>
 										{Array.from({
-											length: config.max_rating,
-										}).map((_, i) => {
-											const isLighted = i < rating.rating;
+											length: Math.ceil(
+												config.max_rating / 2,
+											),
+										}).map((_, row) => {
+											const perRow = Math.ceil(
+												config.max_rating / 2,
+											);
+
+											const start = row * perRow;
 											return (
-												<span
-													class={
-														isLighted
-															? "text-yellow-300"
-															: "text-fg-secondary"
-													}
-												>
-													★
-												</span>
+												<div class="flex gap-0.5">
+													{Array.from({
+														length: perRow,
+													}).map((_, i) => {
+														const index = start + i;
+														if (
+															index >=
+															config.max_rating
+														)
+															return null;
+
+														const isLighted =
+															index <
+															rating.rating;
+
+														return (
+															<span
+																class={
+																	isLighted
+																		? "text-yellow-300"
+																		: "text-fg-secondary"
+																}
+															>
+																★
+															</span>
+														);
+													})}
+												</div>
 											);
 										})}
 									</div>
-									<p class="mt-2 text-fg-muted">
+									<p class="mt-2 text-fg-muted max-w-30 md:max-w-50">
 										{rating.message ??
 											`${rating.rating} out of ${config.max_rating} stars`}
 									</p>

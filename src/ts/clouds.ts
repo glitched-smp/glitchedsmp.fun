@@ -19,11 +19,11 @@ function spawnCloud(parent: HTMLElement) {
 
     const clouds = [Cloud0, Cloud1, Cloud2, Cloud3, Cloud4]
     element.src = clouds[Math.floor(Math.random() * clouds.length)].src
-    element.className = "absolute z-4"
+    element.className = "opacity-75 absolute z-4"
     parent.appendChild(element)
     activeClouds.push({
         element,
-        speed: Math.floor(Math.random() * 3) * .5,
+        speed: Math.floor(Math.random() * 1.5) * .5,
         x: window.innerWidth,
         y: Math.floor(Math.random() * (window.innerHeight - 101)) + 100,
     })
@@ -50,6 +50,6 @@ function updateClouds() {
 document.addEventListener("DOMContentLoaded", () => {
     const homeSection = document.getElementById("home")
     if (!homeSection) return
-    setInterval(() => spawnCloud(homeSection), 250)
+    setInterval(() => spawnCloud(homeSection), 500)
     updateClouds()
 })
