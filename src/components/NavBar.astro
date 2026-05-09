@@ -1,0 +1,56 @@
+---
+import { Image } from "astro:assets";
+import config from "../config.json";
+---
+
+<nav
+    class="flex items-center justify-between px-8 bg-bg-secondary shadow-md w-full h-14 fixed z-10"
+>
+    <a href="/" class="nolink flex items-center gap-2">
+        <Image
+            src="https://i.flappygrant.com/logos/icon2k_original.png"
+            width={256}
+            height={256}
+            alt=""
+            class="bg-accent rounded-md w-8 h-8"
+        />
+
+        <span class="text-lg">Glitched SMP</span>
+    </a>
+
+    <ul id="navlinks-desktop" class="hidden gap-2">
+        {
+            Object.entries(config.public_links).map(([path, title], i) => (
+                <li>
+                    <a href={path}>{title}</a>
+                </li>
+            ))
+        }
+    </ul>
+
+    <ul id="navlinks-mobile" class="hidden flex-col gap-2">
+        {
+            Object.entries(config.public_links).map(([path, title], i) => (
+                <li>
+                    <a href={path}>{title}</a>
+                </li>
+            ))
+        }
+    </ul>
+
+    <script>
+        const navlinksDesktop = document.getElementById("navlinks-desktop");
+        const navlinksMobile = document.getElementById("navlinks-mobile");
+        document.addEventListener("DOMContentLoaded", () => {
+            if (window.innerWidth <= 768) {
+                if (!navlinksMobile) return;
+                navlinksMobile.classList.remove("hidden");
+                navlinksMobile.classList.add("flex");
+            } else {
+                if (!navlinksDesktop) return;
+                navlinksDesktop.classList.remove("hidden");
+                navlinksDesktop.classList.add("flex");
+            }
+        });
+    </script>
+</nav>
