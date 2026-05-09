@@ -27,11 +27,8 @@ import config from "../config.json";
 		</div>
 		<script src="../ts/clouds.ts"></script>
 	</section>
-	<section
-		id="about"
-		class="py-24 pb-14 bg-[#64c437] text-white min-h-screen relative"
-	>
-		<div class="mx-auto px-4 max-w-[500px] w-full">
+	<section id="about" class="py-14 bg-[#64c437] text-white relative">
+		<div class="mt-6 mx-auto px-4 max-w-[500px] w-full">
 			<Card>
 				<article>
 					<h1
@@ -44,76 +41,63 @@ import config from "../config.json";
 			</Card>
 		</div>
 	</section>
-	<section
-		id="ratings"
-		class="py-14 bg-[#6b4025] text-white min-h-screen relative"
-	>
-		<div class="px-4 w-max top-1/2 left-1/2 -translate-1/2 absolute">
+	<section id="ratings" class="py-14 bg-[#6b4025] text-white relative">
+		<div class="mt-6 mx-auto px-4 w-max">
 			<h1
-				class="block mb-4 text-center text-4xl text-shadow-lg font-PressStart2P"
+				class="block mb-4 text-center text-2xl text-shadow-lg font-PressStart2P"
 			>
 				Ratings
 			</h1>
-			<div class="grid grid-cols-2 md:grid-cols-4 gap-2 mx-auto w-max">
+			<div class="grid grid-cols-2 gap-2 mx-auto w-max">
 				{
 					config.ratings.map((rating) => (
-						<div>
-							<Card>
-								<div class="flex flex-col">
-									<span class="text-xl">{rating.by}</span>
-									<div
-										title={`${rating.rating} out of ${config.max_rating} stars`}
-										class="flex flex-col gap-0.5 text-sm"
-									>
-										{Array.from({
-											length: Math.ceil(
-												config.max_rating / 2,
-											),
-										}).map((_, row) => {
-											const perRow = Math.ceil(
-												config.max_rating / 2,
-											);
+						<Card className="flex flex-col transition-all ease-in-out hover:scale-[1.02]">
+							<span class="text-xl">{rating.by}</span>
+							<div
+								title={`${rating.rating} out of ${config.max_rating} stars`}
+								class="flex flex-col gap-0.5 text-sm"
+							>
+								{Array.from({
+									length: Math.ceil(config.max_rating / 2),
+								}).map((_, row) => {
+									const perRow = Math.ceil(
+										config.max_rating / 2,
+									);
 
-											const start = row * perRow;
-											return (
-												<div class="flex gap-0.5">
-													{Array.from({
-														length: perRow,
-													}).map((_, i) => {
-														const index = start + i;
-														if (
-															index >=
-															config.max_rating
-														)
-															return null;
+									const start = row * perRow;
+									return (
+										<div class="flex gap-0.5">
+											{Array.from({
+												length: perRow,
+											}).map((_, i) => {
+												const index = start + i;
+												if (index >= config.max_rating)
+													return null;
 
-														const isLighted =
-															index <
-															rating.rating;
+												const isLighted =
+													index < rating.rating;
 
-														return (
-															<span
-																class={
-																	isLighted
-																		? "text-yellow-300"
-																		: "text-fg-secondary"
-																}
-															>
-																★
-															</span>
-														);
-													})}
-												</div>
-											);
-										})}
-									</div>
-									<p class="mt-2 text-fg-muted max-w-30 md:max-w-50">
-										{rating.message ??
-											`${rating.rating} out of ${config.max_rating} stars`}
-									</p>
-								</div>
-							</Card>
-						</div>
+												return (
+													<span
+														class={
+															isLighted
+																? "text-yellow-300"
+																: "text-fg-secondary"
+														}
+													>
+														★
+													</span>
+												);
+											})}
+										</div>
+									);
+								})}
+							</div>
+							<p class="mt-2 text-fg-muted max-w-30 md:max-w-50">
+								{rating.message ??
+									`${rating.rating} out of ${config.max_rating} stars`}
+							</p>
+						</Card>
 					))
 				}
 			</div>
