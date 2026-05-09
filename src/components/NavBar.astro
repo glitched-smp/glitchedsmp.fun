@@ -18,7 +18,7 @@ import config from "../config.json";
         <span class="text-lg">Glitched SMP</span>
     </a>
 
-    <ul id="navlinks-desktop" class="hidden gap-2">
+    <ul id="navlinks-desktop" class="hidden md:flex gap-2">
         {
             Object.entries(config.public_links).map(([path, title], i) => (
                 <li>
@@ -28,7 +28,7 @@ import config from "../config.json";
         }
     </ul>
 
-    <ul id="navlinks-mobile" class="hidden flex-col gap-2">
+    <ul id="navlinks-mobile" class="md:hidden flex flex-col gap-2">
         {
             Object.entries(config.public_links).map(([path, title], i) => (
                 <li>
@@ -37,20 +37,4 @@ import config from "../config.json";
             ))
         }
     </ul>
-
-    <script>
-        const navlinksDesktop = document.getElementById("navlinks-desktop");
-        const navlinksMobile = document.getElementById("navlinks-mobile");
-        document.addEventListener("DOMContentLoaded", () => {
-            if (window.innerWidth <= 768) {
-                if (!navlinksMobile) return;
-                navlinksMobile.classList.remove("hidden");
-                navlinksMobile.classList.add("flex");
-            } else {
-                if (!navlinksDesktop) return;
-                navlinksDesktop.classList.remove("hidden");
-                navlinksDesktop.classList.add("flex");
-            }
-        });
-    </script>
 </nav>
