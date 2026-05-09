@@ -5,7 +5,7 @@ import config from "../config.json";
 ---
 
 <nav
-    class="flex items-center justify-between px-8 bg-bg-secondary shadow-md w-full h-14 fixed z-10"
+    class="flex items-center justify-between px-8 bg-white/10 shadow-md w-full h-14 fixed z-10"
 >
     <a href="/" class="nolink flex items-center gap-2">
         <Image
@@ -45,7 +45,7 @@ import config from "../config.json";
 
         <ul
             id="navlinks-mobile"
-            class="flex flex-col gap-2 p-4 bg-bg-tertiary shadow-lg w-max h-screen top-0 left-0 -translate-x-full transition-transform ease-in-out fixed"
+            class="flex flex-col gap-2 p-4 bg-bg-secondary shadow-lg w-max h-screen top-0 left-0 -translate-x-full transition-transform ease-in-out fixed"
         >
             {
                 Object.entries(config.public_links).map(([path, title], i) => (
