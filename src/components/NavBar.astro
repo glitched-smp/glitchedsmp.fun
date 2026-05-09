@@ -43,21 +43,6 @@ import config from "../config.json";
             />
         </button>
 
-        <ul
-            id="navlinks-mobile"
-            class="flex flex-col gap-2 p-4 bg-bg-secondary shadow-lg w-max h-screen top-0 left-0 -translate-x-full transition-transform ease-in-out fixed"
-        >
-            {
-                Object.entries(config.public_links).map(([path, title], i) => (
-                    <li>
-                        <a href={path} class="text-3xl">
-                            {title}
-                        </a>
-                    </li>
-                ))
-            }
-        </ul>
-
         <script>
             document.addEventListener("DOMContentLoaded", () => {
                 const menuButton = document.getElementById("menu-button");
@@ -69,4 +54,31 @@ import config from "../config.json";
             });
         </script>
     </div>
+
+    <ul
+        id="navlinks-mobile"
+        class="flex flex-col gap-2 p-4 bg-linear-to-t from-gray-800/50 to-gray-800 shadow-md h-screen top-0 left-0 -translate-x-full transition-transform ease-in-out fixed z-20"
+    >
+        {
+            Object.entries(config.public_links).map(([path, title], i) => (
+                <li>
+                    <a href={path} class="closenav text-3xl">
+                        {title}
+                    </a>
+                </li>
+            ))
+        }
+
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const navLinks = document.getElementById("navlinks-mobile");
+                const closeNavLinks = document.querySelectorAll("a.closenav");
+                if (!navLinks || !closeNavLinks) return;
+                for (const closeNavLink of closeNavLinks)
+                    closeNavLink.addEventListener("click", () => {
+                        navLinks.classList.toggle("-translate-x-full");
+                    });
+            });
+        </script>
+    </ul>
 </nav>
