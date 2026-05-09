@@ -1,0 +1,10 @@
+@font-face {
+  font-family: PressStart2P;
+  src: "../assets/fonts/PressStart2P.ttf";
+}
+
+.font-PressStart2P {
+  font-family: "Press Start 2P", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}

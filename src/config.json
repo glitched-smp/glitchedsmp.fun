@@ -1,7 +1,70 @@
 {
   "page_title": "Glitched SMP",
-  "description": "Write description here!",
+  "description": "Write description here",
   "public_links": {
-    "/": "Home"
-  }
+    "/#home": "Home",
+    "/#about": "About Us",
+    "/#ratings": "Ratings"
+  },
+  "about_us": [
+    "Paragraph #1",
+    "Paragraph #2",
+    "Paragraph #3",
+    "Paragraph #4",
+    "Paragraph #5",
+    "Paragraph #6",
+    "Paragraph #7",
+    "Paragraph #8",
+    "Paragraph #9",
+    "Paragraph #10",
+    "Paragraph #11",
+    "Paragraph #12",
+    "Paragraph #13",
+    "Paragraph #14",
+    "Paragraph #15",
+    "Paragraph #16",
+    "Paragraph #17",
+    "Paragraph #18",
+    "Paragraph #19",
+    "Paragraph #20",
+    "Duplicate this line (and keep it valid JSON) to add more paragraphs!"
+  ],
+  "min_rating": 1,
+  "max_rating": 10,
+  "ratings": [
+    {
+      "by": "John Doe",
+      "rating": 9,
+      "message": "Wadup! This awesome!!!!"
+    },
+    {
+      "by": "Mr. Fahh",
+      "rating": 1,
+      "message": "I don't like Minecraft >:("
+    },
+    {
+      "by": "#3",
+      "rating": 1
+    },
+    {
+      "by": "#4",
+      "rating": 1
+    },
+    {
+      "by": "#5",
+      "rating": 1
+    },
+    {
+      "by": "#6",
+      "rating": 1
+    },
+    {
+      "by": "#7",
+      "rating": 1
+    },
+    {
+      "by": "#8",
+      "rating": 1
+    }
+  ]
 }

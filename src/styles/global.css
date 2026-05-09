@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./fonts.css";
 @import "./hyperlinks.css";
 
 @theme inline {
@@ -6,6 +7,7 @@
   --color-bg-secondary: #391073;
   --color-fg-primary: #fefefe;
   --color-fg-secondary: #eeeeee;
+  --color-fg-muted: #cccccc;
   --color-accent: #0088ee;
 }
 

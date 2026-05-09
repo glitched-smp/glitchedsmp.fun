@@ -1,8 +1,80 @@
 ---
+import type { JSX } from "preact";
 import MainLayout from "../layouts/MainLayout.astro";
+import Card from "../components/Card.astro";
+import config from "../config.json";
 ---
 
 <MainLayout>
-	<h1>Hello!</h1>
-	<a href="/">Yeah!</a>
+	<section id="home" class="py-14 bg-blue-300 h-screen relative">
+		<div class="px-4 text-center top-1/2 left-1/2 -translate-1/2 absolute">
+			<h1 class="mb-2 text-4xl text-shadow-lg font-PressStart2P">
+				Glitched SMP
+			</h1>
+			<span class="text-lg text-shadow-md">
+				{config.description}
+			</span>
+		</div>
+	</section>
+	<section id="about" class="py-14 bg-green-400 min-h-screen relative">
+		<div class="mx-auto px-4 max-w-[500px] w-full">
+			<Card>
+				<article>
+					<h1
+						class="block mb-4 text-center text-2xl text-shadow-lg font-PressStart2P"
+					>
+						About Us
+					</h1>
+					{config.about_us.map((line) => <p class="mt-2">{line}</p>)}
+				</article>
+			</Card>
+		</div>
+	</section>
+	<section id="ratings" class="py-14 bg-[#6b4025] min-h-screen relative">
+		<div class="px-4 w-max top-1/2 left-1/2 -translate-1/2 absolute">
+			<h1
+				class="block mb-4 text-center text-4xl text-shadow-lg font-PressStart2P"
+			>
+				Ratings
+			</h1>
+			<div class="grid grid-cols-4 gap-2 mx-auto w-max">
+				{
+					config.ratings.map((rating) => (
+						<div>
+							<Card>
+								<div class="flex flex-col">
+									<span class="text-xl">{rating.by}</span>
+									<div
+										title={`${rating.rating} out of ${config.max_rating} stars`}
+										class="flex gap-0.5 text-sm"
+									>
+										{Array.from({
+											length: config.max_rating,
+										}).map((_, i) => {
+											const isLighted = i < rating.rating;
+											return (
+												<span
+													class={
+														isLighted
+															? "text-yellow-300"
+															: "text-fg-secondary"
+													}
+												>
+													★
+												</span>
+											);
+										})}
+									</div>
+									<p class="mt-2 text-fg-muted">
+										{rating.message ??
+											`${rating.rating} out of ${config.max_rating} stars`}
+									</p>
+								</div>
+							</Card>
+						</div>
+					))
+				}
+			</div>
+		</div>
+	</section>
 </MainLayout>
