@@ -5,7 +5,49 @@ import config from "../config.json";
 ---
 
 <MainLayout>
-    <section id="updates" class="pt-14 bg-bg-primary text-white w-full min-h-screen">
-        A
+    <section
+        id="updates"
+        class="flex flex-wrap gap-4 pt-18 pb-4 px-4 bg-bg-primary text-white w-full min-h-screen"
+    >
+        {
+            config.updates.map((update) => (
+                <div class="w-80">
+                    <Card className="min-h-60 hover:scale-[1.02]">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-fg-muted text-sm uppercase">
+                                {update.type}
+                            </span>
+                            <h2>{update.name}</h2>
+                        </div>
+                        <div>
+                            <ul class="mb-2">
+                                <h3>Added</h3>
+                                {update.added.map((addition) => (
+                                    <li class="ml-4 list-disc text-fg-muted">
+                                        {addition}
+                                    </li>
+                                ))}
+                            </ul>
+                            <ul class="mb-2">
+                                <h3>Removed</h3>
+                                {update.removed.map((subtraction) => (
+                                    <li class="ml-4 list-disc text-fg-muted">
+                                        {subtraction}
+                                    </li>
+                                ))}
+                            </ul>
+                            <ul class="mb-2">
+                                <h3>Changed</h3>
+                                {update.changed.map((change) => (
+                                    <li class="ml-4 list-disc text-fg-muted">
+                                        {change}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    </Card>
+                </div>
+            ))
+        }
     </section>
 </MainLayout>

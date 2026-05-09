@@ -72,10 +72,35 @@
   "updates": [
     {
       "type": "patchnote",
-      "name": "#1",
-      "added": [],
-      "removed": [],
-      "changed": []
+      "name": "1.8.1.9",
+      "added": [
+        "This is what was added",
+        "Not really, but it should help populate real data later!"
+      ],
+      "removed": [
+        "Removed stuff",
+        "None?!?!?!?"
+      ],
+      "changed": [
+        "Meh",
+        "I don't wanna!!!"
+      ]
+    },
+    {
+      "type": "update",
+      "name": "1.5.2",
+      "added": [
+        "fafawpfawfwajw a fwafwa This is what was added",
+        "Not really, but it should hefwa f yiawhfakjwh lp populate real data later!"
+      ],
+      "removed": [
+        "Removed stu fwawfawf ff",
+        "None? fawfwa hj!?!?!?"
+      ],
+      "changed": [
+        "Measwfa wh",
+        "I don'tf waf afw wanna!!!"
+      ]
     }
   ]
 }
