@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import MenuSVG from "../assets/svg/menu.svg";
 import config from "../config.json";
 ---
 
@@ -18,7 +19,7 @@ import config from "../config.json";
         <span class="text-lg">Glitched SMP</span>
     </a>
 
-    <ul id="navlinks-desktop" class="hidden md:flex gap-2">
+    <ul class="hidden md:flex gap-2">
         {
             Object.entries(config.public_links).map(([path, title], i) => (
                 <li>
@@ -28,13 +29,44 @@ import config from "../config.json";
         }
     </ul>
 
-    <ul id="navlinks-mobile" class="md:hidden flex flex-col gap-2">
-        {
-            Object.entries(config.public_links).map(([path, title], i) => (
-                <li>
-                    <a href={path}>{title}</a>
-                </li>
-            ))
-        }
-    </ul>
+    <div class="md:hidden">
+        <button
+            id="menu-button"
+            class="flex items-center w-8 h-8 hover:opacity-75 active:opacity-50"
+        >
+            <Image
+                src={MenuSVG}
+                width={32}
+                height={32}
+                alt="Menu"
+                class="w-full h-full"
+            />
+        </button>
+
+        <ul
+            id="navlinks-mobile"
+            class="flex flex-col gap-2 p-4 bg-bg-tertiary shadow-lg w-max h-screen top-0 left-0 -translate-x-full transition-transform ease-in-out fixed"
+        >
+            {
+                Object.entries(config.public_links).map(([path, title], i) => (
+                    <li>
+                        <a href={path} class="text-3xl">
+                            {title}
+                        </a>
+                    </li>
+                ))
+            }
+        </ul>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const menuButton = document.getElementById("menu-button");
+                const navLinks = document.getElementById("navlinks-mobile");
+                if (!menuButton || !navLinks) return;
+                menuButton.addEventListener("click", () => {
+                    navLinks.classList.toggle("-translate-x-full");
+                });
+            });
+        </script>
+    </div>
 </nav>
