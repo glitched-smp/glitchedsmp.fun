@@ -26,8 +26,77 @@ import config from "../config.json";
 			<span class="text-lg md:text-xl text-fg-secondary text-shadow-lg">
 				{config.description}
 			</span>
+			<div class="grid grid-cols-3 gap-4 mt-32">
+				<div class="h-30">
+					<Card
+						className="flex items-center justify-center h-full transition-all ease-in-out hover:scale-[1.02]"
+					>
+						<div class="flex flex-col gap-2">
+							<span
+								id="online-players-display"
+								class="text-3xl font-PressStart2P"
+							>
+								?
+							</span>
+							<span>Online Players</span>
+						</div>
+					</Card>
+				</div>
+				<div class="h-30">
+					<Card
+						className="flex items-center justify-center h-full transition-all ease-in-out hover:scale-[1.02]"
+					>
+						<div class="flex flex-col gap-2">
+							<span class="text-3xl font-PressStart2P">
+								Empty
+							</span>
+							<span>Slot</span>
+						</div>
+					</Card>
+				</div>
+				<div class="h-30">
+					<Card
+						className="flex items-center justify-center h-full transition-all ease-in-out hover:scale-[1.02]"
+					>
+						<div class="flex flex-col gap-2">
+							<span class="text-3xl font-PressStart2P">
+								Empty
+							</span>
+							<span>Slot</span>
+						</div>
+					</Card>
+				</div>
+			</div>
 		</div>
 		<script src="../ts/clouds.ts"></script>
+		<script>
+			async function fetchOnlinePlayers(display: HTMLElement) {
+				try {
+					const res = await fetch(
+						"https://api.mcsrvstat.us/3/glitchedsmp.fun",
+					);
+
+					if (!res.ok)
+						throw new Error("Mcsrvstat.us is probably down");
+					const data = await res.json();
+					if (!data.online) return;
+					display.textContent = data.players.online;
+				} catch (error) {
+					alert(
+						error instanceof Error ? error.message : String(error),
+					);
+				}
+			}
+
+			document.addEventListener("DOMContentLoaded", () => {
+				const onlinePlayersDisplay = document.getElementById(
+					"online-players-display",
+				);
+
+				if (!onlinePlayersDisplay) return;
+				fetchOnlinePlayers(onlinePlayersDisplay);
+			});
+		</script>
 	</section>
 	<section
 		id="about"
@@ -57,7 +126,7 @@ import config from "../config.json";
 				{
 					config.about_us_cards.map((card) => (
 						<div>
-							<Card color="black">
+							<Card color="black" className="transition-all ease-in-out hover:scale-[1.02]">
 								<h1 class="text-xl font-PressStart2P">
 									{card.name}
 								</h1>
