@@ -1,7 +1,7 @@
 {
   "$schema": "https://glitchedsmp.fun/config.schema.json",
   "page_title": "Glitched SMP",
-  "description": "Write description here",
+  "description": "A Unique Minecraft Survival Server.",
   "public_links": {
     "/#home": "Home",
     "/#about": "About Us",
