@@ -78,6 +78,7 @@ import config from "../config.json";
 
 					if (!res.ok)
 						throw new Error("Mcsrvstat.us is probably down");
+
 					const data = await res.json();
 					if (!data.online) return;
 					display.textContent = data.players.online;
@@ -122,11 +123,14 @@ import config from "../config.json";
 					</article>
 				</Card>
 			</div>
-			<div class="flex flex-wrap gap-2 mx-auto w-max">
+			<div class="grid grid-cols-2 md:grid-cols-4 gap-2 mx-auto w-max">
 				{
 					config.about_us_cards.map((card) => (
 						<div>
-							<Card color="black" className="transition-all ease-in-out hover:scale-[1.02]">
+							<Card
+								color="black"
+								className="transition-all ease-in-out hover:scale-[1.02]"
+							>
 								<h1 class="text-xl font-PressStart2P">
 									{card.name}
 								</h1>
