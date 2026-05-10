@@ -37,7 +37,7 @@ import config from "../config.json";
 		<div
 			class="py-14 bg-linear-to-b from-transparent to-black/30 w-full h-max"
 		>
-			<div class="mt-6 mx-auto px-4 max-w-[500px] w-full">
+			<div class="my-6 mx-auto px-4 max-w-[500px] w-full">
 				<Card>
 					<article>
 						<h1
@@ -52,6 +52,22 @@ import config from "../config.json";
 						}
 					</article>
 				</Card>
+			</div>
+			<div class="flex flex-wrap gap-2 mx-auto w-max">
+				{
+					config.about_us_cards.map((card) => (
+						<div>
+							<Card color="black">
+								<h1 class="text-xl font-PressStart2P">
+									{card.name}
+								</h1>
+								<p class="text-fg-secondary">
+									{card.description}
+								</p>
+							</Card>
+						</div>
+					))
+				}
 			</div>
 		</div>
 	</section>

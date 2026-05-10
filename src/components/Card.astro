@@ -1,11 +1,12 @@
 ---
-const { className = "" } = Astro.props as {
+const { className = "", color = "white" } = Astro.props as {
     className: string;
+    color: string;
 };
 ---
 
 <div
-    class={`p-4 bg-linear-to-t from-white/5 to-white/20 backdrop-blur rounded-md shadow-md w-full ${className}`}
+    class={`p-4 bg-linear-to-t from-${color}/5 to-${color}/20 backdrop-blur rounded-md shadow-md w-full ${className}`}
 >
     <slot />
 </div>

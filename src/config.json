@@ -31,6 +31,24 @@
     "Paragraph #20",
     "Duplicate this line (and keep it valid JSON) to add more paragraphs!"
   ],
+  "about_us_cards": [
+    {
+      "name": "Survival",
+      "description": "Blah blah blah"
+    },
+    {
+      "name": "PvP Arena",
+      "description": "Blah blah blah"
+    },
+    {
+      "name": "Custom Items",
+      "description": "Blah blah blah"
+    },
+    {
+      "name": "Community",
+      "description": "Blah blah blah"
+    }
+  ],
   "min_rating": 1,
   "max_rating": 10,
   "ratings": [
