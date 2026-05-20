@@ -4,73 +4,147 @@ import Card from "../components/Card.astro";
 import GrassBlock from "../assets/blocks/grass.png";
 import DirtBlock from "../assets/blocks/dirt.png";
 import config from "../config.json";
+
+const serverAddress = "glitchedsmp.fun";
+const updatesLink = config.public_links["/updates.html"] ? "/updates.html" : "#ratings";
 ---
 
 <MainLayout>
 	<section
 		id="home"
-		class="py-14 bg-linear-to-b from-blue-500 to-blue-300 text-white min-h-[90vh] overflow-hidden relative"
+		class="home-hero py-20 text-white min-h-screen overflow-hidden relative"
 	>
+		<div class="sun-pixel" aria-hidden="true"></div>
+		<div class="mountain mountain-back" aria-hidden="true"></div>
+		<div class="mountain mountain-front" aria-hidden="true"></div>
+		<div class="ground-layer ground-grass" aria-hidden="true"></div>
+		<div class="ground-layer ground-dirt" aria-hidden="true"></div>
+
 		<div
-			class="px-4 text-center w-[400px] md:w-[800px] top-1/2 left-1/2 -translate-1/2 absolute z-5"
+			class="relative z-5 mx-auto flex min-h-[calc(100vh-8rem)] w-full max-w-6xl flex-col justify-center px-4 pt-12 pb-28"
 		>
-			<h1
-				class="mb-2 md:mb-4 text-4xl md:text-6xl font-PressStart2P"
-				style={{
-					textShadow:
-						"0 2px 0 #000, 0 4px 0 #000, 0 6px 0 rgba(0,0,0,0.7)",
-				}}
-			>
-				Glitched SMP
-			</h1>
-			<span class="text-lg md:text-xl text-fg-secondary text-shadow-lg">
-				{config.description}
-			</span>
-			<div class="grid grid-cols-3 gap-4 mt-32">
-				<div class="h-30">
-					<Card
-						className="flex items-center justify-center h-full transition-all ease-in-out hover:scale-[1.02]"
+			<div class="grid items-center gap-8 lg:grid-cols-[1.08fr_0.92fr]">
+				<div class="hero-copy max-w-3xl">
+					<p
+						class="mb-4 inline-flex border-2 border-white/40 bg-black/30 px-3 py-2 text-xs uppercase shadow-[0_4px_0_rgba(0,0,0,0.35)] backdrop-blur font-PressStart2P"
 					>
-						<div class="flex flex-col gap-2">
+						Java Survival SMP
+					</p>
+					<h1
+						class="mb-5 text-4xl leading-tight md:text-6xl lg:text-7xl font-PressStart2P"
+					>
+						Glitched SMP
+					</h1>
+					<p
+						class="max-w-2xl text-lg leading-8 text-white/90 md:text-2xl text-shadow-lg"
+					>
+						{config.description} Build, grind, fight, explore custom
+						features, and leave your mark on a world with a few extra sparks.
+					</p>
+
+					<div class="mt-8 flex flex-col gap-3 sm:flex-row">
+						<a
+							href="#about"
+							class="nolink block border-2 border-lime-200 bg-lime-500 px-5 py-4 text-center text-sm text-lime-950 shadow-[0_6px_0_#2f6f1f] transition-transform hover:-translate-y-0.5 active:translate-y-1 active:shadow-[0_2px_0_#2f6f1f] font-PressStart2P"
+						>
+							Start Exploring
+						</a>
+						<a
+							href={updatesLink}
+							class="nolink block border-2 border-sky-100 bg-sky-500/90 px-5 py-4 text-center text-sm text-white shadow-[0_6px_0_#155e75] transition-transform hover:-translate-y-0.5 active:translate-y-1 active:shadow-[0_2px_0_#155e75] font-PressStart2P"
+						>
+							Latest Updates
+						</a>
+					</div>
+				</div>
+
+				<div class="server-panel">
+					<div
+						class="border-2 border-white/30 bg-black/35 p-4 shadow-[0_8px_0_rgba(0,0,0,0.35)] backdrop-blur-md md:p-5"
+					>
+						<div
+							class="mb-4 flex items-center justify-between gap-3 border-b border-white/20 pb-3"
+						>
+							<span class="text-sm uppercase text-white/70 font-PressStart2P">
+								Server Status
+							</span>
 							<span
-								id="online-players-display"
-								class="text-lg md:text-3xl font-PressStart2P"
+								id="server-status-display"
+								class="border border-emerald-200/70 bg-emerald-400/20 px-2 py-1 text-xs text-emerald-100"
 							>
-								?
+								Checking
 							</span>
-							<span>Online Players</span>
 						</div>
-					</Card>
-				</div>
-				<div class="h-30">
-					<Card
-						className="flex items-center justify-center h-full transition-all ease-in-out hover:scale-[1.02]"
-					>
-						<div class="flex flex-col gap-2">
-							<span class="text-lg md:text-3xl font-PressStart2P">
-								Empty
+
+						<div class="grid gap-3 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
+							<Card
+								className="hero-stat flex min-h-28 items-center justify-center text-center transition-all ease-in-out hover:scale-[1.02]"
+							>
+								<div class="flex flex-col gap-2">
+									<span
+										id="online-players-display"
+										class="text-2xl md:text-3xl font-PressStart2P"
+									>
+										?
+									</span>
+									<span class="text-sm text-white/80">Online Players</span>
+								</div>
+							</Card>
+							<Card
+								className="hero-stat flex min-h-28 items-center justify-center text-center transition-all ease-in-out hover:scale-[1.02]"
+							>
+								<div class="flex flex-col gap-2">
+									<span class="text-xl md:text-2xl font-PressStart2P">
+										SMP
+									</span>
+									<span class="text-sm text-white/80">Survival World</span>
+								</div>
+							</Card>
+							<Card
+								className="hero-stat flex min-h-28 items-center justify-center text-center transition-all ease-in-out hover:scale-[1.02]"
+							>
+								<div class="flex flex-col gap-2">
+									<span class="text-xl md:text-2xl font-PressStart2P">
+										1.21+
+									</span>
+									<span class="text-sm text-white/80">Minecraft Ready</span>
+								</div>
+							</Card>
+						</div>
+
+						<div class="mt-4 border-2 border-white/25 bg-black/30 p-3">
+							<span class="mb-2 block text-xs uppercase text-white/60 font-PressStart2P">
+								Join IP
 							</span>
-							<span>Slot</span>
+							<div
+								class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"
+							>
+								<code
+									id="server-address"
+									class="break-all text-lg text-lime-200 md:text-xl"
+								>
+									{serverAddress}
+								</code>
+								<button
+									id="copy-server-address"
+									type="button"
+									class="border-2 border-white/30 bg-white/15 px-3 py-2 text-sm text-white transition hover:bg-white/25 active:scale-95"
+								>
+									Copy
+								</button>
+							</div>
 						</div>
-					</Card>
-				</div>
-				<div class="h-30">
-					<Card
-						className="flex items-center justify-center h-full transition-all ease-in-out hover:scale-[1.02]"
-					>
-						<div class="flex flex-col gap-2">
-							<span class="text-lg md:text-3xl font-PressStart2P">
-								Empty
-							</span>
-							<span>Slot</span>
-						</div>
-					</Card>
+					</div>
 				</div>
 			</div>
 		</div>
+
 		<script src="../ts/clouds.ts"></script>
 		<script>
-			async function fetchOnlinePlayers(display: HTMLElement) {
+			async function fetchOnlinePlayers(
+				display: HTMLElement,
+				statusDisplay: HTMLElement | null,
+			) {
 				try {
 					const res = await fetch(
 						"https://api.mcsrvstat.us/3/glitchedsmp.fun",
@@ -80,12 +154,29 @@ import config from "../config.json";
 						throw new Error("Mcsrvstat.us is probably down");
 
 					const data = await res.json();
-					if (!data.online) return;
+					if (!data.online) {
+						display.textContent = "0";
+						if (statusDisplay) {
+							statusDisplay.textContent = "Offline";
+							statusDisplay.className =
+								"border border-red-200/70 bg-red-400/20 px-2 py-1 text-xs text-red-100";
+						}
+						return;
+					}
+
 					display.textContent = data.players.online;
-				} catch (error) {
-					alert(
-						error instanceof Error ? error.message : String(error),
-					);
+					if (statusDisplay) {
+						statusDisplay.textContent = "Online";
+						statusDisplay.className =
+							"border border-emerald-200/70 bg-emerald-400/20 px-2 py-1 text-xs text-emerald-100";
+					}
+				} catch {
+					display.textContent = "?";
+					if (statusDisplay) {
+						statusDisplay.textContent = "Unknown";
+						statusDisplay.className =
+							"border border-yellow-200/70 bg-yellow-400/20 px-2 py-1 text-xs text-yellow-100";
+					}
 				}
 			}
 
@@ -93,9 +184,24 @@ import config from "../config.json";
 				const onlinePlayersDisplay = document.getElementById(
 					"online-players-display",
 				);
+				const statusDisplay = document.getElementById(
+					"server-status-display",
+				);
+				const copyButton = document.getElementById("copy-server-address");
+				const serverAddress = document.getElementById("server-address");
 
-				if (!onlinePlayersDisplay) return;
-				fetchOnlinePlayers(onlinePlayersDisplay);
+				if (onlinePlayersDisplay)
+					fetchOnlinePlayers(onlinePlayersDisplay, statusDisplay);
+
+				copyButton?.addEventListener("click", async () => {
+					const address = serverAddress?.textContent?.trim();
+					if (!address) return;
+					await navigator.clipboard.writeText(address);
+					copyButton.textContent = "Copied";
+					setTimeout(() => {
+						copyButton.textContent = "Copy";
+					}, 1600);
+				});
 			});
 		</script>
 	</section>
@@ -220,3 +326,115 @@ import config from "../config.json";
 		</div>
 	</section>
 </MainLayout>
+
+<style>
+	.home-hero {
+		background:
+			linear-gradient(180deg, rgba(74, 170, 255, 0.95) 0%, rgba(75, 184, 255, 0.82) 45%, rgba(39, 126, 91, 0.9) 100%),
+			repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.08) 0 2px, transparent 2px 24px);
+	}
+
+	.home-hero::before {
+		position: absolute;
+		inset: 0;
+		content: "";
+		background:
+			linear-gradient(rgba(255, 255, 255, 0.08) 2px, transparent 2px),
+			linear-gradient(90deg, rgba(255, 255, 255, 0.08) 2px, transparent 2px);
+		background-size: 32px 32px;
+		mask-image: linear-gradient(to bottom, black, transparent 72%);
+		pointer-events: none;
+	}
+
+	.home-hero::after {
+		position: absolute;
+		inset: auto 0 0;
+		height: 36%;
+		content: "";
+		background: linear-gradient(to top, rgba(0, 0, 0, 0.45), transparent);
+		pointer-events: none;
+	}
+
+	.hero-copy h1 {
+		color: #fff7b8;
+		text-shadow:
+			0 3px 0 #5d370b,
+			0 6px 0 #2d1a08,
+			0 10px 18px rgba(0, 0, 0, 0.55);
+	}
+
+	.server-panel {
+		filter: drop-shadow(0 18px 24px rgba(0, 0, 0, 0.35));
+	}
+
+	.hero-stat {
+		box-shadow:
+			inset 0 0 0 2px rgba(255, 255, 255, 0.14),
+			0 6px 0 rgba(0, 0, 0, 0.28);
+	}
+
+	.sun-pixel {
+		position: absolute;
+		top: 90px;
+		right: 11%;
+		width: 96px;
+		aspect-ratio: 1;
+		background: #ffd86b;
+		box-shadow:
+			0 0 0 10px rgba(255, 216, 107, 0.22),
+			0 0 42px rgba(255, 216, 107, 0.75);
+	}
+
+	.mountain {
+		position: absolute;
+		right: -8%;
+		bottom: 120px;
+		width: min(64vw, 780px);
+		aspect-ratio: 2.6 / 1;
+		clip-path: polygon(0 100%, 14% 52%, 26% 72%, 42% 18%, 58% 66%, 70% 34%, 100% 100%);
+	}
+
+	.mountain-back {
+		right: 18%;
+		bottom: 190px;
+		background: rgba(75, 117, 86, 0.38);
+	}
+
+	.mountain-front {
+		background: rgba(38, 91, 55, 0.55);
+	}
+
+	.ground-layer {
+		position: absolute;
+		right: 0;
+		left: 0;
+		background-size: 64px 64px;
+		image-rendering: pixelated;
+	}
+
+	.ground-grass {
+		bottom: 56px;
+		height: 72px;
+		background-image: url("../assets/blocks/grass.png");
+		box-shadow: 0 -14px 36px rgba(0, 0, 0, 0.18);
+	}
+
+	.ground-dirt {
+		bottom: 0;
+		height: 64px;
+		background-image: url("../assets/blocks/dirt.png");
+	}
+
+	@media (max-width: 767px) {
+		.sun-pixel {
+			top: 88px;
+			right: 24px;
+			width: 58px;
+		}
+
+		.mountain {
+			width: 120vw;
+			bottom: 132px;
+		}
+	}
+</style>
