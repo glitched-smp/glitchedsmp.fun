@@ -1,237 +1,412 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
 
-const updates = [
+type UpdateSection = {
+	title: string;
+	items: string[];
+};
+
+type UpdateEntry = {
+	date: string;
+	version: string;
+	kind: "Update" | "Patchnote";
+	size: string;
+	sections: UpdateSection[];
+};
+
+const updates: UpdateEntry[] = [
 	{
 		date: "July 11, 2022",
 		version: "1.14",
-		type: "Huge",
-		items: [
-			"Added new structures including pillager outposts, wild west builds, igloos, ruined portals, desert temples, and soul valley structures.",
-			"Added throwable swords and axes, banner flags, cravings, daily quests, tutorial book, old bundle, and custom crafting table setup.",
-			"Reworked survival systems with campfire healing, torch crafting, hunger drain, stronger shields, craftable chainmail, armor perks, and custom mob behaviors.",
-			"Added spectral mob mechanics, new villagers, stronghold silverfish events, custom recipes, healing salves, war horn, sea fragments, dragon fruit, fishing nets, trophies, bundles, and many recipe changes.",
+		kind: "Update",
+		size: "Huge",
+		sections: [
+			{
+				title: "Structures And World",
+				items: [
+					"Added new pillager outposts.",
+					"Added wild west structures.",
+					"Added new igloos.",
+					"Added new ruined portals.",
+					"Added new desert temples, though they were noted as possibly being removed later.",
+					"Added new structures in the Soul Valley.",
+					"Added better loot across the server.",
+				],
+			},
+			{
+				title: "Combat And Mobs",
+				items: [
+					"Added throwable swords and axes using Q.",
+					"Undead mobs can make torches disappear when walking on them.",
+					"Blazes can drop fire charges.",
+					"Piglin trades can give multiple fire charges.",
+					"Zombies can drain hunger unless the player wears chainmail armor.",
+					"Skeletons wearing armor can switch to a Viking axe when close enough, with possible sharpness or looting.",
+					"Being near creepers gives Slowness II unless wearing leather armor.",
+					"Leather armor can give speed while protecting from creeper slowness.",
+					"Zombies can give nausea.",
+					"Spiders with strength can spawn more spiders.",
+					"The Ender Dragon fight was changed to three stages.",
+					"The Wither can spawn wither skeletons, while the above-ground fight was made more manageable.",
+					"Wither and Ender Dragon minions can give healing effects.",
+					"Added Spectral mob types, including ghasts, phantoms, and pillager minions.",
+					"Spectral mobs can be instantly killed with spectral arrows.",
+					"Ghast fireballs are stronger.",
+					"Ghasts can drop multiple ghast tears.",
+					"Mobs killed in strongholds can spawn silverfish.",
+					"Added silverfish eggs, obtained by killing undead mobs in strongholds with a wolf.",
+					"Mobs can drop emeralds depending on rarity and farmability.",
+				],
+			},
+			{
+				title: "Survival Systems",
+				items: [
+					"Added daily quests.",
+					"Added cravings after sleeping.",
+					"Sleeping can also cause hunger loss, tied to cravings.",
+					"Throwing an oak log on a campfire can regenerate health.",
+					"Soul campfire healing works with Nether wood types.",
+					"Torches can be made using campfires by placing a stick on the campfire.",
+					"Torches received a new recipe that needs kindling, with fire charges also usable.",
+					"Blocking with a shield uses a small amount of hunger.",
+					"Shields received a harder recipe using leather, oak logs, and an iron block.",
+					"Stone has a 10% chance to drop an iron nugget.",
+					"Deepslate has a 10% chance to drop one or two iron nuggets.",
+					"When at half a heart, players get weakness.",
+					"Wearing gold armor gives haste.",
+					"Hitting a mob while wearing a diamond or netherite chestplate mildly takes hunger.",
+					"A full netherite armor set gives fire resistance.",
+					"Breaking a spawner drops a bundle.",
+					"Loot bundles can contain custom shield designs.",
+					"The Ender Dragon egg can drop elytra, emerald blocks, and a tape.",
+					"The Wither has a chance to drop ancient debris.",
+					"Piglin trades were reverted to 1.16.2-style better trades.",
+					"Rotten flesh on a campfire becomes hide, and hides sell for 1 dollar.",
+					"All leaves except azalea leaves can drop apples.",
+					"Added fishing trophies.",
+				],
+			},
+			{
+				title: "Villagers And Exploration",
+				items: [
+					"Added a tutorial book.",
+					"New players receive the Old Bundle when joining for the first time.",
+					"Added Splunker, a cave villager who trades mining items.",
+					"Added a Strider Jockey villager.",
+					"Added Voyager, an End villager who helps with end island exploration.",
+					"Pillagers can be turned into villagers by splashing weakness and naming them with a nametag.",
+					"Converted pillagers become Lumberjacks by default, with grindstone as the job block.",
+					"Evokers can be turned into artists by splashing weakness and naming them with a nametag.",
+					"Artist villagers use the cartography table as their job table.",
+				],
+			},
+			{
+				title: "Custom Items And Crafting",
+				items: [
+					"Added banner flags that let banners hang on fences and iron bars by shift-clicking.",
+					"Added craftable chainmail armor.",
+					"Added spectral arrows crafted with glow ink and eight arrows.",
+					"Added new recipes for enchanting tables, eyes of ender, ender chests, and bookshelves.",
+					"Bookshelves require Nether wood.",
+					"Nether logs give six planks.",
+					"Most custom items require the custom crafting table setup with a crafting table, item frame, and emerald.",
+					"Added healing salves in the custom crafting table.",
+					"Added war horn in the custom crafting table.",
+					"Added sea fragments from killing guardians.",
+					"Added dragon fruit, giving three additional hearts, crafted in the custom crafting table.",
+					"Polar bears can be snipped for string or a fishing net depending on luck.",
+					"Fishing nets can also be obtained from villagers while having Hero of the Village.",
+					"Fishing nets are assembled by placing a barrel in water, an item frame on top, then putting the net in the frame.",
+					"Added new blast furnace recipes.",
+					"Added a dispenser recipe using string, sticks, and a dropper.",
+					"Jack o' lanterns no longer require carving.",
+					"Slimeballs can be crafted with spider eyes and a water bucket.",
+					"Cobwebs can be crafted with slimeballs and string.",
+					"Leather horse armor can be crafted and upgraded with the smithing table.",
+					"Arrows can be crafted with an amethyst shard, stick, and feather.",
+					"Flower pots can be crafted from Nether bricks.",
+					"Crafting mossy blocks gives two blocks.",
+					"Bee nest-style tree blocks can be crafted using beehives and honeycomb.",
+					"Sugar can be crafted from sweet berries.",
+				],
+			},
 		],
 	},
 	{
 		date: "September 2, 2022",
 		version: "1.15",
-		type: "Big",
-		items: [
-			"Added custom terrain across worlds with 150+ new biomes, including 50 overworld biomes.",
-			"Revamped vehicles, added realistic seasons, improved anti-cheat, and started rolling out more minigames.",
-			"Custom generation landed in the End and Overworld, with Nether generation planned later.",
-			"Removed unused or broken plugins to simplify the server and improve stability.",
+		kind: "Update",
+		size: "Big",
+		sections: [
+			{
+				title: "Added",
+				items: [
+					"Custom terrain for all worlds, with 150+ new biomes and 50 overworld biomes.",
+					"Revamped vehicles.",
+					"Realistic seasons.",
+					"Better anti-cheat.",
+					"More minigames, with rollout still in progress.",
+					"Custom generation in the End.",
+					"Custom generation in the Overworld.",
+				],
+			},
+			{
+				title: "Coming Soon",
+				items: ["Custom generation in the Nether."],
+			},
+			{
+				title: "Removed Plugins",
+				items: [
+					"OmNom because it was useless.",
+					"Spark Profiler because it was not needed.",
+					"Custom Crafting and WolfyUtilities because they were unused and difficult to manage.",
+					"VillageDefense dev build because it had issues.",
+					"MurderMystery dev build because it had issues.",
+					"RealisticSeasons because it conflicted with custom generation.",
+					"WeaponMechanics guns because it was unused and broken.",
+				],
+			},
 		],
+	},
+	{
+		date: "September 5, 2022",
+		version: "1.15.1",
+		kind: "Update",
+		size: "Small",
+		sections: [{ title: "Notes", items: ["Some things may be readded.", "Custom generation was planned to be revamped for a better experience."] }],
 	},
 	{
 		date: "September 16, 2022",
 		version: "1.15.1",
-		type: "Normal",
-		items: ["Added a better Nations system using Towny, with tutorial support planned."],
+		kind: "Update",
+		size: "Normal",
+		sections: [{ title: "Added", items: ["A better Nations system using Towny.", "A tutorial was planned for later."] }],
 	},
 	{
 		date: "September 17, 2022",
 		version: "1.15.2",
-		type: "Revamp",
-		items: [
-			"Improved user experience by moving away from spawn-based navigation.",
-			"Added player rooms and GUI-based navigation through CommandPanels.",
-			"Removed FakePlayers and JumpPads.",
+		kind: "Update",
+		size: "Revamp",
+		sections: [
+			{ title: "Changed", items: ["Improved user experience by ditching the spawn idea and making GUI navigation the main way to move around."] },
+			{ title: "Added", items: ["Player rooms where players can see themselves and their stats.", "GUI-based navigation using CommandPanels."] },
+			{ title: "Removed", items: ["FakePlayers.", "JumpPads."] },
 		],
 	},
 	{
 		date: "September 21, 2022",
 		version: "1.15.3",
-		type: "Very Small",
-		items: ["Changed server hardware with an extra 20GB of storage."],
+		kind: "Update",
+		size: "Very Small",
+		sections: [{ title: "Changed", items: ["Changed server hardware and added 20GB of storage."] }],
 	},
 	{
 		date: "October 10, 2022",
 		version: "1.16",
-		type: "Normal",
-		items: [
-			"Added Oneblock, Skyblock, custom ESC menu, custom items, parkour, duels, custom food, quests, crates, and more minigame maps.",
-			"Planned Tower Defense, Hide n Seek, more minigames, and enhanced survival content for follow-up updates.",
-			"Optional resource packs were suggested for vehicles and custom food.",
+		kind: "Update",
+		size: "Normal",
+		sections: [
+			{ title: "Added", items: ["Oneblock.", "Skyblock, planned to release a few days later.", "Custom ESC menu.", "Custom picks, swords, armor, and emerald gear.", "Parkour.", "Duels.", "Custom food.", "Quests.", "Crates.", "More maps for minigames."] },
+			{ title: "Planned", items: ["Tower Defense.", "Hide n Seek.", "More minigames.", "Possibly enhanced survival.", "Suggested things likely coming in 1.16.1."] },
+			{ title: "Notes", items: ["Optional resource packs were linked for cars and custom food.", "Players could use /o pack send [username] in-game.", "Server supported versions 1.12 through 1.19.2."] },
 		],
 	},
 	{
 		date: "November 6, 2022",
 		version: "1.16.1",
-		type: "Small",
-		items: [
-			"Readded computers, leveled mobs, Slimefun, player shops, and enhanced survival.",
-			"Added paintball, more maps, and suggested community features.",
-			"Fixed Towny and continued work on Village Defense.",
+		kind: "Update",
+		size: "Small",
+		sections: [
+			{ title: "Readded", items: ["Computers.", "Leveled mobs.", "Slimefun, planned for the next day.", "Player shops.", "Enhanced survival."] },
+			{ title: "Added", items: ["Paintball minigame.", "More maps.", "Some suggested things."] },
+			{ title: "Fixed", items: ["Towny.", "Village Defense was about 80% done."] },
 		],
 	},
 	{
 		date: "January 8, 2023",
 		version: "1.17",
-		type: "Continued Update",
-		items: [
-			"Added a better fishing system with money rewards.",
-			"Started the Box server, server name changes, and host changes.",
-			"Removed 1.16.1 readded content, QAV vehicles, and unnecessary resource packs/datapacks.",
+		kind: "Update",
+		size: "Continued",
+		sections: [
+			{ title: "Added", items: ["A better fishing system where players can earn money.", "Box server partly done.", "Server name changing soon.", "Server host change soon."] },
+			{ title: "Removed", items: ["Everything readded from 1.16.1.", "QAV cars.", "Unnecessary resource packs and datapacks."] },
+			{ title: "Fixed", items: ["Everything seemed to be in shape."] },
 		],
 	},
 	{
 		date: "January 29, 2023",
 		version: "1.17.1",
-		type: "Big",
-		items: [
-			"Added the Box server.",
-			"Teased 1.18 improvements focused on bigger Box server testing and refinement.",
+		kind: "Update",
+		size: "Big",
+		sections: [
+			{ title: "Added", items: ["The Box server."] },
+			{ title: "Removed", items: ["Nothing."] },
+			{ title: "Fixed", items: ["Nothing."] },
+			{ title: "Next", items: ["1.18 was expected to improve the Box server drastically with help from player testing.", "Server supported versions 1.12 through 1.19.2."] },
 		],
 	},
 	{
 		date: "June 25, 2023",
 		version: "1.18",
-		type: "Huge",
-		items: [
-			"Survival gained RealEstate, purchasable prebuilds, improved nations, server shop, new spawn, lore structures, and a better survival menu.",
-			"Minigames readded Village Defense and Murder Mystery, plus a new lobby and maps.",
-			"BoxServer received a new lobby, Classic mode, fixes for spawn, trading, and duping.",
-			"Server-wide changes included revamped GUI, join/leave messages, clickable links, TAB menu, update logs, and compatibility from 1.12 to 1.19.4.",
+		kind: "Update",
+		size: "Huge",
+		sections: [
+			{ title: "Survival", items: ["Added RealEstate and purchasable prebuilds.", "Added a new and improved nations system.", "Added a new server shop.", "Added the new survival spawn.", "Added custom structures and monuments around the world with lore. Count started at 2 and was planned to increase every week.", "Revamped and improved the survival menu."] },
+			{ title: "Minigames", items: ["Readded Village Defense.", "Readded Murder Mystery.", "Added a new minigames lobby.", "Added new minigame maps."] },
+			{ title: "BoxServer", items: ["Added a new lobby.", "Added Classic BoxServer mode.", "Added new things to UniqueBoxServer, though it was down at the time.", "Fixed spawn.", "Fixed being unable to trade things.", "Fixed duping."] },
+			{ title: "Server Wide", items: ["Revamped the GUI menu.", "Fixed multiple bugs.", "Added new join messages.", "Added new leave messages.", "Added clickable links.", "Added cutscenes, coming soon.", "Customized the TAB menu.", "Added update logs to the GUI interface.", "Added compatibility from 1.12 through 1.19.4."] },
+			{ title: "Notes", items: ["A tutorial and showcase video were planned.", "Survival menu could be accessed through the information slide.", "Nations could be created with /team create [name]."] },
 		],
 	},
 	{
 		date: "November 5, 2023",
 		version: "1.18.1",
-		type: "Normal",
-		items: [
-			"Survival added money stations, seasons, Slimefun research, improved economy, ambience, vehicles, and daily rewards.",
-			"Work continued on PartyGames, Tower Defense, and Battle Royale while minigames were paused for bug fixing.",
-			"Added the Sandbox gamemode and fixed major money-drop issues.",
-			"Removed BoxServer and unused content.",
+		kind: "Update",
+		size: "Normal",
+		sections: [
+			{ title: "Survival", items: ["Money stations.", "Seasons.", "Slimefun research using /sf guide.", "New and improved economy, planned to fully function the next day.", "New ambience sounds.", "Vehicles, planned to function the next day.", "Daily rewards."] },
+			{ title: "Minigames", items: ["Work continued on PartyGames.", "Work continued on Tower Defense.", "Work continued on Battle Royale.", "Minigames were shut down for major bug fixing and planned to return by 1.19."] },
+			{ title: "Server Wide", items: ["Added the new Sandbox gamemode.", "Fixed major bugs such as money dropping where it should not."] },
+			{ title: "Removed", items: ["BoxServer.", "Unused things."] },
 		],
 	},
 	{
 		date: "November 10, 2023",
 		version: "1.18.2",
-		type: "Tiny",
-		items: ["Added Auction House."],
+		kind: "Update",
+		size: "Tiny",
+		sections: [{ title: "Added", items: ["Auction House."] }, { title: "Removed", items: ["Nothing."] }],
 	},
 	{
 		date: "January 24, 2024",
 		version: "1.18.3",
-		type: "Medium",
-		items: [
-			"Added the Commission System with daily commissions, money, XP, and Commission Tokens.",
-			"Added seasonal limited-time commission shop items such as winter gear, Ricketeer Sword, Ice-Cold Snowball, enchantment books, hard ice, upgraded gear, and Frozen Sword.",
-			"Commission phases rotate every week or two.",
+		kind: "Update",
+		size: "Medium",
+		sections: [
+			{ title: "Added", items: ["Commission System.", "Daily commissions with custom rewards.", "Money rewards.", "XP rewards.", "Commission Tokens.", "A commission shop near spawn."] },
+			{ title: "Winter Season Items", items: ["Phase 1: Winter Gear, Ricketeer Sword, and Ice-Cold Snowball.", "Phase 2: The Enchantment Book, Hard Ice, and upgraded Winter Gear.", "Phase 3: Frozen Sword as the expensive OP item."] },
+			{ title: "Notes", items: ["Seasonal items were limited-time and would not be obtainable from the commission shop after the season ended.", "Phases were planned every week or two."] },
 		],
 	},
 	{
 		date: "April 14, 2024",
 		version: "1.0.0",
-		type: "Massive Revamp",
-		items: [
-			"Survival was revamped with bug fixes, PlayerShop, RealisticVillagers, custom terrain, custom structures, skills, Slimefun, movable armor stands, commissions, crates, and 200+ quality-of-life features.",
-			"Fixed Slimefun, Towny, shops, economy, custom enchants, NPCs, permissions, and other server-wide bugs.",
-			"Added PartyGames with 23 minigames in one mode.",
-			"Added new lobbies, spawns, and free cosmetics for the launch period.",
-			"RPG was announced as a work in progress for the next update.",
+		kind: "Update",
+		size: "Massive Revamp",
+		sections: [
+			{ title: "Survival", items: ["Tweaked and fixed major bugs.", "Added PlayerShop.", "Added RealisticVillagers.", "Added custom terrain.", "Added custom structures.", "Added skills or powers.", "Added Slimefun.", "Added movable and better armor stands.", "Added commissions.", "Added crates.", "Added 200+ quality-of-life features, including features brought back from 1.14.", "Fixed Slimefun bugs.", "Fixed Towny bugs.", "Fixed shop bugs.", "Fixed economy.", "Fixed custom enchants."] },
+			{ title: "Minigames", items: ["Added PartyGames, a group of 23 minigames compressed into one.", "Fixed all bugs related to minigames.", "Noted that the next minigame update would be bigger."] },
+			{ title: "RPG", items: ["RPG was set as a work in progress for the next update."] },
+			{ title: "Server Wide", items: ["Added new lobbies and spawns.", "Fixed all bugs.", "Fixed NPC bugs.", "Fixed permission bugs.", "Added cosmetics for free for the next 1-2 weeks using /cosmetics."] },
 		],
 	},
 	{
 		date: "April 15, 2024",
 		version: "1.0.1",
-		type: "Small Bugfix",
-		items: ["Removed the annoying healing and craftable systems, and nerfed mobs."],
+		kind: "Update",
+		size: "Small Bugfix",
+		sections: [{ title: "Added", items: ["Nothing."] }, { title: "Removed", items: ["Removed the annoying healing system.", "Removed the annoying craftable system.", "Nerfed mobs."] }],
 	},
 	{
 		date: "April 18, 2024",
 		version: "1.0.2",
-		type: "Big Bugfix",
-		items: [
-			"Added protection so armor, tools, and weapons do not drop when players die to hostile mobs.",
-			"Added a server restart schedule every two hours with player warnings planned before restarts.",
-			"Fixed builds and inventories being removed.",
+		kind: "Update",
+		size: "Big Bugfix",
+		sections: [
+			{ title: "Added", items: ["If players die from hostiles, armor, tools, and weapons will not drop.", "Restart schedule for the server, one restart every two hours.", "Players should be notified five minutes before restarts."] },
+			{ title: "Removed", items: ["Nothing."] },
+			{ title: "Fixed", items: ["Fixed builds and inventories getting removed, with an estimated 85% chance to work."] },
 		],
 	},
 	{
 		date: "May 19, 2024",
 		version: "1.0.3",
-		type: "Small Nerfs",
-		items: ["Nerfed curse enchantment spawn rates from 50% to 5% for most things."],
+		kind: "Update",
+		size: "Small Nerfs",
+		sections: [{ title: "Nerfed", items: ["Curse enchantment spawn rates were reduced from 50% to 5% for most things."] }],
 	},
 	{
 		date: "May 24, 2024",
 		version: "1.0.4",
-		type: "Removal",
-		items: ["Removed Towny while a new system was prepared."],
+		kind: "Update",
+		size: "Removal",
+		sections: [{ title: "Added", items: ["Nothing."] }, { title: "Removed", items: ["Towny, with a new system planned later."] }],
 	},
 	{
 		date: "May 25, 2024",
 		version: "1.1.0",
-		type: "Fight or Flee, Part 1",
-		items: [
-			"Added new particles for breaking blocks and damaging players.",
-			"Added loot boxes, sitting, crawling, bellyflop, and new block physics such as tree cutting.",
-			"Added revamped land claiming with /land and removed the old Towny system.",
-			"Fixed Nether and End RPG healthbars, currencies, and player tab visibility.",
-			"Teased a Herobrine-style boss encounter.",
+		kind: "Update",
+		size: "Big",
+		sections: [
+			{ title: "Theme", items: ["The Fight or Flee update, Part 1.", "Combat-based update with minor bug fixes."] },
+			{ title: "Added", items: ["New particles for breaking blocks and damaging players.", "Loot boxes, noted as not pay-to-win.", "Ability to sit, crawl, and bellyflop using /sit, /crawl, and /bellyflop.", "New physics for blocks, such as cutting trees.", "New revamped Towny replacement using /land."] },
+			{ title: "Fixed", items: ["Nether and End having RPG healthbars.", "Different currencies in Nether and End.", "Players not showing in tab while in Nether or End."] },
+			{ title: "Removed", items: ["Old Towny system."] },
+			{ title: "Notes", items: ["A new boss was teased with a recipe.", "A simple explanation for the revamped land system was attached in the original announcement."] },
 		],
 	},
 	{
 		date: "May 28, 2024",
 		version: "1.1.1",
-		type: "Minor Change",
-		items: ["Added trapdoor animations and removed block-breaking and mob-hurt animations."],
+		kind: "Update",
+		size: "Small",
+		sections: [{ title: "Changed", items: ["Added trapdoor animations.", "Removed breaking block animations.", "Removed hurting mob animations."] }],
 	},
 	{
 		date: "June 6, 2024",
 		version: "1.1.2",
-		type: "Minor Change",
-		items: ["Temporarily removed Slimefun while investigating item reset issues."],
+		kind: "Update",
+		size: "Small",
+		sections: [{ title: "Removed", items: ["Slimefun was removed while investigating inventory or item reset issues.", "If the issue persisted, Slimefun would be added back while the bug was found."] }],
 	},
 	{
 		date: "June 7, 2024",
 		version: "1.1.3",
-		type: "Small Change",
-		items: ["Readded a stable version of Slimefun."],
+		kind: "Update",
+		size: "Small",
+		sections: [{ title: "Added", items: ["Readded a stable version of Slimefun."] }],
 	},
 	{
 		date: "June 7, 2024",
 		version: "1.1.4",
-		type: "Hardware Change",
-		items: ["Upgraded server hardware from 12GB to 16GB RAM."],
+		kind: "Update",
+		size: "Big",
+		sections: [{ title: "Changed", items: ["Server hardware upgraded from 12GB to 16GB RAM."] }],
 	},
 	{
 		date: "June 12, 2024",
 		version: "1.1.5",
-		type: "Largest Change",
-		items: ["Removed phantoms."],
+		kind: "Update",
+		size: "Biggest Ever",
+		sections: [{ title: "New", items: ["Phantoms are now removed."] }],
 	},
 	{
 		date: "June 16, 2024",
 		version: "1.2.0",
-		type: "Survival-Based",
-		items: [
-			"Added MoFI inside Survival with Easy, Normal, Hard, Insane, and Hardcore difficulties.",
-			"Added Hardcore Mode MoFI rotations with top-tier rewards, crate keys, and special suffixes.",
-			"Added The Dealer NPC with rotating quests and rewards for early-mid game players.",
-			"Casual mode and Hardcore Mode were planned for 1.2.1.",
+		kind: "Update",
+		size: "Big",
+		sections: [
+			{ title: "Added", items: ["MoFI, a gamemode found inside Survival next to The Adventurer.", "Five MoFI difficulties: Easy, Normal, Hard, Insane, and Hardcore.", "Rewards scale as the difficulty increases.", "MoFI is intended for late-end game players.", "Hardcore Mode MoFI as a rotating gamemode.", "Hardcore Mode rewards include 1000 Commission Crate Keys, 100 Dealer Crate Keys, and a special suffix that changes each rotation.", "The Dealer, an NPC with quests that change every few months.", "Dealer quests give rewards and are intended for early-mid game players."] },
+			{ title: "Coming Soon", items: ["Casual Mode was planned for 1.2.1.", "Hardcore Mode was also planned for 1.2.1."] },
 		],
 	},
 	{
 		date: "August 7, 2024",
 		version: "1.3.0",
-		type: "Medium",
-		items: [
-			"Updated Survival to Minecraft 1.20.6.",
-			"Added MoFI Hardcore Mode, commission crate rotation, Golden Crate rework, more Golden Key sources, new commission quests, cannons, vehicles, and custom food.",
-			"Added vehicle commands for cars, racing cars, planes, and helicopters, plus /uf menu for custom food.",
-			"Scoreboard and balance were temporarily disabled while the rest of 1.3.0 continued rolling out.",
+		kind: "Update",
+		size: "Medium",
+		sections: [
+			{ title: "Survival", items: ["Updated to 1.20.6.", "Added MoFI Hardcore Mode.", "Added Commission Crate rotation.", "Reworked Golden Crate.", "Added more ways to get Golden Keys.", "Added new Commission Quest.", "Added cannons.", "Added vehicles.", "Added custom food."] },
+			{ title: "Commands", items: ["Vehicle commands: /carshop, /racingcarshop, /planeshop, and /helicoptershop.", "Custom food command: /uf menu."] },
+			{ title: "Notes", items: ["The update was smaller than planned because 1.20.6 caused issues.", "Scoreboard and balance were temporarily disabled.", "The rest of 1.3.0 was planned for later versions."] },
 		],
 	},
 	{
-		date: "August 27, 2024",
-		version: "Patchnotes Era",
-		type: "Format Change",
-		items: ["The server update format switched to patchnotes going forward."],
+		date: "August 12, 2024",
+		version: "1.3.1 / 1.4.0 / 1.4.1",
+		kind: "Update",
+		size: "Mentioned",
+		sections: [{ title: "Notes", items: ["The versions 1.3.1, 1.4.0, and 1.4.1 were mentioned without detailed notes in the provided log."] }],
 	},
 ];
 ---
@@ -242,13 +417,13 @@ const updates = [
 		<div class="relative z-5 mx-auto w-full max-w-6xl px-4 pt-28 pb-16">
 			<div class="max-w-3xl">
 				<p class="mb-3 inline-flex border-2 border-emerald-200/40 bg-black/45 px-3 py-2 text-xs uppercase text-emerald-100 shadow-[0_4px_0_rgba(0,0,0,0.35)] backdrop-blur font-PressStart2P">
-					Patch Archive
+					Update Archive
 				</p>
 				<h1 class="text-4xl leading-tight md:text-6xl font-PressStart2P">
 					Latest Updates
 				</h1>
 				<p class="mt-5 text-lg leading-8 text-white/85 md:text-xl">
-					A cleaned-up timeline of server updates, sorted by date and trimmed down to the changes players actually need to know.
+					A cleaned-up archive of the server updates, keeping the details from the original posts while cutting out pings, chatter, and duplicate noise.
 				</p>
 			</div>
 
@@ -260,17 +435,29 @@ const updates = [
 								<span class="text-sm uppercase text-emerald-200">{update.date}</span>
 								<h2 class="mt-2 text-2xl font-PressStart2P">{update.version}</h2>
 							</div>
-							<span class="w-max border border-amber-200/60 bg-amber-300/15 px-3 py-1 text-sm text-amber-100">
-								{update.type}
-							</span>
+							<div class="flex flex-wrap gap-2">
+								<span class="w-max border border-cyan-200/60 bg-cyan-300/15 px-3 py-1 text-sm text-cyan-100">
+									{update.kind}
+								</span>
+								<span class="w-max border border-amber-200/60 bg-amber-300/15 px-3 py-1 text-sm text-amber-100">
+									{update.size}
+								</span>
+							</div>
 						</div>
-						<ul class="mt-4 grid gap-3">
-							{update.items.map((item) => (
-								<li class="relative pl-5 leading-7 text-white/82 before:absolute before:left-0 before:top-2 before:h-2 before:w-2 before:bg-lime-300">
-									{item}
-								</li>
+						<div class="mt-5 grid gap-5 md:grid-cols-2">
+							{update.sections.map((section) => (
+								<section class="update-section border border-white/10 bg-white/[0.04] p-4">
+									<h3 class="text-sm uppercase text-lime-200 font-PressStart2P">{section.title}</h3>
+									<ul class="mt-4 grid gap-3">
+										{section.items.map((item) => (
+											<li class="relative pl-5 leading-7 text-white/82 before:absolute before:left-0 before:top-2 before:h-2 before:w-2 before:bg-lime-300">
+												{item}
+											</li>
+										))}
+									</ul>
+								</section>
 							))}
-						</ul>
+						</div>
 					</article>
 				))}
 			</div>
@@ -304,7 +491,8 @@ const updates = [
 			linear-gradient(180deg, rgba(0, 0, 0, 0.28), rgba(0, 0, 0, 0.84));
 	}
 
-	.update-card {
+	.update-card,
+	.update-section {
 		image-rendering: auto;
 	}
 </style>
