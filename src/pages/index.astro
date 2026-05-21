@@ -7,6 +7,21 @@ import config from "../config.json";
 
 const serverAddress = "glitchedsmp.fun";
 const updatesLink = config.public_links["/updates.html"] ? "/updates.html" : "#ratings";
+const heroDescription = "A Unique Minecraft Survival Server perserving the minecraft feel while adding loads of fun topped with a great community.";
+const aboutCards = [
+	{
+		title: "Survival First",
+		description: "A survival world built around exploring, building, grinding, trading, and making your base feel like home.",
+	},
+	{
+		title: "Custom Features",
+		description: "Extra systems, quests, crates, commissions, vehicles, custom food, and server events add more to do without losing the Minecraft feel.",
+	},
+	{
+		title: "Community Driven",
+		description: "Updates are shaped by the people playing, testing, suggesting, and sticking around through each season of the server.",
+	},
+];
 ---
 
 <MainLayout>
@@ -38,8 +53,7 @@ const updatesLink = config.public_links["/updates.html"] ? "/updates.html" : "#r
 					<p
 						class="max-w-2xl text-lg leading-8 text-white/90 md:text-2xl text-shadow-lg"
 					>
-						{config.description} Build, grind, fight, explore custom
-						features, and leave your mark on a world with a few extra sparks.
+						{heroDescription}
 					</p>
 
 					<div class="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -205,123 +219,75 @@ const updatesLink = config.public_links["/updates.html"] ? "/updates.html" : "#r
 			});
 		</script>
 	</section>
+
 	<section
 		id="about"
-		class="text-white relative"
+		class="about-section relative overflow-hidden text-white"
 		style={{ backgroundImage: `url(${GrassBlock.src})` }}
 	>
-		<div
-			class="py-14 bg-linear-to-b from-transparent to-black/30 w-full h-max"
-		>
-			<div class="my-6 mx-auto px-4 max-w-[500px] w-full">
-				<Card>
-					<article>
-						<h1
-							class="block mb-4 text-center text-2xl text-shadow-lg font-PressStart2P"
-						>
-							About Us
-						</h1>
-						{
-							config.about_us.map((line) => (
-								<p class="mt-2">{line}</p>
-							))
-						}
-					</article>
-				</Card>
+		<div class="relative z-5 mx-auto grid max-w-6xl gap-8 px-4 py-20 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
+			<div>
+				<p class="mb-4 inline-flex border-2 border-lime-200/40 bg-black/35 px-3 py-2 text-xs uppercase text-lime-100 shadow-[0_4px_0_rgba(0,0,0,0.35)] font-PressStart2P">
+					About Us
+				</p>
+				<h2 class="text-3xl leading-tight md:text-5xl font-PressStart2P">
+					Built Like Minecraft, Tuned For More
+				</h2>
+				<p class="mt-5 text-lg leading-8 text-white/85">
+					Glitched SMP is a survival server focused on keeping that classic Minecraft loop alive while adding custom systems, seasonal ideas, and community-shaped updates that give players more reasons to keep exploring.
+				</p>
 			</div>
-			<div class="grid grid-cols-1 md:grid-cols-4 gap-2 mx-auto w-max">
-				{
-					config.about_us_cards.map((card) => (
-						<div>
-							<Card
-								color="black"
-								className="transition-all ease-in-out hover:scale-[1.02]"
-							>
-								<h1 class="text-xl font-PressStart2P">
-									{card.name}
-								</h1>
-								<p class="text-fg-secondary">
-									{card.description}
-								</p>
-							</Card>
-						</div>
-					))
-				}
+
+			<div class="grid gap-4 md:grid-cols-3">
+				{aboutCards.map((card) => (
+					<article class="about-card border-2 border-white/15 bg-black/45 p-5 shadow-[0_7px_0_rgba(0,0,0,0.35)] backdrop-blur-md transition-transform hover:-translate-y-1">
+						<h3 class="text-lg font-PressStart2P">{card.title}</h3>
+						<p class="mt-4 leading-7 text-white/78">{card.description}</p>
+					</article>
+				))}
 			</div>
 		</div>
 	</section>
+
 	<section
 		id="ratings"
-		class="text-white relative"
+		class="ratings-section relative overflow-hidden text-white"
 		style={{ backgroundImage: `url(${DirtBlock.src})` }}
 	>
-		<div
-			class="py-14 bg-linear-to-b from-transparent to-black/50 w-full h-max"
-		>
-			<div class="pt-6 mx-auto px-4 w-max">
-				<h1
-					class="block mb-4 text-center text-2xl text-shadow-lg font-PressStart2P"
-				>
-					Ratings
-				</h1>
-				<div class="grid grid-cols-2 gap-2 mx-auto w-max">
-					{
-						config.ratings.map((rating) => (
-							<Card className="flex flex-col transition-all ease-in-out hover:scale-[1.02]">
-								<span class="text-xl">{rating.by}</span>
-								<div
-									title={`${rating.rating} out of ${config.max_rating} stars`}
-									class="flex flex-col gap-0.5 text-sm"
-								>
-									{Array.from({
-										length: Math.ceil(
-											config.max_rating / 2,
-										),
-									}).map((_, row) => {
-										const perRow = Math.ceil(
-											config.max_rating / 2,
-										);
-
-										const start = row * perRow;
-										return (
-											<div class="flex gap-0.5">
-												{Array.from({
-													length: perRow,
-												}).map((_, i) => {
-													const index = start + i;
-													if (
-														index >=
-														config.max_rating
-													)
-														return null;
-
-													const isLighted =
-														index < rating.rating;
-
-													return (
-														<span
-															class={
-																isLighted
-																	? "text-yellow-300"
-																	: "text-fg-secondary"
-															}
-														>
-															★
-														</span>
-													);
-												})}
-											</div>
-										);
-									})}
-								</div>
-								<p class="mt-2 text-fg-muted max-w-30 md:max-w-130">
-									{rating.message ??
-										`${rating.rating} out of ${config.max_rating} stars`}
-								</p>
-							</Card>
-						))
-					}
+		<div class="relative z-5 mx-auto max-w-6xl px-4 py-20">
+			<div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+				<div>
+					<p class="mb-4 inline-flex border-2 border-amber-200/40 bg-black/35 px-3 py-2 text-xs uppercase text-amber-100 shadow-[0_4px_0_rgba(0,0,0,0.35)] font-PressStart2P">
+						Player Ratings
+					</p>
+					<h2 class="text-3xl leading-tight md:text-5xl font-PressStart2P">
+						What Players Say
+					</h2>
 				</div>
+				<p class="max-w-xl text-white/75 md:text-right">
+					Reviews from people who have played, tested, and lived through the chaos with us.
+				</p>
+			</div>
+
+			<div class="mt-8 grid gap-4 md:grid-cols-2">
+				{config.ratings.map((rating) => (
+					<article class="rating-card border-2 border-white/15 bg-black/50 p-5 shadow-[0_7px_0_rgba(0,0,0,0.35)] backdrop-blur-md transition-transform hover:-translate-y-1">
+						<div class="flex items-start justify-between gap-4">
+							<h3 class="text-xl font-PressStart2P">{rating.by}</h3>
+							<span class="border border-yellow-200/60 bg-yellow-300/15 px-3 py-1 text-sm text-yellow-100">
+								{rating.rating}/{config.max_rating}
+							</span>
+						</div>
+						<div class="mt-4 flex flex-wrap gap-1 text-lg" title={`${rating.rating} out of ${config.max_rating} stars`}>
+							{Array.from({ length: config.max_rating }).map((_, index) => (
+								<span class={index < rating.rating ? "text-yellow-300" : "text-white/20"}>★</span>
+							))}
+						</div>
+						<p class="mt-4 leading-7 text-white/76">
+							{rating.message ?? `${rating.rating} out of ${config.max_rating} stars`}
+						</p>
+					</article>
+				))}
 			</div>
 		</div>
 	</section>
@@ -346,16 +312,42 @@ const updatesLink = config.public_links["/updates.html"] ? "/updates.html" : "#r
 		pointer-events: none;
 	}
 
-	.home-hero::after {
+	.home-hero::after,
+	.about-section::before,
+	.ratings-section::before {
 		position: absolute;
-		inset: auto 0 0;
-		height: 36%;
+		inset: 0;
 		content: "";
-		background: linear-gradient(to top, rgba(0, 0, 0, 0.45), transparent);
 		pointer-events: none;
 	}
 
-	.hero-copy h1 {
+	.home-hero::after {
+		inset: auto 0 0;
+		height: 36%;
+		background: linear-gradient(to top, rgba(0, 0, 0, 0.45), transparent);
+	}
+
+	.about-section,
+	.ratings-section {
+		background-size: 64px 64px;
+		image-rendering: pixelated;
+	}
+
+	.about-section::before {
+		background:
+			linear-gradient(135deg, rgba(11, 54, 24, 0.82), rgba(0, 0, 0, 0.42)),
+			linear-gradient(to bottom, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.5));
+	}
+
+	.ratings-section::before {
+		background:
+			linear-gradient(135deg, rgba(50, 29, 13, 0.86), rgba(0, 0, 0, 0.55)),
+			linear-gradient(to bottom, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.64));
+	}
+
+	.hero-copy h1,
+	.about-section h2,
+	.ratings-section h2 {
 		color: #fff7b8;
 		text-shadow:
 			0 3px 0 #5d370b,
@@ -367,9 +359,11 @@ const updatesLink = config.public_links["/updates.html"] ? "/updates.html" : "#r
 		filter: drop-shadow(0 18px 24px rgba(0, 0, 0, 0.35));
 	}
 
-	.hero-stat {
+	.hero-stat,
+	.about-card,
+	.rating-card {
 		box-shadow:
-			inset 0 0 0 2px rgba(255, 255, 255, 0.14),
+			inset 0 0 0 2px rgba(255, 255, 255, 0.12),
 			0 6px 0 rgba(0, 0, 0, 0.28);
 	}
 
