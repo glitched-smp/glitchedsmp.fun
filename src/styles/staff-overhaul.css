@@ -157,24 +157,7 @@
 }
 
 .staff-section .staff-card::after {
-  position: absolute !important;
-  top: 50% !important;
-  right: 75px !important;
-  bottom: auto !important;
-  width: 140px !important;
-  height: 140px !important;
-  content: "";
-  opacity: 0.16 !important;
-  background: rgba(250, 204, 21, 0.24) !important;
-  border-radius: 22px;
-  transform: translateY(-50%) rotate(8deg) !important;
-  pointer-events: none;
-}
-
-.staff-section .staff-card:nth-child(even)::after {
-  right: auto !important;
-  left: 75px !important;
-  transform: translateY(-50%) rotate(-8deg) !important;
+  content: none !important;
 }
 
 .staff-section .staff-card:hover {
@@ -184,10 +167,6 @@
 
 .staff-section .staff-card:hover::before {
   transform: translateY(-6px) scale(1.03) !important;
-}
-
-.staff-section .staff-card:hover::after {
-  opacity: 0.26 !important;
 }
 
 .staff-section .staff-card:nth-child(1) { border-color: rgba(250, 204, 21, 0.48) !important; }
@@ -270,12 +249,6 @@
       "role avatar"
       "bio avatar" !important;
   }
-
-  .staff-section .staff-card:nth-child(even)::after {
-    right: 64px !important;
-    left: auto !important;
-    transform: translateY(-50%) rotate(8deg) !important;
-  }
 }
 
 @media (max-width: 640px) {
@@ -294,13 +267,6 @@
   .staff-section .staff-card::before {
     width: 96px !important;
     height: 96px !important;
-  }
-
-  .staff-section .staff-card::after {
-    top: 74px !important;
-    right: 50% !important;
-    left: auto !important;
-    transform: translate(50%, -50%) rotate(8deg) !important;
   }
 
   .staff-section .staff-card h3 {
