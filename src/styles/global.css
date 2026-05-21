@@ -272,6 +272,88 @@
   display: none;
 }
 
+.updates-page .archive-stats {
+  border-color: rgba(190, 242, 100, 0.5) !important;
+  background:
+    linear-gradient(135deg, rgba(5, 46, 22, 0.76), rgba(8, 47, 73, 0.7)),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px) !important;
+  background-size: auto, 20px 20px !important;
+}
+
+.updates-page .update-card {
+  border-color: rgba(187, 247, 208, 0.26) !important;
+  background:
+    linear-gradient(135deg, rgba(5, 28, 36, 0.95), rgba(10, 40, 24, 0.9)),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.065) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px) !important;
+  background-size: auto, 20px 20px, 20px 20px !important;
+  box-shadow:
+    inset 0 0 0 2px rgba(255, 255, 255, 0.1),
+    inset 0 -20px 44px rgba(34, 197, 94, 0.12),
+    0 8px 0 rgba(0, 0, 0, 0.42),
+    0 20px 38px rgba(0, 0, 0, 0.35) !important;
+}
+
+.updates-page .update-summary {
+  position: relative;
+  transition: background 180ms ease;
+}
+
+.updates-page .update-summary:hover {
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.updates-page .update-summary h2 {
+  color: #ecfccb;
+  text-shadow:
+    0 3px 0 rgba(20, 83, 45, 0.86),
+    0 7px 16px rgba(0, 0, 0, 0.45);
+}
+
+.updates-page .update-number {
+  display: inline-flex;
+  width: max-content;
+  border: 2px solid rgba(190, 242, 100, 0.5);
+  background: rgba(63, 98, 18, 0.38);
+  padding: 0.65rem 0.75rem;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.3);
+}
+
+.updates-page .open-label,
+.updates-page .update-summary span[class*="border"] {
+  border-width: 2px !important;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.28);
+}
+
+.updates-page .update-body {
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.18), rgba(2, 12, 8, 0.42)),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: auto, 18px 18px;
+}
+
+.updates-page .update-body pre {
+  max-height: 74vh;
+  overflow: auto;
+  border: 2px solid rgba(190, 242, 100, 0.2) !important;
+  background:
+    linear-gradient(135deg, rgba(1, 8, 6, 0.86), rgba(9, 24, 18, 0.82)),
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px) !important;
+  background-size: auto, 28px 28px !important;
+  padding: 1.2rem !important;
+  color: rgba(240, 253, 244, 0.9) !important;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace !important;
+  font-size: 1rem !important;
+  line-height: 1.85 !important;
+  scrollbar-color: #84cc16 rgba(0, 0, 0, 0.45);
+  scrollbar-width: thin;
+}
+
+.updates-page .update-body pre::selection {
+  background: rgba(190, 242, 100, 0.28);
+  color: #ffffff;
+}
+
 @media (max-width: 767px) {
   .ratings-section .rating-card,
   .staff-section .staff-card {
@@ -292,5 +374,10 @@
 
   .staff-section .staff-card > div {
     padding-right: 3.8rem;
+  }
+
+  .updates-page .update-body pre {
+    max-height: none;
+    font-size: 0.92rem !important;
   }
 }
