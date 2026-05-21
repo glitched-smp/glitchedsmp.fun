@@ -40,6 +40,19 @@ const title = subtitle
             (() => {
                 const staffGrid = document.querySelector(".staff-section .mt-8.grid");
                 if (staffGrid && !staffGrid.dataset.splitStaff) {
+                    const avatarPixels = [
+                        "#2b2417", "#211b12", "#2d2617", "#403019", "#51361e", "#50351f", "#3b2a1b", "#2b2417",
+                        "#8d6248", "#c29072", "#c99b80", "#d1a18a", "#c58f73", "#bd8769", "#b77e61", "#8a5d43",
+                        "#bc8766", "#c18d70", "#be8b72", "#a87860", "#8f6652", "#b77f63", "#bd8764", "#ae795b",
+                        "#ffffff", "#ffffff", "#4b3aa0", "#c89376", "#b77c62", "#5541a8", "#ffffff", "#ffffff",
+                        "#a8704f", "#b57b5e", "#b98269", "#6f4938", "#704838", "#b47a5e", "#a66b4d", "#9a6548",
+                        "#a56746", "#9a5e3f", "#3a2115", "#6f4438", "#9b5b4d", "#3a2115", "#9c6042", "#8a563c",
+                        "#6b3f2b", "#6b3f2b", "#321d13", "#8e5144", "#9b5b4d", "#321d13", "#6b3f2b", "#6b3f2b",
+                        "#2b180f", "#2b180f", "#2b180f", "#2d190f", "#2d190f", "#2b180f", "#2b180f", "#2b180f"
+                    ];
+                    const avatarMarkup = `<div class="staff-avatar" aria-hidden="true">${avatarPixels
+                        .map((color) => `<i style="--c:${color}"></i>`)
+                        .join("")}</div>`;
                     const personCards = [];
                     staffGrid.querySelectorAll(".staff-card").forEach((card) => {
                         const role = card.querySelector("h3")?.textContent?.trim() || "Staff";
@@ -51,6 +64,7 @@ const title = subtitle
                             personCard.className = card.className;
                             personCard.dataset.role = role;
                             personCard.innerHTML = `
+                                ${avatarMarkup}
                                 <h3 class="text-lg font-PressStart2P">${name}</h3>
                                 <div class="mt-4 flex flex-wrap gap-2">
                                     <span class="border border-white/20 bg-white/10 px-3 py-1 text-sm text-white/88">${role}</span>
