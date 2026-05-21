@@ -114,14 +114,145 @@
   line-height: 1.75;
 }
 
+.staff-section {
+  position: relative;
+  background-size: 64px 64px;
+  image-rendering: pixelated;
+  isolation: isolate;
+}
+
+.staff-section::after {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  content: "";
+  background:
+    radial-gradient(circle at 14% 18%, rgba(34, 211, 238, 0.22), transparent 24%),
+    radial-gradient(circle at 82% 30%, rgba(132, 204, 22, 0.2), transparent 26%),
+    linear-gradient(135deg, rgba(8, 47, 73, 0.84), rgba(5, 46, 22, 0.68) 48%, rgba(0, 0, 0, 0.54)),
+    linear-gradient(rgba(255, 255, 255, 0.05) 2px, transparent 2px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 2px, transparent 2px);
+  background-size: auto, auto, auto, 32px 32px, 32px 32px;
+  pointer-events: none;
+}
+
+.staff-section > div {
+  position: relative;
+  z-index: 2;
+}
+
+.staff-section h2 {
+  color: #d9fff2;
+  text-shadow:
+    0 3px 0 #064e3b,
+    0 6px 0 #052e16,
+    0 12px 24px rgba(0, 0, 0, 0.62);
+}
+
+.staff-section .staff-card {
+  position: relative;
+  min-height: 230px;
+  overflow: hidden;
+  border-color: rgba(165, 243, 252, 0.34) !important;
+  background:
+    linear-gradient(135deg, rgba(5, 28, 36, 0.92), rgba(8, 38, 24, 0.84)),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px) !important;
+  background-size: auto, 20px 20px, 20px 20px !important;
+  box-shadow:
+    inset 0 0 0 2px rgba(255, 255, 255, 0.12),
+    inset 0 -24px 42px rgba(34, 197, 94, 0.12),
+    0 8px 0 rgba(0, 0, 0, 0.38),
+    0 20px 38px rgba(0, 0, 0, 0.3) !important;
+}
+
+.staff-section .staff-card::before {
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+  width: 48px;
+  height: 82px;
+  content: "";
+  background:
+    linear-gradient(#f2c18d 0 18px, transparent 18px),
+    linear-gradient(90deg, transparent 0 10px, #22d3ee 10px 38px, transparent 38px),
+    linear-gradient(90deg, transparent 0 8px, #0f766e 8px 40px, transparent 40px),
+    linear-gradient(90deg, transparent 0 6px, #0f172a 6px 18px, transparent 18px 30px, #0f172a 30px 42px, transparent 42px);
+  background-position: 14px 0, 0 22px, 0 44px, 0 66px;
+  background-size: 20px 18px, 48px 22px, 48px 22px, 48px 16px;
+  background-repeat: no-repeat;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 8px 0 rgba(0, 0, 0, 0.32));
+  opacity: 0.64;
+  pointer-events: none;
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.staff-section .staff-card::after {
+  position: absolute;
+  right: 8px;
+  bottom: 72px;
+  width: 22px;
+  height: 10px;
+  content: "";
+  background: #f2c18d;
+  box-shadow: 18px -8px 0 #f2c18d;
+  image-rendering: pixelated;
+  opacity: 0.64;
+  transform: rotate(-16deg);
+  transform-origin: left center;
+  pointer-events: none;
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.staff-section .staff-card:hover::before {
+  opacity: 0.92;
+  transform: translateY(-4px);
+}
+
+.staff-section .staff-card:hover::after {
+  opacity: 0.95;
+  transform: translate(-3px, -5px) rotate(-26deg);
+}
+
+.staff-section .staff-card h3 {
+  display: inline-flex;
+  max-width: calc(100% - 58px);
+  border: 2px solid rgba(165, 243, 252, 0.55);
+  background: rgba(8, 145, 178, 0.24);
+  padding: 0.55rem 0.65rem;
+  color: #cffafe;
+  line-height: 1.6;
+  text-shadow: 0 3px 0 rgba(0, 0, 0, 0.66);
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.28);
+}
+
+.staff-section .staff-card span {
+  border: 2px solid rgba(187, 247, 208, 0.32) !important;
+  background: rgba(20, 83, 45, 0.58) !important;
+  color: rgba(240, 253, 244, 0.95) !important;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.22);
+}
+
+.staff-section .staff-card p {
+  max-width: calc(100% - 52px);
+  color: rgba(255, 255, 255, 0.74) !important;
+}
+
 @media (max-width: 767px) {
-  .ratings-section .rating-card {
+  .ratings-section .rating-card,
+  .staff-section .staff-card {
     padding: 1.1rem !important;
   }
 
   .ratings-section .rating-card h3,
-  .ratings-section .rating-card .font-PressStart2P:first-child {
+  .ratings-section .rating-card .font-PressStart2P:first-child,
+  .staff-section .staff-card h3 {
     font-size: 1rem;
     line-height: 1.65;
+  }
+
+  .staff-section .staff-card {
+    min-height: 210px;
   }
 }
