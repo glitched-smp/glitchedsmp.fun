@@ -263,19 +263,75 @@
   border-color: rgba(248, 245, 224, 0.12) !important;
 }
 
-.updates-page .update-body pre {
+.updates-page .update-body pre,
+.updates-page .archive-entry {
   max-height: 64vh;
   overflow: auto;
   border: 1px solid rgba(248, 245, 224, 0.18) !important;
-  background: rgba(7, 13, 9, 0.5) !important;
-  color: rgba(255, 250, 229, 0.86) !important;
+  background:
+    linear-gradient(145deg, rgba(255, 248, 218, 0.08), rgba(93, 128, 80, 0.06)),
+    rgba(7, 13, 9, 0.5) !important;
+  color: rgba(255, 250, 229, 0.88) !important;
   padding: clamp(1rem, 2vw, 1.35rem) !important;
-  font-family: Inter, ui-sans-serif, system-ui, sans-serif !important;
-  font-size: 0.96rem !important;
-  line-height: 1.85 !important;
-  white-space: pre-wrap;
+  font-family: Inter, Roboto, ui-sans-serif, system-ui, sans-serif !important;
+  font-size: 0.98rem !important;
+  line-height: 1.75 !important;
   border-radius: 18px;
   backdrop-filter: blur(16px) saturate(1.08);
+}
+
+.updates-page .archive-entry {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.updates-page .archive-entry h4 {
+  width: max-content;
+  max-width: 100%;
+  border: 1px solid rgba(255, 248, 218, 0.24);
+  background: rgba(255, 248, 218, 0.14);
+  padding: 0.45rem 0.72rem;
+  color: #fff1b8;
+  border-radius: 999px;
+  font-family: "Press Start 2P", system-ui, sans-serif;
+  font-size: 0.7rem;
+  line-height: 1.45;
+}
+
+.updates-page .archive-entry p {
+  margin: 0;
+  border-left: 3px solid rgba(255, 248, 218, 0.18);
+  padding-left: 0.8rem;
+  color: rgba(255, 250, 229, 0.88);
+}
+
+.updates-page .archive-entry ul {
+  display: grid;
+  gap: 0.55rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.updates-page .archive-entry li {
+  position: relative;
+  border: 1px solid rgba(255, 248, 218, 0.1);
+  background: rgba(255, 248, 218, 0.06);
+  padding: 0.65rem 0.75rem 0.65rem 2.15rem;
+  color: rgba(255, 250, 229, 0.9);
+  border-radius: 14px;
+}
+
+.updates-page .archive-entry li::before {
+  position: absolute;
+  top: 0.86rem;
+  left: 0.85rem;
+  width: 0.55rem;
+  height: 0.55rem;
+  content: "";
+  background: #d7f47c;
+  border-radius: 3px;
+  box-shadow: 0 0 0 3px rgba(215, 244, 124, 0.12);
 }
 
 @media (max-width: 767px) {
