@@ -6,6 +6,7 @@
     "/#home": "Home",
     "/#about": "About Us",
     "/#ratings": "Ratings",
+    "/#staff": "Staff",
     "/updates.html": "Updates"
   },
   "about_us": [
@@ -58,7 +59,7 @@
     },
     {
       "by": "Audaciouslord",
-      "rating": 1,
+      "rating": 10,
       "message": "if i could go beyond i would. server has friendly staff that are generous and dont mind helping you whenever, they always prioritize you and your concerns, members are also friendly ofc some rnt but its fine, server has great lots of exclusive features to add infinite fun and grinding so you never get bored, has great custom stuff that really are impressive. have their own special lore/story area called the mines, insanely grindy but worth it for the best armor ever, good wall to hold the best tools and armor custom created, only downside is its insane OP disables the need for customised setups and stuff, server is somewhat grindy in its exclusivity but thats fitting with me and adds more to the fun and enjoyment, might not be fit everyone but its a nice touch. insanely beautiful generation and builds and custom structures, never regretted joining this."
     },
     {
@@ -67,38 +68,5 @@
       "message": "Nice and vanilla. The staff are friendly and super helpful. First thing we did was play a game together. Simple, peaceful, and a good place to start. Has plenty of useful things to get you going too."
     }
   ],
-  "updates": [
-    {
-      "type": "patchnote",
-      "name": "1.8.1.9",
-      "added": [
-        "This is what was added",
-        "Not really, but it should help populate real data later!"
-      ],
-      "removed": [
-        "Removed stuff",
-        "None?!?!?!?"
-      ],
-      "changed": [
-        "Meh",
-        "I don't wanna!!!"
-      ]
-    },
-    {
-      "type": "update",
-      "name": "1.5.2",
-      "added": [
-        "fafawpfawfwajw a fwafwa This is what was added",
-        "Not really, but it should hefwa f yiawhfakjwh lp populate real data later!"
-      ],
-      "removed": [
-        "Removed stu fwawfawf ff",
-        "None? fawfwa hj!?!?!?"
-      ],
-      "changed": [
-        "Measwfa wh",
-        "I don'tf waf afw wanna!!!"
-      ]
-    }
-  ]
+  "updates": []
 }
