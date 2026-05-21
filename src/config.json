@@ -1,7 +1,7 @@
 {
   "$schema": "https://glitchedsmp.fun/config.schema.json",
   "page_title": "Glitched SMP",
-  "description": "A Unique Minecraft Survival Server.",
+  "description": "A unique Minecraft survival server preserving the Minecraft feel while adding loads of fun, topped with a great community.",
   "public_links": {
     "/#home": "Home",
     "/#about": "About Us",
@@ -10,38 +10,22 @@
     "/updates.html": "Updates"
   },
   "about_us": [
-    "Paragraph #1",
-    "Paragraph #2",
-    "Paragraph #3",
-    "Paragraph #4",
-    "Paragraph #5",
-    "Paragraph #6",
-    "Paragraph #7",
-    "Paragraph #8",
-    "Paragraph #9",
-    "Paragraph #10",
-    "Paragraph #11",
-    "Paragraph #12",
-    "Paragraph #13",
-    "Paragraph #14",
-    "Duplicate this line (and keep it valid JSON) to add more paragraphs!"
+    "Glitched Network started as an SMP simply made to play with friends.",
+    "As the months went on, we all shared the same goal: have fun, enjoy ourselves, and bring the server to more people so they could experience that same fun.",
+    "The server keeps the Minecraft survival feel while adding custom features, events, story moments, and quality-of-life changes that make the grind more fun."
   ],
   "about_us_cards": [
     {
-      "name": "Survival",
-      "description": "Blah blah blah"
+      "name": "Survival Based",
+      "description": "A survival world built around exploring, building, grinding, trading, and making your base feel like home."
     },
     {
-      "name": "PvP Arena",
-      "description": "Blah blah blah"
+      "name": "Custom Features",
+      "description": "Experience great QOL features as well as things like custom enchants, a story, and countless events."
     },
     {
-      "name": "Custom Items",
-      "description": "Blah blah blah"
-    },
-    {
-      "name": "Community",
-      "description": "Blah blah blah"
+      "name": "Community Driven",
+      "description": "Updates are shaped by the people playing, testing, suggesting, and sticking around through each season of the server."
     }
   ],
   "min_rating": 1,
