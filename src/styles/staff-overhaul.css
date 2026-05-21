@@ -48,20 +48,38 @@
 }
 
 .staff-section .mt-8.grid {
+  position: relative;
   display: grid !important;
   grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
-  gap: 1rem !important;
+  gap: 1.35rem !important;
   align-items: stretch !important;
 }
 
+.staff-section .mt-8.grid::before {
+  position: absolute;
+  top: 0.5rem;
+  bottom: 0.5rem;
+  left: 50%;
+  width: 3px;
+  content: "";
+  background: linear-gradient(180deg, transparent, rgba(250, 204, 21, 0.48), rgba(34, 211, 238, 0.38), transparent);
+  box-shadow: 0 0 24px rgba(190, 242, 100, 0.22);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
 .staff-section .staff-card {
-  grid-column: span 4;
+  grid-column: span 7 !important;
   position: relative;
   display: grid !important;
-  grid-template-columns: 1fr !important;
-  gap: 1rem !important;
-  align-content: start;
-  min-height: 250px !important;
+  grid-template-columns: minmax(0, 1fr) 140px !important;
+  grid-template-areas:
+    "name avatar"
+    "role avatar"
+    "bio avatar" !important;
+  gap: 0.85rem 1.2rem !important;
+  align-content: center;
+  min-height: 220px !important;
   overflow: hidden;
   border: 2px solid rgba(187, 247, 208, 0.26) !important;
   background:
@@ -69,7 +87,7 @@
     linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px),
     linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px) !important;
   background-size: auto, 22px 22px, 22px 22px !important;
-  padding: 1.2rem !important;
+  padding: clamp(1.2rem, 2.2vw, 1.8rem) !important;
   box-shadow:
     inset 0 0 0 2px rgba(255, 255, 255, 0.1),
     inset 0 -26px 48px rgba(34, 197, 94, 0.1),
@@ -78,90 +96,84 @@
   transform-style: preserve-3d;
 }
 
+.staff-section .staff-card:nth-child(odd) {
+  grid-column: 1 / span 7 !important;
+}
+
+.staff-section .staff-card:nth-child(even) {
+  grid-column: 6 / span 7 !important;
+  grid-template-columns: 140px minmax(0, 1fr) !important;
+  grid-template-areas:
+    "avatar name"
+    "avatar role"
+    "avatar bio" !important;
+}
+
+.staff-section .staff-card::before {
+  grid-area: avatar;
+  position: relative !important;
+  top: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  align-self: center;
+  justify-self: center;
+  width: 104px !important;
+  height: 168px !important;
+  content: "";
+  opacity: 0.88 !important;
+  transform: none !important;
+  background:
+    linear-gradient(#f2c18d 0 36px, transparent 36px),
+    linear-gradient(90deg, transparent 0 20px, var(--skin-shirt, #22d3ee) 20px 84px, transparent 84px),
+    linear-gradient(90deg, transparent 0 16px, var(--skin-pants, #0f766e) 16px 88px, transparent 88px),
+    linear-gradient(90deg, transparent 0 10px, #111827 10px 38px, transparent 38px 66px, #111827 66px 94px, transparent 94px) !important;
+  background-position: 34px 0, 0 46px, 0 92px, 0 140px !important;
+  background-size: 36px 36px, 104px 46px, 104px 48px, 104px 26px !important;
+  background-repeat: no-repeat !important;
+  filter: drop-shadow(0 12px 0 rgba(0, 0, 0, 0.34));
+  pointer-events: none;
+}
+
+.staff-section .staff-card::after {
+  position: absolute !important;
+  top: 50% !important;
+  right: 88px !important;
+  bottom: auto !important;
+  width: 42px !important;
+  height: 16px !important;
+  content: "";
+  opacity: 0.85 !important;
+  background: #f2c18d !important;
+  box-shadow: 34px -15px 0 #f2c18d !important;
+  transform: translateY(-25%) rotate(-18deg) !important;
+  pointer-events: none;
+}
+
+.staff-section .staff-card:nth-child(even)::after {
+  right: auto !important;
+  left: 88px !important;
+  transform: translateY(-25%) scaleX(-1) rotate(-18deg) !important;
+}
+
 .staff-section .staff-card:hover {
   transform: translateY(-5px) !important;
   border-color: rgba(254, 240, 138, 0.54) !important;
 }
 
-.staff-section .staff-card:nth-child(1),
-.staff-section .staff-card:nth-child(2) {
-  grid-column: span 6;
-  min-height: 340px !important;
-  padding: clamp(1.35rem, 2.3vw, 2rem) !important;
-}
-
-.staff-section .staff-card:nth-child(1) {
-  border-color: rgba(250, 204, 21, 0.48) !important;
-  background:
-    linear-gradient(145deg, rgba(92, 52, 12, 0.48), rgba(7, 59, 30, 0.86)),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.075) 1px, transparent 1px),
-    linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px) !important;
-  background-size: auto, 22px 22px, 22px 22px !important;
-}
-
-.staff-section .staff-card:nth-child(2) {
-  border-color: rgba(103, 232, 249, 0.42) !important;
-  background:
-    linear-gradient(145deg, rgba(8, 51, 68, 0.54), rgba(7, 59, 45, 0.86)),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.075) 1px, transparent 1px),
-    linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px) !important;
-  background-size: auto, 22px 22px, 22px 22px !important;
-}
-
-.staff-section .staff-card:nth-child(3),
-.staff-section .staff-card:nth-child(5),
-.staff-section .staff-card:nth-child(6),
-.staff-section .staff-card:nth-child(8),
-.staff-section .staff-card:nth-child(10),
-.staff-section .staff-card:nth-child(12),
-.staff-section .staff-card:nth-child(14) {
-  grid-column: span 6;
-  min-height: 225px !important;
-}
-
-.staff-section .staff-card::before {
-  top: auto !important;
-  right: 1.15rem !important;
-  bottom: 1rem !important;
-  width: 82px !important;
-  height: 132px !important;
-  opacity: 0.2 !important;
-  transform: none !important;
-  background:
-    linear-gradient(#f2c18d 0 28px, transparent 28px),
-    linear-gradient(90deg, transparent 0 16px, var(--skin-shirt, #22d3ee) 16px 66px, transparent 66px),
-    linear-gradient(90deg, transparent 0 12px, var(--skin-pants, #0f766e) 12px 70px, transparent 70px),
-    linear-gradient(90deg, transparent 0 8px, #111827 8px 30px, transparent 30px 52px, #111827 52px 74px, transparent 74px) !important;
-  background-position: 27px 0, 0 36px, 0 72px, 0 110px !important;
-  background-size: 28px 28px, 82px 36px, 82px 38px, 82px 20px !important;
-  background-repeat: no-repeat !important;
-  filter: drop-shadow(0 10px 0 rgba(0, 0, 0, 0.34));
-}
-
-.staff-section .staff-card::after {
-  top: auto !important;
-  right: 0.75rem !important;
-  bottom: 5.5rem !important;
-  width: 34px !important;
-  height: 14px !important;
-  opacity: 0.2 !important;
-  background: #f2c18d !important;
-  box-shadow: 27px -12px 0 #f2c18d !important;
-  transform: rotate(-18deg) !important;
-}
-
 .staff-section .staff-card:hover::before {
-  opacity: 0.42 !important;
   transform: translateY(-6px) !important;
 }
 
 .staff-section .staff-card:hover::after {
-  opacity: 0.5 !important;
-  transform: translate(-4px, -8px) rotate(-30deg) !important;
+  transform: translate(-4px, calc(-25% - 8px)) rotate(-30deg) !important;
 }
 
-.staff-section .staff-card:nth-child(1) { --skin-shirt: #facc15; --skin-pants: #854d0e; }
-.staff-section .staff-card:nth-child(2) { --skin-shirt: #22d3ee; --skin-pants: #155e75; }
+.staff-section .staff-card:nth-child(even):hover::after {
+  transform: translate(4px, calc(-25% - 8px)) scaleX(-1) rotate(-30deg) !important;
+}
+
+.staff-section .staff-card:nth-child(1) { --skin-shirt: #facc15; --skin-pants: #854d0e; border-color: rgba(250, 204, 21, 0.48) !important; }
+.staff-section .staff-card:nth-child(2) { --skin-shirt: #22d3ee; --skin-pants: #155e75; border-color: rgba(103, 232, 249, 0.42) !important; }
 .staff-section .staff-card:nth-child(3) { --skin-shirt: #a3e635; --skin-pants: #166534; }
 .staff-section .staff-card:nth-child(4) { --skin-shirt: #f97316; --skin-pants: #7c2d12; }
 .staff-section .staff-card:nth-child(5) { --skin-shirt: #38bdf8; --skin-pants: #075985; }
@@ -178,47 +190,36 @@
 .staff-section .staff-card:nth-child(16) { --skin-shirt: #f9a8d4; --skin-pants: #831843; }
 
 .staff-section .staff-card h3 {
+  grid-area: name;
   position: relative;
   z-index: 2;
   display: inline-flex !important;
   width: max-content;
-  max-width: calc(100% - 4.5rem);
+  max-width: 100%;
   border: 2px solid rgba(254, 240, 138, 0.34) !important;
   background: rgba(250, 204, 21, 0.12) !important;
   padding: 0.75rem 0.9rem !important;
   color: #fef3c7 !important;
-  font-size: clamp(0.9rem, 1.4vw, 1.28rem) !important;
-  line-height: 1.6 !important;
+  font-size: clamp(1rem, 2vw, 1.55rem) !important;
+  line-height: 1.55 !important;
   text-shadow: 0 3px 0 rgba(0, 0, 0, 0.58) !important;
   box-shadow: 0 5px 0 rgba(0, 0, 0, 0.3) !important;
 }
 
-.staff-section .staff-card h3::after {
+.staff-section .staff-card h3::after,
+.staff-section .staff-card h3::before {
   content: "" !important;
 }
 
-.staff-section .staff-card h3::before {
-  content: "Staff";
-  position: absolute;
-  top: -0.72rem;
-  left: 0.7rem;
-  background: #102219;
-  padding: 0.08rem 0.38rem;
-  color: rgba(240, 253, 244, 0.78);
-  font-family: Roboto, system-ui, sans-serif;
-  font-size: 0.72rem;
-  line-height: 1;
-  text-shadow: none;
-}
-
 .staff-section .staff-card > div {
+  grid-area: role;
   position: relative;
   z-index: 2;
   display: flex !important;
   flex-wrap: wrap;
   gap: 0.65rem !important;
-  margin-top: 0.2rem !important;
-  padding-right: 5.4rem !important;
+  margin-top: 0 !important;
+  padding-right: 0 !important;
 }
 
 .staff-section .staff-card span {
@@ -231,26 +232,16 @@
   box-shadow: 0 4px 0 rgba(0, 0, 0, 0.26) !important;
 }
 
-.staff-section .staff-card:nth-child(1) span,
-.staff-section .staff-card:nth-child(2) span {
-  font-size: clamp(1.05rem, 1.8vw, 1.45rem) !important;
-  padding: 0.72rem 0.95rem !important;
-}
-
-.staff-section .staff-card:nth-child(4) span,
-.staff-section .staff-card:nth-child(7) span,
-.staff-section .staff-card:nth-child(9) span {
-  font-size: 0.95rem !important;
-}
-
 .staff-section .staff-card p {
+  grid-area: bio;
   position: relative;
   z-index: 2;
   display: block !important;
-  max-width: calc(100% - 6rem);
-  margin-top: auto !important;
+  max-width: 100%;
+  margin-top: 0 !important;
   border-top: 1px solid rgba(255, 255, 255, 0.12);
   padding-top: 0.9rem;
+  padding-right: 0 !important;
   color: rgba(240, 253, 244, 0.62) !important;
   font-size: 0.98rem !important;
   line-height: 1.65;
@@ -258,37 +249,51 @@
 
 @media (max-width: 980px) {
   .staff-section .mt-8.grid {
-    grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+    grid-template-columns: 1fr !important;
+  }
+
+  .staff-section .mt-8.grid::before {
+    left: 1.2rem;
   }
 
   .staff-section .staff-card,
-  .staff-section .staff-card:nth-child(1),
-  .staff-section .staff-card:nth-child(2),
-  .staff-section .staff-card:nth-child(3),
-  .staff-section .staff-card:nth-child(5),
-  .staff-section .staff-card:nth-child(6),
-  .staff-section .staff-card:nth-child(8),
-  .staff-section .staff-card:nth-child(10),
-  .staff-section .staff-card:nth-child(12),
-  .staff-section .staff-card:nth-child(14) {
-    grid-column: span 6;
+  .staff-section .staff-card:nth-child(odd),
+  .staff-section .staff-card:nth-child(even) {
+    grid-column: 1 !important;
+    grid-template-columns: minmax(0, 1fr) 120px !important;
+    grid-template-areas:
+      "name avatar"
+      "role avatar"
+      "bio avatar" !important;
+  }
+
+  .staff-section .staff-card:nth-child(even)::after {
+    right: 76px !important;
+    left: auto !important;
+    transform: translateY(-25%) rotate(-18deg) !important;
   }
 }
 
 @media (max-width: 640px) {
-  .staff-section .staff-card {
+  .staff-section .staff-card,
+  .staff-section .staff-card:nth-child(odd),
+  .staff-section .staff-card:nth-child(even) {
+    grid-template-columns: 1fr !important;
+    grid-template-areas:
+      "avatar"
+      "name"
+      "role"
+      "bio" !important;
     min-height: auto !important;
   }
 
-  .staff-section .staff-card::before,
-  .staff-section .staff-card::after {
-    opacity: 0.12 !important;
+  .staff-section .staff-card::before {
+    width: 86px !important;
+    height: 138px !important;
   }
 
-  .staff-section .staff-card > div,
-  .staff-section .staff-card p {
-    max-width: none;
-    padding-right: 3.4rem !important;
+  .staff-section .staff-card::after {
+    display: none;
   }
 
   .staff-section .staff-card h3 {
