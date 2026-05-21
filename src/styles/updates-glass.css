@@ -1,23 +1,103 @@
-.updates-page .mt-10.grid {
-  display: grid !important;
-  grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.72fr) !important;
-  gap: 1.15rem !important;
-  align-items: start;
+.updates-page .updates-hero {
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(7, 16, 12, 0.48);
+  padding: clamp(1.25rem, 3vw, 2rem);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    0 18px 40px rgba(0, 0, 0, 0.34);
+  backdrop-filter: blur(18px) saturate(1.25);
 }
 
-.updates-page .archive-stats,
-.updates-page .update-card {
+.updates-page .updates-hero h1 {
+  color: #f7fee7 !important;
+  font-size: clamp(2.4rem, 6vw, 5.6rem) !important;
+  line-height: 1.08 !important;
+  text-shadow:
+    0 4px 0 rgba(20, 83, 45, 0.88),
+    0 14px 32px rgba(0, 0, 0, 0.56) !important;
+}
+
+.updates-page .updates-hero .max-w-3xl > p.mt-5 {
+  font-size: 0 !important;
+  line-height: 0 !important;
+}
+
+.updates-page .updates-hero .max-w-3xl > p.mt-5::after {
+  content: "Glitched Network Updates listed starting at 2022.";
+  display: block;
+  max-width: 760px;
+  color: rgba(255, 255, 255, 0.84);
+  font-size: 1.12rem;
+  line-height: 1.9;
+}
+
+.updates-page .archive-stats {
   border: 1px solid rgba(255, 255, 255, 0.22) !important;
-  background: rgba(8, 18, 14, 0.48) !important;
+  background: rgba(7, 16, 12, 0.5) !important;
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.18),
-    0 18px 42px rgba(0, 0, 0, 0.36) !important;
-  backdrop-filter: blur(18px) saturate(1.24);
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    0 18px 40px rgba(0, 0, 0, 0.34) !important;
+  backdrop-filter: blur(18px) saturate(1.25);
+}
+
+.updates-page .archive-stats > span {
+  font-size: 0 !important;
+}
+
+.updates-page .archive-stats > span::after {
+  content: "Total Updates";
+  color: rgba(190, 242, 100, 0.82);
+  font-family: "Press Start 2P", system-ui, sans-serif;
+  font-size: 0.72rem;
+  line-height: 1.5;
+}
+
+.updates-page .archive-stats strong {
+  color: #bef264 !important;
+}
+
+.updates-page .mt-10.grid {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.42fr) minmax(320px, 0.72fr) !important;
+  gap: 1.15rem !important;
+  align-items: start;
+  position: relative;
+}
+
+.updates-page .mt-10.grid::before,
+.updates-page .mt-10.grid::after {
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.08);
+  padding: 0.85rem 1rem;
+  color: #ffffff;
+  font-family: "Press Start 2P", system-ui, sans-serif;
+  font-size: clamp(0.85rem, 1.4vw, 1.15rem);
+  line-height: 1.55;
+  backdrop-filter: blur(14px) saturate(1.2);
+}
+
+.updates-page .mt-10.grid::before {
+  content: "Updates";
+  grid-column: 1;
+  color: #fef3c7;
+}
+
+.updates-page .mt-10.grid::after {
+  content: "Patchnotes";
+  grid-column: 2;
+  grid-row: 1;
+  color: #bae6fd;
 }
 
 .updates-page .update-card {
   grid-column: 1;
   overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.22) !important;
+  background: rgba(8, 18, 14, 0.48) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    0 18px 42px rgba(0, 0, 0, 0.34) !important;
+  backdrop-filter: blur(18px) saturate(1.24);
 }
 
 .updates-page .update-card:nth-child(1),
@@ -43,7 +123,7 @@
 }
 
 .updates-page .update-card:not(:nth-child(1)):not(:nth-child(2)):not(:nth-child(6)):not(:nth-child(11)):not(:nth-child(12)):not(:nth-child(13)):not(:nth-child(15)):not(:nth-child(26)):not(:nth-child(30)):not(:nth-child(31)):not(:nth-child(32)):not(:nth-child(33)):not(:nth-child(34)):not(:nth-child(35)):not(:nth-child(36)):not(:nth-child(37)):not(:nth-child(38)):not(:nth-child(39)):not(:nth-child(40)) {
-  border-color: rgba(253, 224, 71, 0.42) !important;
+  border-color: rgba(253, 224, 71, 0.38) !important;
   background:
     linear-gradient(135deg, rgba(120, 53, 15, 0.24), rgba(20, 83, 45, 0.2)),
     rgba(8, 18, 14, 0.5) !important;
@@ -199,6 +279,8 @@
     grid-template-columns: 1fr !important;
   }
 
+  .updates-page .mt-10.grid::before,
+  .updates-page .mt-10.grid::after,
   .updates-page .update-card,
   .updates-page .update-card:nth-child(1),
   .updates-page .update-card:nth-child(2),
@@ -221,9 +303,18 @@
   .updates-page .update-card:nth-child(40) {
     grid-column: 1;
   }
+
+  .updates-page .mt-10.grid::after {
+    grid-row: auto;
+    margin-top: 1rem;
+  }
 }
 
 @media (max-width: 767px) {
+  .updates-page .updates-hero .max-w-3xl > p.mt-5::after {
+    font-size: 1rem;
+  }
+
   .updates-page .update-card:not(:nth-child(1)):not(:nth-child(2)):not(:nth-child(6)):not(:nth-child(11)):not(:nth-child(12)):not(:nth-child(13)):not(:nth-child(15)):not(:nth-child(26)):not(:nth-child(30)):not(:nth-child(31)):not(:nth-child(32)):not(:nth-child(33)):not(:nth-child(34)):not(:nth-child(35)):not(:nth-child(36)):not(:nth-child(37)):not(:nth-child(38)):not(:nth-child(39)):not(:nth-child(40)) .update-summary,
   .updates-page .update-card:nth-child(1) .update-summary,
   .updates-page .update-card:nth-child(2) .update-summary,
