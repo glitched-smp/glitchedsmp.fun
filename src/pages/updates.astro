@@ -1,53 +1,310 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
-import Card from "../components/Card.astro";
-import config from "../config.json";
+
+const updates = [
+	{
+		date: "July 11, 2022",
+		version: "1.14",
+		type: "Huge",
+		items: [
+			"Added new structures including pillager outposts, wild west builds, igloos, ruined portals, desert temples, and soul valley structures.",
+			"Added throwable swords and axes, banner flags, cravings, daily quests, tutorial book, old bundle, and custom crafting table setup.",
+			"Reworked survival systems with campfire healing, torch crafting, hunger drain, stronger shields, craftable chainmail, armor perks, and custom mob behaviors.",
+			"Added spectral mob mechanics, new villagers, stronghold silverfish events, custom recipes, healing salves, war horn, sea fragments, dragon fruit, fishing nets, trophies, bundles, and many recipe changes.",
+		],
+	},
+	{
+		date: "September 2, 2022",
+		version: "1.15",
+		type: "Big",
+		items: [
+			"Added custom terrain across worlds with 150+ new biomes, including 50 overworld biomes.",
+			"Revamped vehicles, added realistic seasons, improved anti-cheat, and started rolling out more minigames.",
+			"Custom generation landed in the End and Overworld, with Nether generation planned later.",
+			"Removed unused or broken plugins to simplify the server and improve stability.",
+		],
+	},
+	{
+		date: "September 16, 2022",
+		version: "1.15.1",
+		type: "Normal",
+		items: ["Added a better Nations system using Towny, with tutorial support planned."],
+	},
+	{
+		date: "September 17, 2022",
+		version: "1.15.2",
+		type: "Revamp",
+		items: [
+			"Improved user experience by moving away from spawn-based navigation.",
+			"Added player rooms and GUI-based navigation through CommandPanels.",
+			"Removed FakePlayers and JumpPads.",
+		],
+	},
+	{
+		date: "September 21, 2022",
+		version: "1.15.3",
+		type: "Very Small",
+		items: ["Changed server hardware with an extra 20GB of storage."],
+	},
+	{
+		date: "October 10, 2022",
+		version: "1.16",
+		type: "Normal",
+		items: [
+			"Added Oneblock, Skyblock, custom ESC menu, custom items, parkour, duels, custom food, quests, crates, and more minigame maps.",
+			"Planned Tower Defense, Hide n Seek, more minigames, and enhanced survival content for follow-up updates.",
+			"Optional resource packs were suggested for vehicles and custom food.",
+		],
+	},
+	{
+		date: "November 6, 2022",
+		version: "1.16.1",
+		type: "Small",
+		items: [
+			"Readded computers, leveled mobs, Slimefun, player shops, and enhanced survival.",
+			"Added paintball, more maps, and suggested community features.",
+			"Fixed Towny and continued work on Village Defense.",
+		],
+	},
+	{
+		date: "January 8, 2023",
+		version: "1.17",
+		type: "Continued Update",
+		items: [
+			"Added a better fishing system with money rewards.",
+			"Started the Box server, server name changes, and host changes.",
+			"Removed 1.16.1 readded content, QAV vehicles, and unnecessary resource packs/datapacks.",
+		],
+	},
+	{
+		date: "January 29, 2023",
+		version: "1.17.1",
+		type: "Big",
+		items: [
+			"Added the Box server.",
+			"Teased 1.18 improvements focused on bigger Box server testing and refinement.",
+		],
+	},
+	{
+		date: "June 25, 2023",
+		version: "1.18",
+		type: "Huge",
+		items: [
+			"Survival gained RealEstate, purchasable prebuilds, improved nations, server shop, new spawn, lore structures, and a better survival menu.",
+			"Minigames readded Village Defense and Murder Mystery, plus a new lobby and maps.",
+			"BoxServer received a new lobby, Classic mode, fixes for spawn, trading, and duping.",
+			"Server-wide changes included revamped GUI, join/leave messages, clickable links, TAB menu, update logs, and compatibility from 1.12 to 1.19.4.",
+		],
+	},
+	{
+		date: "November 5, 2023",
+		version: "1.18.1",
+		type: "Normal",
+		items: [
+			"Survival added money stations, seasons, Slimefun research, improved economy, ambience, vehicles, and daily rewards.",
+			"Work continued on PartyGames, Tower Defense, and Battle Royale while minigames were paused for bug fixing.",
+			"Added the Sandbox gamemode and fixed major money-drop issues.",
+			"Removed BoxServer and unused content.",
+		],
+	},
+	{
+		date: "November 10, 2023",
+		version: "1.18.2",
+		type: "Tiny",
+		items: ["Added Auction House."],
+	},
+	{
+		date: "January 24, 2024",
+		version: "1.18.3",
+		type: "Medium",
+		items: [
+			"Added the Commission System with daily commissions, money, XP, and Commission Tokens.",
+			"Added seasonal limited-time commission shop items such as winter gear, Ricketeer Sword, Ice-Cold Snowball, enchantment books, hard ice, upgraded gear, and Frozen Sword.",
+			"Commission phases rotate every week or two.",
+		],
+	},
+	{
+		date: "April 14, 2024",
+		version: "1.0.0",
+		type: "Massive Revamp",
+		items: [
+			"Survival was revamped with bug fixes, PlayerShop, RealisticVillagers, custom terrain, custom structures, skills, Slimefun, movable armor stands, commissions, crates, and 200+ quality-of-life features.",
+			"Fixed Slimefun, Towny, shops, economy, custom enchants, NPCs, permissions, and other server-wide bugs.",
+			"Added PartyGames with 23 minigames in one mode.",
+			"Added new lobbies, spawns, and free cosmetics for the launch period.",
+			"RPG was announced as a work in progress for the next update.",
+		],
+	},
+	{
+		date: "April 15, 2024",
+		version: "1.0.1",
+		type: "Small Bugfix",
+		items: ["Removed the annoying healing and craftable systems, and nerfed mobs."],
+	},
+	{
+		date: "April 18, 2024",
+		version: "1.0.2",
+		type: "Big Bugfix",
+		items: [
+			"Added protection so armor, tools, and weapons do not drop when players die to hostile mobs.",
+			"Added a server restart schedule every two hours with player warnings planned before restarts.",
+			"Fixed builds and inventories being removed.",
+		],
+	},
+	{
+		date: "May 19, 2024",
+		version: "1.0.3",
+		type: "Small Nerfs",
+		items: ["Nerfed curse enchantment spawn rates from 50% to 5% for most things."],
+	},
+	{
+		date: "May 24, 2024",
+		version: "1.0.4",
+		type: "Removal",
+		items: ["Removed Towny while a new system was prepared."],
+	},
+	{
+		date: "May 25, 2024",
+		version: "1.1.0",
+		type: "Fight or Flee, Part 1",
+		items: [
+			"Added new particles for breaking blocks and damaging players.",
+			"Added loot boxes, sitting, crawling, bellyflop, and new block physics such as tree cutting.",
+			"Added revamped land claiming with /land and removed the old Towny system.",
+			"Fixed Nether and End RPG healthbars, currencies, and player tab visibility.",
+			"Teased a Herobrine-style boss encounter.",
+		],
+	},
+	{
+		date: "May 28, 2024",
+		version: "1.1.1",
+		type: "Minor Change",
+		items: ["Added trapdoor animations and removed block-breaking and mob-hurt animations."],
+	},
+	{
+		date: "June 6, 2024",
+		version: "1.1.2",
+		type: "Minor Change",
+		items: ["Temporarily removed Slimefun while investigating item reset issues."],
+	},
+	{
+		date: "June 7, 2024",
+		version: "1.1.3",
+		type: "Small Change",
+		items: ["Readded a stable version of Slimefun."],
+	},
+	{
+		date: "June 7, 2024",
+		version: "1.1.4",
+		type: "Hardware Change",
+		items: ["Upgraded server hardware from 12GB to 16GB RAM."],
+	},
+	{
+		date: "June 12, 2024",
+		version: "1.1.5",
+		type: "Largest Change",
+		items: ["Removed phantoms."],
+	},
+	{
+		date: "June 16, 2024",
+		version: "1.2.0",
+		type: "Survival-Based",
+		items: [
+			"Added MoFI inside Survival with Easy, Normal, Hard, Insane, and Hardcore difficulties.",
+			"Added Hardcore Mode MoFI rotations with top-tier rewards, crate keys, and special suffixes.",
+			"Added The Dealer NPC with rotating quests and rewards for early-mid game players.",
+			"Casual mode and Hardcore Mode were planned for 1.2.1.",
+		],
+	},
+	{
+		date: "August 7, 2024",
+		version: "1.3.0",
+		type: "Medium",
+		items: [
+			"Updated Survival to Minecraft 1.20.6.",
+			"Added MoFI Hardcore Mode, commission crate rotation, Golden Crate rework, more Golden Key sources, new commission quests, cannons, vehicles, and custom food.",
+			"Added vehicle commands for cars, racing cars, planes, and helicopters, plus /uf menu for custom food.",
+			"Scoreboard and balance were temporarily disabled while the rest of 1.3.0 continued rolling out.",
+		],
+	},
+	{
+		date: "August 27, 2024",
+		version: "Patchnotes Era",
+		type: "Format Change",
+		items: ["The server update format switched to patchnotes going forward."],
+	},
+];
 ---
 
-<MainLayout>
-    <section
-        id="updates"
-        class="flex flex-wrap gap-4 pt-18 pb-4 px-4 bg-bg-primary text-white w-full min-h-screen"
-    >
-        {
-            config.updates.map((update) => (
-                <div class="w-80">
-                    <Card className="min-h-60 transition-all ease-in-out hover:scale-[1.02]">
-                        <div class="flex items-center gap-2 mb-2">
-                            <span class="text-fg-muted text-sm uppercase">
-                                {update.type}
-                            </span>
-                            <h2>{update.name}</h2>
-                        </div>
-                        <div>
-                            <ul class="mb-2">
-                                <h3>Added</h3>
-                                {update.added.map((addition) => (
-                                    <li class="ml-4 list-disc text-fg-muted">
-                                        {addition}
-                                    </li>
-                                ))}
-                            </ul>
-                            <ul class="mb-2">
-                                <h3>Removed</h3>
-                                {update.removed.map((subtraction) => (
-                                    <li class="ml-4 list-disc text-fg-muted">
-                                        {subtraction}
-                                    </li>
-                                ))}
-                            </ul>
-                            <ul class="mb-2">
-                                <h3>Changed</h3>
-                                {update.changed.map((change) => (
-                                    <li class="ml-4 list-disc text-fg-muted">
-                                        {change}
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    </Card>
-                </div>
-            ))
-        }
-    </section>
+<MainLayout title="Updates" description="Glitched SMP update history and patch notes.">
+	<section id="updates" class="updates-page min-h-screen text-white">
+		<div class="updates-backdrop"></div>
+		<div class="relative z-5 mx-auto w-full max-w-6xl px-4 pt-28 pb-16">
+			<div class="max-w-3xl">
+				<p class="mb-3 inline-flex border-2 border-emerald-200/40 bg-black/45 px-3 py-2 text-xs uppercase text-emerald-100 shadow-[0_4px_0_rgba(0,0,0,0.35)] backdrop-blur font-PressStart2P">
+					Patch Archive
+				</p>
+				<h1 class="text-4xl leading-tight md:text-6xl font-PressStart2P">
+					Latest Updates
+				</h1>
+				<p class="mt-5 text-lg leading-8 text-white/85 md:text-xl">
+					A cleaned-up timeline of server updates, sorted by date and trimmed down to the changes players actually need to know.
+				</p>
+			</div>
+
+			<div class="mt-10 grid gap-5">
+				{updates.map((update) => (
+					<article class="update-card border-2 border-white/15 bg-black/55 p-5 shadow-[0_7px_0_rgba(0,0,0,0.35)] backdrop-blur-md transition-transform hover:-translate-y-1 md:p-6">
+						<div class="flex flex-col gap-3 border-b border-white/15 pb-4 md:flex-row md:items-start md:justify-between">
+							<div>
+								<span class="text-sm uppercase text-emerald-200">{update.date}</span>
+								<h2 class="mt-2 text-2xl font-PressStart2P">{update.version}</h2>
+							</div>
+							<span class="w-max border border-amber-200/60 bg-amber-300/15 px-3 py-1 text-sm text-amber-100">
+								{update.type}
+							</span>
+						</div>
+						<ul class="mt-4 grid gap-3">
+							{update.items.map((item) => (
+								<li class="relative pl-5 leading-7 text-white/82 before:absolute before:left-0 before:top-2 before:h-2 before:w-2 before:bg-lime-300">
+									{item}
+								</li>
+							))}
+						</ul>
+					</article>
+				))}
+			</div>
+		</div>
+	</section>
 </MainLayout>
+
+<style>
+	.updates-page {
+		position: relative;
+		overflow: hidden;
+		background: #070b08;
+	}
+
+	.updates-page::before {
+		position: fixed;
+		inset: 0;
+		content: "";
+		background-image: url("/updates-bg.svg");
+		background-size: cover;
+		background-position: center;
+		filter: saturate(1.08) contrast(1.05);
+		transform: scale(1.04);
+	}
+
+	.updates-backdrop {
+		position: fixed;
+		inset: 0;
+		background:
+			linear-gradient(90deg, rgba(0, 0, 0, 0.78), rgba(0, 0, 0, 0.44)),
+			linear-gradient(180deg, rgba(0, 0, 0, 0.28), rgba(0, 0, 0, 0.84));
+	}
+
+	.update-card {
+		image-rendering: auto;
+	}
+</style>
