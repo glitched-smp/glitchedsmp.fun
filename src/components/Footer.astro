@@ -1,0 +1,45 @@
+---
+const legalLinks = [
+    { href: "/terms.html", label: "Terms of Service" },
+    { href: "/privacy.html", label: "Privacy Policy" },
+    { href: "/rules.html", label: "Rules" },
+    { href: "/disclaimer.html", label: "Disclaimer" },
+];
+
+const socialLinks = [
+    { href: "https://discord.gg/6cqs7HaUq9", label: "Discord" },
+];
+---
+
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-brand">
+            <p class="footer-kicker font-PressStart2P">Glitched Network</p>
+            <p>
+                A Minecraft survival community with custom features, events, story moments, and a lot of history behind it.
+            </p>
+        </div>
+
+        <nav class="footer-links" aria-label="Footer legal links">
+            <h2 class="font-PressStart2P">Info</h2>
+            <ul>
+                {legalLinks.map((link) => (
+                    <li><a href={link.href}>{link.label}</a></li>
+                ))}
+            </ul>
+        </nav>
+
+        <nav class="footer-links" aria-label="Footer social links">
+            <h2 class="font-PressStart2P">Socials</h2>
+            <ul>
+                {socialLinks.map((link) => (
+                    <li><a href={link.href} target="_blank" rel="noreferrer">{link.label}</a></li>
+                ))}
+            </ul>
+        </nav>
+    </div>
+
+    <div class="footer-bottom">
+        <p>Glitched Network is not an official Minecraft product and is not approved by or associated with Mojang or Microsoft.</p>
+    </div>
+</footer>
