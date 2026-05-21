@@ -91,6 +91,28 @@
   border-color: rgba(248, 245, 224, 0.14) !important;
 }
 
+.updates-page .archive-stats p:first-of-type,
+.updates-page .archive-stats p:last-of-type {
+  font-size: 0 !important;
+  line-height: 0 !important;
+}
+
+.updates-page .archive-stats p:first-of-type::after {
+  content: "Update logs may be clunky on the server; it is recommended to view them off Discord.";
+  display: block;
+  color: rgba(255, 250, 229, 0.76);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.updates-page .archive-stats p:last-of-type::after {
+  content: "AI was used to log all updates.";
+  display: block;
+  color: rgba(255, 250, 229, 0.62);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
 .updates-page .mt-10.grid {
   display: grid !important;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)) !important;
