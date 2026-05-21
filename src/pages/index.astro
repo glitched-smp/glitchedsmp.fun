@@ -7,20 +7,31 @@ import config from "../config.json";
 
 const serverAddress = "glitchedsmp.fun";
 const updatesLink = config.public_links["/updates.html"] ? "/updates.html" : "#ratings";
-const heroDescription = "A Unique Minecraft Survival Server perserving the minecraft feel while adding loads of fun topped with a great community.";
+const heroDescription = "A Unique Minecraft Survival Server preserving the Minecraft feel while adding loads of fun, topped with a great community.";
 const aboutCards = [
 	{
-		title: "Survival First",
+		title: "Survival Based",
 		description: "A survival world built around exploring, building, grinding, trading, and making your base feel like home.",
 	},
 	{
 		title: "Custom Features",
-		description: "Extra systems, quests, crates, commissions, vehicles, custom food, and server events add more to do without losing the Minecraft feel.",
+		description: "Experience great QOL features as well as things like custom enchants, a story, and countless events.",
 	},
 	{
 		title: "Community Driven",
 		description: "Updates are shaped by the people playing, testing, suggesting, and sticking around through each season of the server.",
 	},
+];
+const staffGroups = [
+	{ role: "Owner", members: ["mm202045"] },
+	{ role: "Co-Owner", members: ["Lobexerion"] },
+	{ role: "Staff Manager", members: ["Gemerboyg"] },
+	{ role: "Admins", members: ["Ect0fox", "Silver", "Ilike2flynotdie", "Pzstorm"] },
+	{ role: "Community Manager", members: ["Odin"] },
+	{ role: "Head Developer", members: ["Floormann15"] },
+	{ role: "Developers", members: ["King", "Watermelonn", "Faceless"] },
+	{ role: "Lead Builder", members: ["Maxboi152"] },
+	{ role: "Mods", members: ["Plumbaskett", "Yzopontop"] },
 ];
 ---
 
@@ -231,10 +242,10 @@ const aboutCards = [
 					About Us
 				</p>
 				<h2 class="text-3xl leading-tight md:text-5xl font-PressStart2P">
-					Built Like Minecraft, Tuned For More
+					Running Since 2021
 				</h2>
 				<p class="mt-5 text-lg leading-8 text-white/85">
-					Glitched SMP is a survival server focused on keeping that classic Minecraft loop alive while adding custom systems, seasonal ideas, and community-shaped updates that give players more reasons to keep exploring.
+					Glitched Network started as an SMP simply made to play with friends. As the months went on, we all shared the same goal: have fun, enjoy ourselves, and bring the server to more people so they could experience that same fun.
 				</p>
 			</div>
 
@@ -265,7 +276,7 @@ const aboutCards = [
 					</h2>
 				</div>
 				<p class="max-w-xl text-white/75 md:text-right">
-					Reviews from people who have played, tested, and lived through the chaos with us.
+					Reviews from players and their experience.
 				</p>
 			</div>
 
@@ -285,6 +296,44 @@ const aboutCards = [
 						</div>
 						<p class="mt-4 leading-7 text-white/76">
 							{rating.message ?? `${rating.rating} out of ${config.max_rating} stars`}
+						</p>
+					</article>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<section
+		id="staff"
+		class="staff-section relative overflow-hidden text-white"
+		style={{ backgroundImage: `url(${GrassBlock.src})` }}
+	>
+		<div class="relative z-5 mx-auto max-w-6xl px-4 py-20">
+			<div class="max-w-3xl">
+				<p class="mb-4 inline-flex border-2 border-cyan-200/40 bg-black/35 px-3 py-2 text-xs uppercase text-cyan-100 shadow-[0_4px_0_rgba(0,0,0,0.35)] font-PressStart2P">
+					Meet The Staff
+				</p>
+				<h2 class="text-3xl leading-tight md:text-5xl font-PressStart2P">
+					The Team Behind The Server
+				</h2>
+				<p class="mt-5 text-lg leading-8 text-white/80">
+					The people keeping the server moving, building, fixing, planning, and helping players along the way.
+				</p>
+			</div>
+
+			<div class="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+				{staffGroups.map((group) => (
+					<article class="staff-card border-2 border-white/15 bg-black/50 p-5 shadow-[0_7px_0_rgba(0,0,0,0.35)] backdrop-blur-md transition-transform hover:-translate-y-1">
+						<h3 class="text-lg font-PressStart2P">{group.role}</h3>
+						<div class="mt-4 flex flex-wrap gap-2">
+							{group.members.map((member) => (
+								<span class="border border-white/20 bg-white/10 px-3 py-1 text-sm text-white/88">
+									{member}
+								</span>
+							))}
+						</div>
+						<p class="mt-4 leading-7 text-white/68">
+							Staff bio coming soon.
 						</p>
 					</article>
 				))}
@@ -314,7 +363,8 @@ const aboutCards = [
 
 	.home-hero::after,
 	.about-section::before,
-	.ratings-section::before {
+	.ratings-section::before,
+	.staff-section::before {
 		position: absolute;
 		inset: 0;
 		content: "";
@@ -328,7 +378,8 @@ const aboutCards = [
 	}
 
 	.about-section,
-	.ratings-section {
+	.ratings-section,
+	.staff-section {
 		background-size: 64px 64px;
 		image-rendering: pixelated;
 	}
@@ -345,9 +396,16 @@ const aboutCards = [
 			linear-gradient(to bottom, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.64));
 	}
 
+	.staff-section::before {
+		background:
+			linear-gradient(135deg, rgba(8, 42, 49, 0.86), rgba(0, 0, 0, 0.52)),
+			linear-gradient(to bottom, rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0.66));
+	}
+
 	.hero-copy h1,
 	.about-section h2,
-	.ratings-section h2 {
+	.ratings-section h2,
+	.staff-section h2 {
 		color: #fff7b8;
 		text-shadow:
 			0 3px 0 #5d370b,
@@ -361,7 +419,8 @@ const aboutCards = [
 
 	.hero-stat,
 	.about-card,
-	.rating-card {
+	.rating-card,
+	.staff-card {
 		box-shadow:
 			inset 0 0 0 2px rgba(255, 255, 255, 0.12),
 			0 6px 0 rgba(0, 0, 0, 0.28);
