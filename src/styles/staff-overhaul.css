@@ -1,0 +1,301 @@
+.staff-section {
+  position: relative;
+  isolation: isolate;
+}
+
+.staff-section::after {
+  background:
+    radial-gradient(circle at 12% 16%, rgba(250, 204, 21, 0.22), transparent 22%),
+    radial-gradient(circle at 84% 22%, rgba(34, 211, 238, 0.22), transparent 24%),
+    linear-gradient(135deg, rgba(7, 36, 35, 0.9), rgba(7, 59, 30, 0.72) 46%, rgba(0, 0, 0, 0.66)),
+    linear-gradient(rgba(255, 255, 255, 0.055) 2px, transparent 2px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.055) 2px, transparent 2px) !important;
+  background-size: auto, auto, auto, 32px 32px, 32px 32px !important;
+}
+
+.staff-section > div {
+  max-width: 1240px !important;
+}
+
+.staff-section > div > .max-w-3xl {
+  max-width: 860px !important;
+  border: 2px solid rgba(187, 247, 208, 0.22);
+  background:
+    linear-gradient(135deg, rgba(1, 22, 18, 0.58), rgba(12, 74, 56, 0.34)),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: auto, 24px 24px, 24px 24px;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  box-shadow:
+    inset 0 0 0 2px rgba(255, 255, 255, 0.08),
+    0 8px 0 rgba(0, 0, 0, 0.34),
+    0 22px 44px rgba(0, 0, 0, 0.26);
+  backdrop-filter: blur(12px);
+}
+
+.staff-section > div > .max-w-3xl p:first-child {
+  border-color: rgba(250, 204, 21, 0.48) !important;
+  background: rgba(250, 204, 21, 0.16) !important;
+  color: #fef3c7 !important;
+}
+
+.staff-section h2 {
+  color: #fef3c7 !important;
+  text-shadow:
+    0 3px 0 #854d0e,
+    0 6px 0 #3f2505,
+    0 13px 28px rgba(0, 0, 0, 0.58) !important;
+}
+
+.staff-section .mt-8.grid {
+  display: grid !important;
+  grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
+  gap: 1rem !important;
+  align-items: stretch !important;
+}
+
+.staff-section .staff-card {
+  grid-column: span 4;
+  position: relative;
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 1rem !important;
+  align-content: start;
+  min-height: 250px !important;
+  overflow: hidden;
+  border: 2px solid rgba(187, 247, 208, 0.26) !important;
+  background:
+    linear-gradient(145deg, rgba(6, 32, 31, 0.92), rgba(12, 58, 34, 0.86)),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px) !important;
+  background-size: auto, 22px 22px, 22px 22px !important;
+  padding: 1.2rem !important;
+  box-shadow:
+    inset 0 0 0 2px rgba(255, 255, 255, 0.1),
+    inset 0 -26px 48px rgba(34, 197, 94, 0.1),
+    0 8px 0 rgba(0, 0, 0, 0.42),
+    0 24px 42px rgba(0, 0, 0, 0.28) !important;
+  transform-style: preserve-3d;
+}
+
+.staff-section .staff-card:hover {
+  transform: translateY(-5px) !important;
+  border-color: rgba(254, 240, 138, 0.54) !important;
+}
+
+.staff-section .staff-card:nth-child(1),
+.staff-section .staff-card:nth-child(2) {
+  grid-column: span 6;
+  min-height: 340px !important;
+  padding: clamp(1.35rem, 2.3vw, 2rem) !important;
+}
+
+.staff-section .staff-card:nth-child(1) {
+  border-color: rgba(250, 204, 21, 0.48) !important;
+  background:
+    linear-gradient(145deg, rgba(92, 52, 12, 0.48), rgba(7, 59, 30, 0.86)),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.075) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px) !important;
+  background-size: auto, 22px 22px, 22px 22px !important;
+}
+
+.staff-section .staff-card:nth-child(2) {
+  border-color: rgba(103, 232, 249, 0.42) !important;
+  background:
+    linear-gradient(145deg, rgba(8, 51, 68, 0.54), rgba(7, 59, 45, 0.86)),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.075) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px) !important;
+  background-size: auto, 22px 22px, 22px 22px !important;
+}
+
+.staff-section .staff-card:nth-child(3),
+.staff-section .staff-card:nth-child(5),
+.staff-section .staff-card:nth-child(6),
+.staff-section .staff-card:nth-child(8) {
+  grid-column: span 6;
+  min-height: 225px !important;
+}
+
+.staff-section .staff-card::before {
+  top: auto !important;
+  right: 1.15rem !important;
+  bottom: 1rem !important;
+  width: 82px !important;
+  height: 132px !important;
+  opacity: 0.2 !important;
+  transform: none !important;
+  background:
+    linear-gradient(#f2c18d 0 28px, transparent 28px),
+    linear-gradient(90deg, transparent 0 16px, var(--skin-shirt, #22d3ee) 16px 66px, transparent 66px),
+    linear-gradient(90deg, transparent 0 12px, var(--skin-pants, #0f766e) 12px 70px, transparent 70px),
+    linear-gradient(90deg, transparent 0 8px, #111827 8px 30px, transparent 30px 52px, #111827 52px 74px, transparent 74px) !important;
+  background-position: 27px 0, 0 36px, 0 72px, 0 110px !important;
+  background-size: 28px 28px, 82px 36px, 82px 38px, 82px 20px !important;
+  background-repeat: no-repeat !important;
+  filter: drop-shadow(0 10px 0 rgba(0, 0, 0, 0.34));
+}
+
+.staff-section .staff-card::after {
+  top: auto !important;
+  right: 0.75rem !important;
+  bottom: 5.5rem !important;
+  width: 34px !important;
+  height: 14px !important;
+  opacity: 0.2 !important;
+  background: #f2c18d !important;
+  box-shadow: 27px -12px 0 #f2c18d !important;
+  transform: rotate(-18deg) !important;
+}
+
+.staff-section .staff-card:hover::before {
+  opacity: 0.42 !important;
+  transform: translateY(-6px) !important;
+}
+
+.staff-section .staff-card:hover::after {
+  opacity: 0.5 !important;
+  transform: translate(-4px, -8px) rotate(-30deg) !important;
+}
+
+.staff-section .staff-card:nth-child(1) { --skin-shirt: #facc15; --skin-pants: #854d0e; }
+.staff-section .staff-card:nth-child(2) { --skin-shirt: #22d3ee; --skin-pants: #155e75; }
+.staff-section .staff-card:nth-child(3) { --skin-shirt: #a3e635; --skin-pants: #166534; }
+.staff-section .staff-card:nth-child(4) { --skin-shirt: #f97316; --skin-pants: #7c2d12; }
+.staff-section .staff-card:nth-child(5) { --skin-shirt: #38bdf8; --skin-pants: #075985; }
+.staff-section .staff-card:nth-child(6) { --skin-shirt: #c084fc; --skin-pants: #581c87; }
+.staff-section .staff-card:nth-child(7) { --skin-shirt: #fb7185; --skin-pants: #881337; }
+.staff-section .staff-card:nth-child(8) { --skin-shirt: #fbbf24; --skin-pants: #78350f; }
+.staff-section .staff-card:nth-child(9) { --skin-shirt: #86efac; --skin-pants: #14532d; }
+
+.staff-section .staff-card h3 {
+  position: relative;
+  z-index: 2;
+  display: inline-flex !important;
+  width: max-content;
+  max-width: calc(100% - 4.5rem);
+  border: 2px solid rgba(254, 240, 138, 0.34) !important;
+  background: rgba(250, 204, 21, 0.12) !important;
+  padding: 0.75rem 0.9rem !important;
+  color: #fef3c7 !important;
+  font-size: clamp(0.9rem, 1.4vw, 1.28rem) !important;
+  line-height: 1.6 !important;
+  text-shadow: 0 3px 0 rgba(0, 0, 0, 0.58) !important;
+  box-shadow: 0 5px 0 rgba(0, 0, 0, 0.3) !important;
+}
+
+.staff-section .staff-card h3::after {
+  content: "" !important;
+}
+
+.staff-section .staff-card h3::before {
+  content: "Role";
+  position: absolute;
+  top: -0.72rem;
+  left: 0.7rem;
+  background: #102219;
+  padding: 0.08rem 0.38rem;
+  color: rgba(240, 253, 244, 0.78);
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 0.72rem;
+  line-height: 1;
+  text-shadow: none;
+}
+
+.staff-section .staff-card > div {
+  position: relative;
+  z-index: 2;
+  display: flex !important;
+  flex-wrap: wrap;
+  gap: 0.65rem !important;
+  margin-top: 0.2rem !important;
+  padding-right: 5.4rem !important;
+}
+
+.staff-section .staff-card span {
+  border: 2px solid rgba(187, 247, 208, 0.34) !important;
+  background: rgba(20, 83, 45, 0.58) !important;
+  color: rgba(240, 253, 244, 0.98) !important;
+  padding: 0.58rem 0.78rem !important;
+  font-size: 1rem !important;
+  line-height: 1.35;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.26) !important;
+}
+
+.staff-section .staff-card:nth-child(1) span,
+.staff-section .staff-card:nth-child(2) span {
+  font-size: clamp(1.05rem, 1.8vw, 1.45rem) !important;
+  padding: 0.72rem 0.95rem !important;
+}
+
+.staff-section .staff-card:nth-child(4) span,
+.staff-section .staff-card:nth-child(7) span,
+.staff-section .staff-card:nth-child(9) span {
+  font-size: 0.95rem !important;
+}
+
+.staff-section .staff-card p {
+  position: relative;
+  z-index: 2;
+  display: block !important;
+  max-width: calc(100% - 6rem);
+  margin-top: auto !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding-top: 0.9rem;
+  color: rgba(240, 253, 244, 0.62) !important;
+  line-height: 1.65;
+}
+
+.staff-section .staff-card:nth-child(1) p::before { content: "Keeps the whole thing alive, somehow."; }
+.staff-section .staff-card:nth-child(2) p::before { content: "Second in command and usually somewhere near the chaos."; }
+.staff-section .staff-card:nth-child(3) p::before { content: "Keeps staff moving in one direction."; }
+.staff-section .staff-card:nth-child(4) p::before { content: "The people watching the server when things get loud."; }
+.staff-section .staff-card:nth-child(5) p::before { content: "Keeps the community side feeling alive."; }
+.staff-section .staff-card:nth-child(6) p::before { content: "Builds and fixes the systems players use."; }
+.staff-section .staff-card:nth-child(7) p::before { content: "The code crew behind features, tools, and fixes."; }
+.staff-section .staff-card:nth-child(8) p::before { content: "Turns empty space into places people remember."; }
+.staff-section .staff-card:nth-child(9) p::before { content: "Helps keep the server clean and playable."; }
+
+.staff-section .staff-card p {
+  font-size: 0;
+}
+
+.staff-section .staff-card p::before {
+  font-size: 0.98rem;
+}
+
+@media (max-width: 980px) {
+  .staff-section .mt-8.grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+  }
+
+  .staff-section .staff-card,
+  .staff-section .staff-card:nth-child(1),
+  .staff-section .staff-card:nth-child(2),
+  .staff-section .staff-card:nth-child(3),
+  .staff-section .staff-card:nth-child(5),
+  .staff-section .staff-card:nth-child(6),
+  .staff-section .staff-card:nth-child(8) {
+    grid-column: span 6;
+  }
+}
+
+@media (max-width: 640px) {
+  .staff-section .staff-card {
+    min-height: auto !important;
+  }
+
+  .staff-section .staff-card::before,
+  .staff-section .staff-card::after {
+    opacity: 0.12 !important;
+  }
+
+  .staff-section .staff-card > div,
+  .staff-section .staff-card p {
+    max-width: none;
+    padding-right: 3.4rem !important;
+  }
+
+  .staff-section .staff-card h3 {
+    max-width: none;
+  }
+}
