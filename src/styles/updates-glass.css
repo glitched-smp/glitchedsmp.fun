@@ -93,7 +93,7 @@
 
 .updates-page .mt-10.grid {
   display: grid !important;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 315px), 1fr)) !important;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)) !important;
   gap: 1.1rem !important;
   align-items: start !important;
 }
@@ -103,7 +103,8 @@
   content: none !important;
 }
 
-.updates-page .update-card {
+.updates-page .update-card,
+.updates-page .update-card:not(:is(:nth-child(1), :nth-child(2), :nth-child(6), :nth-child(11), :nth-child(12), :nth-child(13), :nth-child(15), :nth-child(26), :nth-child(30), :nth-child(31), :nth-child(32), :nth-child(33), :nth-child(34), :nth-child(35), :nth-child(36), :nth-child(37), :nth-child(38), :nth-child(39), :nth-child(40))) {
   grid-column: auto !important;
   position: relative;
   overflow: hidden;
@@ -151,12 +152,14 @@
 
 .updates-page .update-summary {
   display: grid !important;
-  grid-template-columns: auto minmax(0, 1fr) auto !important;
-  grid-template-areas: "number content action" !important;
-  gap: 1rem !important;
+  grid-template-columns: 1fr auto !important;
+  grid-template-areas:
+    "top action"
+    "content content" !important;
+  gap: 0.85rem 1rem !important;
   align-items: start !important;
-  min-height: 150px;
-  padding: 1.15rem !important;
+  min-height: 172px;
+  padding: 1.1rem !important;
   list-style: none;
 }
 
@@ -165,15 +168,16 @@
 }
 
 .updates-page .update-number {
-  grid-area: number;
-  min-width: 4.2rem;
+  grid-area: top;
+  width: max-content;
+  min-width: 4.25rem;
   border: 1px solid rgba(248, 245, 224, 0.24) !important;
   background: rgba(255, 248, 218, 0.14) !important;
   color: #fff1b8 !important;
   border-radius: 16px;
-  padding: 0.76rem 0.7rem;
+  padding: 0.68rem 0.7rem;
   text-align: center;
-  line-height: 1.4;
+  line-height: 1.35;
   text-shadow: 0 2px 0 rgba(0, 0, 0, 0.35);
 }
 
@@ -183,28 +187,41 @@
 }
 
 .updates-page .update-summary .flex {
-  display: flex !important;
-  flex-wrap: wrap;
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, max-content));
+  justify-content: start;
+  align-items: center;
   gap: 0.45rem !important;
   padding-right: 0 !important;
 }
 
 .updates-page .update-summary .flex span {
+  display: inline-flex;
+  width: max-content;
+  max-width: 100%;
+  min-height: 2rem;
+  align-items: center;
+  justify-content: center;
   border: 1px solid rgba(248, 245, 224, 0.2) !important;
   background: rgba(255, 248, 218, 0.12) !important;
   color: rgba(255, 248, 218, 0.88) !important;
-  padding: 0.34rem 0.52rem !important;
+  padding: 0.34rem 0.54rem !important;
   border-radius: 999px;
-  font-size: 0.8rem !important;
-  line-height: 1.2;
+  font-size: 0.78rem !important;
+  line-height: 1.1;
   white-space: nowrap;
+}
+
+.updates-page .update-summary .flex span:first-child {
+  min-width: 6.4rem;
+  font-weight: 700;
 }
 
 .updates-page .update-summary h2 {
   max-width: none !important;
-  margin-top: 0.78rem !important;
+  margin-top: 0.82rem !important;
   color: #fff7d6 !important;
-  font-size: clamp(0.98rem, 1.45vw, 1.28rem);
+  font-size: clamp(0.98rem, 1.4vw, 1.24rem);
   line-height: 1.55;
   overflow-wrap: anywhere;
   text-shadow:
@@ -221,8 +238,9 @@
   color: #fff1b8 !important;
   box-shadow: none !important;
   border-radius: 999px;
-  padding: 0.6rem 0.72rem !important;
+  padding: 0.62rem 0.72rem !important;
   font-size: 0.82rem !important;
+  line-height: 1.15;
   white-space: nowrap;
 }
 
@@ -260,12 +278,6 @@
   backdrop-filter: blur(16px) saturate(1.08);
 }
 
-@media (min-width: 1040px) {
-  .updates-page .update-card:not(:is(:nth-child(1), :nth-child(2), :nth-child(6), :nth-child(11), :nth-child(12), :nth-child(13), :nth-child(15), :nth-child(26), :nth-child(30), :nth-child(31), :nth-child(32), :nth-child(33), :nth-child(34), :nth-child(35), :nth-child(36), :nth-child(37), :nth-child(38), :nth-child(39), :nth-child(40))) {
-    grid-column: span 2;
-  }
-}
-
 @media (max-width: 767px) {
   .updates-page .updates-hero .max-w-3xl > p.mt-5::after {
     font-size: 1rem;
@@ -273,17 +285,16 @@
 
   .updates-page .update-summary {
     grid-template-columns: 1fr auto !important;
-    grid-template-areas:
-      "number action"
-      "content content" !important;
     min-height: auto;
   }
 
-  .updates-page .update-number {
-    justify-self: start;
+  .updates-page .update-summary .flex {
+    grid-template-columns: 1fr;
   }
 
-  .updates-page .open-label {
-    justify-self: end;
+  .updates-page .update-summary .flex span,
+  .updates-page .update-summary .flex span:first-child {
+    min-width: 0;
+    width: max-content;
   }
 }
