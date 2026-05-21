@@ -1,5 +1,6 @@
 @import "./updates-glass.css";
 @import "./footer.css";
+@import "./staff-overhaul.css";
 
 a:not(.nolink) {
   position: relative;
