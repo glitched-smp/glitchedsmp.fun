@@ -117,42 +117,64 @@
   bottom: auto !important;
   align-self: center;
   justify-self: center;
-  width: 104px !important;
-  height: 168px !important;
+  width: 116px !important;
+  height: 116px !important;
   content: "";
-  opacity: 0.88 !important;
+  opacity: 1 !important;
   transform: none !important;
+  image-rendering: pixelated;
   background:
-    linear-gradient(#f2c18d 0 36px, transparent 36px),
-    linear-gradient(90deg, transparent 0 20px, var(--skin-shirt, #22d3ee) 20px 84px, transparent 84px),
-    linear-gradient(90deg, transparent 0 16px, var(--skin-pants, #0f766e) 16px 88px, transparent 88px),
-    linear-gradient(90deg, transparent 0 10px, #111827 10px 38px, transparent 38px 66px, #111827 66px 94px, transparent 94px) !important;
-  background-position: 34px 0, 0 46px, 0 92px, 0 140px !important;
-  background-size: 36px 36px, 104px 46px, 104px 48px, 104px 26px !important;
+    linear-gradient(90deg,
+      #2b2417 0 12.5%, #211b12 12.5% 25%, #2d2617 25% 37.5%, #403019 37.5% 50%,
+      #51361e 50% 62.5%, #50351f 62.5% 75%, #3b2a1b 75% 87.5%, #2b2417 87.5% 100%) 0 0 / 100% 12.5%,
+    linear-gradient(90deg,
+      transparent 0 12.5%, #c29072 12.5% 25%, #c99b80 25% 37.5%, #d1a18a 37.5% 50%,
+      #c58f73 50% 62.5%, #bd8769 62.5% 75%, #b77e61 75% 87.5%, transparent 87.5% 100%) 0 12.5% / 100% 12.5%,
+    linear-gradient(90deg,
+      #bc8766 0 12.5%, #c18d70 12.5% 25%, #be8b72 25% 37.5%, #a87860 37.5% 50%,
+      #8f6652 50% 62.5%, #b77f63 62.5% 75%, #bd8764 75% 87.5%, #ae795b 87.5% 100%) 0 25% / 100% 12.5%,
+    linear-gradient(90deg,
+      #ffffff 0 12.5%, #ffffff 12.5% 25%, #4b3aa0 25% 37.5%, #c89376 37.5% 50%,
+      #b77c62 50% 62.5%, #5541a8 62.5% 75%, #ffffff 75% 87.5%, #ffffff 87.5% 100%) 0 37.5% / 100% 12.5%,
+    linear-gradient(90deg,
+      #a8704f 0 12.5%, #b57b5e 12.5% 25%, #b98269 25% 37.5%, #6f4938 37.5% 50%,
+      #704838 50% 62.5%, #b47a5e 62.5% 75%, #a66b4d 75% 87.5%, #9a6548 87.5% 100%) 0 50% / 100% 12.5%,
+    linear-gradient(90deg,
+      #a56746 0 12.5%, #9a5e3f 12.5% 25%, #3a2115 25% 37.5%, #6f4438 37.5% 50%,
+      #9b5b4d 50% 62.5%, #3a2115 62.5% 75%, #9c6042 75% 87.5%, #8a563c 87.5% 100%) 0 62.5% / 100% 12.5%,
+    linear-gradient(90deg,
+      transparent 0 12.5%, transparent 12.5% 25%, #321d13 25% 37.5%, #8e5144 37.5% 50%,
+      #9b5b4d 50% 62.5%, #321d13 62.5% 75%, transparent 75% 87.5%, transparent 87.5% 100%) 0 75% / 100% 12.5%,
+    linear-gradient(90deg,
+      transparent 0 25%, #2b180f 25% 37.5%, #2d190f 37.5% 50%, #2d190f 50% 62.5%, #2b180f 62.5% 75%, transparent 75% 100%) 0 87.5% / 100% 12.5% !important;
   background-repeat: no-repeat !important;
-  filter: drop-shadow(0 12px 0 rgba(0, 0, 0, 0.34));
+  border: 3px solid rgba(254, 240, 138, 0.42);
+  box-shadow:
+    inset 0 0 0 3px rgba(0, 0, 0, 0.18),
+    0 8px 0 rgba(0, 0, 0, 0.36),
+    0 20px 32px rgba(0, 0, 0, 0.28);
   pointer-events: none;
 }
 
 .staff-section .staff-card::after {
   position: absolute !important;
   top: 50% !important;
-  right: 88px !important;
+  right: 75px !important;
   bottom: auto !important;
-  width: 42px !important;
-  height: 16px !important;
+  width: 140px !important;
+  height: 140px !important;
   content: "";
-  opacity: 0.85 !important;
-  background: #f2c18d !important;
-  box-shadow: 34px -15px 0 #f2c18d !important;
-  transform: translateY(-25%) rotate(-18deg) !important;
+  opacity: 0.16 !important;
+  background: rgba(250, 204, 21, 0.24) !important;
+  border-radius: 22px;
+  transform: translateY(-50%) rotate(8deg) !important;
   pointer-events: none;
 }
 
 .staff-section .staff-card:nth-child(even)::after {
   right: auto !important;
-  left: 88px !important;
-  transform: translateY(-25%) scaleX(-1) rotate(-18deg) !important;
+  left: 75px !important;
+  transform: translateY(-50%) rotate(-8deg) !important;
 }
 
 .staff-section .staff-card:hover {
@@ -161,33 +183,15 @@
 }
 
 .staff-section .staff-card:hover::before {
-  transform: translateY(-6px) !important;
+  transform: translateY(-6px) scale(1.03) !important;
 }
 
 .staff-section .staff-card:hover::after {
-  transform: translate(-4px, calc(-25% - 8px)) rotate(-30deg) !important;
+  opacity: 0.26 !important;
 }
 
-.staff-section .staff-card:nth-child(even):hover::after {
-  transform: translate(4px, calc(-25% - 8px)) scaleX(-1) rotate(-30deg) !important;
-}
-
-.staff-section .staff-card:nth-child(1) { --skin-shirt: #facc15; --skin-pants: #854d0e; border-color: rgba(250, 204, 21, 0.48) !important; }
-.staff-section .staff-card:nth-child(2) { --skin-shirt: #22d3ee; --skin-pants: #155e75; border-color: rgba(103, 232, 249, 0.42) !important; }
-.staff-section .staff-card:nth-child(3) { --skin-shirt: #a3e635; --skin-pants: #166534; }
-.staff-section .staff-card:nth-child(4) { --skin-shirt: #f97316; --skin-pants: #7c2d12; }
-.staff-section .staff-card:nth-child(5) { --skin-shirt: #38bdf8; --skin-pants: #075985; }
-.staff-section .staff-card:nth-child(6) { --skin-shirt: #c084fc; --skin-pants: #581c87; }
-.staff-section .staff-card:nth-child(7) { --skin-shirt: #fb7185; --skin-pants: #881337; }
-.staff-section .staff-card:nth-child(8) { --skin-shirt: #fbbf24; --skin-pants: #78350f; }
-.staff-section .staff-card:nth-child(9) { --skin-shirt: #86efac; --skin-pants: #14532d; }
-.staff-section .staff-card:nth-child(10) { --skin-shirt: #67e8f9; --skin-pants: #164e63; }
-.staff-section .staff-card:nth-child(11) { --skin-shirt: #f0abfc; --skin-pants: #701a75; }
-.staff-section .staff-card:nth-child(12) { --skin-shirt: #fdba74; --skin-pants: #7c2d12; }
-.staff-section .staff-card:nth-child(13) { --skin-shirt: #bbf7d0; --skin-pants: #166534; }
-.staff-section .staff-card:nth-child(14) { --skin-shirt: #fde047; --skin-pants: #854d0e; }
-.staff-section .staff-card:nth-child(15) { --skin-shirt: #93c5fd; --skin-pants: #1e3a8a; }
-.staff-section .staff-card:nth-child(16) { --skin-shirt: #f9a8d4; --skin-pants: #831843; }
+.staff-section .staff-card:nth-child(1) { border-color: rgba(250, 204, 21, 0.48) !important; }
+.staff-section .staff-card:nth-child(2) { border-color: rgba(103, 232, 249, 0.42) !important; }
 
 .staff-section .staff-card h3 {
   grid-area: name;
@@ -268,9 +272,9 @@
   }
 
   .staff-section .staff-card:nth-child(even)::after {
-    right: 76px !important;
+    right: 64px !important;
     left: auto !important;
-    transform: translateY(-25%) rotate(-18deg) !important;
+    transform: translateY(-50%) rotate(8deg) !important;
   }
 }
 
@@ -288,12 +292,15 @@
   }
 
   .staff-section .staff-card::before {
-    width: 86px !important;
-    height: 138px !important;
+    width: 96px !important;
+    height: 96px !important;
   }
 
   .staff-section .staff-card::after {
-    display: none;
+    top: 74px !important;
+    right: 50% !important;
+    left: auto !important;
+    transform: translate(50%, -50%) rotate(8deg) !important;
   }
 
   .staff-section .staff-card h3 {
