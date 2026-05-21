@@ -281,7 +281,8 @@
 }
 
 .updates-page .update-card {
-  border-color: rgba(187, 247, 208, 0.26) !important;
+  position: relative;
+  border-color: rgba(187, 247, 208, 0.3) !important;
   background:
     linear-gradient(135deg, rgba(5, 28, 36, 0.95), rgba(10, 40, 24, 0.9)),
     linear-gradient(90deg, rgba(255, 255, 255, 0.065) 1px, transparent 1px),
@@ -294,13 +295,28 @@
     0 20px 38px rgba(0, 0, 0, 0.35) !important;
 }
 
+.updates-page .update-card::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background:
+    linear-gradient(90deg, rgba(132, 204, 22, 0.18) 0 6px, transparent 6px),
+    radial-gradient(circle at 92% 18%, rgba(34, 211, 238, 0.14), transparent 22%);
+  pointer-events: none;
+}
+
+.updates-page .update-card[open] {
+  border-color: rgba(190, 242, 100, 0.55) !important;
+}
+
 .updates-page .update-summary {
   position: relative;
+  z-index: 2;
   transition: background 180ms ease;
 }
 
 .updates-page .update-summary:hover {
-  background: rgba(255, 255, 255, 0.035);
+  background: rgba(255, 255, 255, 0.04);
 }
 
 .updates-page .update-summary h2 {
@@ -326,6 +342,8 @@
 }
 
 .updates-page .update-body {
+  position: relative;
+  z-index: 2;
   background:
     linear-gradient(180deg, rgba(0, 0, 0, 0.18), rgba(2, 12, 8, 0.42)),
     linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
@@ -335,18 +353,37 @@
 .updates-page .update-body pre {
   max-height: 74vh;
   overflow: auto;
-  border: 2px solid rgba(190, 242, 100, 0.2) !important;
+  border: 2px solid rgba(190, 242, 100, 0.28) !important;
   background:
-    linear-gradient(135deg, rgba(1, 8, 6, 0.86), rgba(9, 24, 18, 0.82)),
+    linear-gradient(90deg, rgba(132, 204, 22, 0.09) 0 4px, transparent 4px),
+    linear-gradient(135deg, rgba(1, 8, 6, 0.9), rgba(8, 26, 18, 0.86)),
     linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px) !important;
-  background-size: auto, 28px 28px !important;
-  padding: 1.2rem !important;
-  color: rgba(240, 253, 244, 0.9) !important;
+  background-size: auto, auto, 28px 28px !important;
+  padding: 1.35rem 1.35rem 1.35rem 1.55rem !important;
+  color: rgba(240, 253, 244, 0.92) !important;
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace !important;
   font-size: 1rem !important;
-  line-height: 1.85 !important;
+  line-height: 1.9 !important;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.55);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06),
+    inset 0 0 36px rgba(34, 197, 94, 0.08) !important;
   scrollbar-color: #84cc16 rgba(0, 0, 0, 0.45);
   scrollbar-width: thin;
+}
+
+.updates-page .update-body pre::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+.updates-page .update-body pre::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.updates-page .update-body pre::-webkit-scrollbar-thumb {
+  border: 2px solid rgba(0, 0, 0, 0.55);
+  background: #84cc16;
 }
 
 .updates-page .update-body pre::selection {
@@ -379,5 +416,6 @@
   .updates-page .update-body pre {
     max-height: none;
     font-size: 0.92rem !important;
+    line-height: 1.8 !important;
   }
 }
