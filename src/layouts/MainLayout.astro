@@ -38,6 +38,35 @@ const title = subtitle
         <Footer />
         <script is:inline>
             (() => {
+                const staffGrid = document.querySelector(".staff-section .mt-8.grid");
+                if (staffGrid && !staffGrid.dataset.splitStaff) {
+                    const personCards = [];
+                    staffGrid.querySelectorAll(".staff-card").forEach((card) => {
+                        const role = card.querySelector("h3")?.textContent?.trim() || "Staff";
+                        card.querySelectorAll("span").forEach((member) => {
+                            const name = member.textContent?.trim();
+                            if (!name) return;
+
+                            const personCard = document.createElement("article");
+                            personCard.className = card.className;
+                            personCard.dataset.role = role;
+                            personCard.innerHTML = `
+                                <h3 class="text-lg font-PressStart2P">${name}</h3>
+                                <div class="mt-4 flex flex-wrap gap-2">
+                                    <span class="border border-white/20 bg-white/10 px-3 py-1 text-sm text-white/88">${role}</span>
+                                </div>
+                                <p class="mt-4 leading-7 text-white/68">placeholder</p>
+                            `;
+                            personCards.push(personCard);
+                        });
+                    });
+
+                    if (personCards.length) {
+                        staffGrid.replaceChildren(...personCards);
+                        staffGrid.dataset.splitStaff = "true";
+                    }
+                }
+
                 const page = document.querySelector(".updates-page");
                 if (!page) return;
 
