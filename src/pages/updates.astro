@@ -1,464 +1,107 @@
 ---
+import { Buffer } from "node:buffer";
+import { gunzipSync } from "node:zlib";
 import MainLayout from "../layouts/MainLayout.astro";
 
-type UpdateSection = {
-	title: string;
-	items: string[];
-};
-
 type UpdateEntry = {
-	date: string;
+	title: string;
 	version: string;
 	kind: "Update" | "Patchnote";
-	size: string;
-	sections: UpdateSection[];
+	lines: number;
+	body: string;
 };
 
-const updates: UpdateEntry[] = [
-	{
-		date: "July 11, 2022",
-		version: "1.14",
-		kind: "Update",
-		size: "Huge",
-		sections: [
-			{
-				title: "Structures And World",
-				items: [
-					"Added new pillager outposts.",
-					"Added wild west structures.",
-					"Added new igloos.",
-					"Added new ruined portals.",
-					"Added new desert temples, though they were noted as possibly being removed later.",
-					"Added new structures in the Soul Valley.",
-					"Added better loot across the server.",
-				],
-			},
-			{
-				title: "Combat And Mobs",
-				items: [
-					"Added throwable swords and axes using Q.",
-					"Undead mobs can make torches disappear when walking on them.",
-					"Blazes can drop fire charges.",
-					"Piglin trades can give multiple fire charges.",
-					"Zombies can drain hunger unless the player wears chainmail armor.",
-					"Skeletons wearing armor can switch to a Viking axe when close enough, with possible sharpness or looting.",
-					"Being near creepers gives Slowness II unless wearing leather armor.",
-					"Leather armor can give speed while protecting from creeper slowness.",
-					"Zombies can give nausea.",
-					"Spiders with strength can spawn more spiders.",
-					"The Ender Dragon fight was changed to three stages.",
-					"The Wither can spawn wither skeletons, while the above-ground fight was made more manageable.",
-					"Wither and Ender Dragon minions can give healing effects.",
-					"Added Spectral mob types, including ghasts, phantoms, and pillager minions.",
-					"Spectral mobs can be instantly killed with spectral arrows.",
-					"Ghast fireballs are stronger.",
-					"Ghasts can drop multiple ghast tears.",
-					"Mobs killed in strongholds can spawn silverfish.",
-					"Added silverfish eggs, obtained by killing undead mobs in strongholds with a wolf.",
-					"Mobs can drop emeralds depending on rarity and farmability.",
-				],
-			},
-			{
-				title: "Survival Systems",
-				items: [
-					"Added daily quests.",
-					"Added cravings after sleeping.",
-					"Sleeping can also cause hunger loss, tied to cravings.",
-					"Throwing an oak log on a campfire can regenerate health.",
-					"Soul campfire healing works with Nether wood types.",
-					"Torches can be made using campfires by placing a stick on the campfire.",
-					"Torches received a new recipe that needs kindling, with fire charges also usable.",
-					"Blocking with a shield uses a small amount of hunger.",
-					"Shields received a harder recipe using leather, oak logs, and an iron block.",
-					"Stone has a 10% chance to drop an iron nugget.",
-					"Deepslate has a 10% chance to drop one or two iron nuggets.",
-					"When at half a heart, players get weakness.",
-					"Wearing gold armor gives haste.",
-					"Hitting a mob while wearing a diamond or netherite chestplate mildly takes hunger.",
-					"A full netherite armor set gives fire resistance.",
-					"Breaking a spawner drops a bundle.",
-					"Loot bundles can contain custom shield designs.",
-					"The Ender Dragon egg can drop elytra, emerald blocks, and a tape.",
-					"The Wither has a chance to drop ancient debris.",
-					"Piglin trades were reverted to 1.16.2-style better trades.",
-					"Rotten flesh on a campfire becomes hide, and hides sell for 1 dollar.",
-					"All leaves except azalea leaves can drop apples.",
-					"Added fishing trophies.",
-				],
-			},
-			{
-				title: "Villagers And Exploration",
-				items: [
-					"Added a tutorial book.",
-					"New players receive the Old Bundle when joining for the first time.",
-					"Added Splunker, a cave villager who trades mining items.",
-					"Added a Strider Jockey villager.",
-					"Added Voyager, an End villager who helps with end island exploration.",
-					"Pillagers can be turned into villagers by splashing weakness and naming them with a nametag.",
-					"Converted pillagers become Lumberjacks by default, with grindstone as the job block.",
-					"Evokers can be turned into artists by splashing weakness and naming them with a nametag.",
-					"Artist villagers use the cartography table as their job table.",
-				],
-			},
-			{
-				title: "Custom Items And Crafting",
-				items: [
-					"Added banner flags that let banners hang on fences and iron bars by shift-clicking.",
-					"Added craftable chainmail armor.",
-					"Added spectral arrows crafted with glow ink and eight arrows.",
-					"Added new recipes for enchanting tables, eyes of ender, ender chests, and bookshelves.",
-					"Bookshelves require Nether wood.",
-					"Nether logs give six planks.",
-					"Most custom items require the custom crafting table setup with a crafting table, item frame, and emerald.",
-					"Added healing salves in the custom crafting table.",
-					"Added war horn in the custom crafting table.",
-					"Added sea fragments from killing guardians.",
-					"Added dragon fruit, giving three additional hearts, crafted in the custom crafting table.",
-					"Polar bears can be snipped for string or a fishing net depending on luck.",
-					"Fishing nets can also be obtained from villagers while having Hero of the Village.",
-					"Fishing nets are assembled by placing a barrel in water, an item frame on top, then putting the net in the frame.",
-					"Added new blast furnace recipes.",
-					"Added a dispenser recipe using string, sticks, and a dropper.",
-					"Jack o' lanterns no longer require carving.",
-					"Slimeballs can be crafted with spider eyes and a water bucket.",
-					"Cobwebs can be crafted with slimeballs and string.",
-					"Leather horse armor can be crafted and upgraded with the smithing table.",
-					"Arrows can be crafted with an amethyst shard, stick, and feather.",
-					"Flower pots can be crafted from Nether bricks.",
-					"Crafting mossy blocks gives two blocks.",
-					"Bee nest-style tree blocks can be crafted using beehives and honeycomb.",
-					"Sugar can be crafted from sweet berries.",
-				],
-			},
-		],
-	},
-	{
-		date: "September 2, 2022",
-		version: "1.15",
-		kind: "Update",
-		size: "Big",
-		sections: [
-			{
-				title: "Added",
-				items: [
-					"Custom terrain for all worlds, with 150+ new biomes and 50 overworld biomes.",
-					"Revamped vehicles.",
-					"Realistic seasons.",
-					"Better anti-cheat.",
-					"More minigames, with rollout still in progress.",
-					"Custom generation in the End.",
-					"Custom generation in the Overworld.",
-				],
-			},
-			{
-				title: "Coming Soon",
-				items: ["Custom generation in the Nether."],
-			},
-			{
-				title: "Removed Plugins",
-				items: [
-					"OmNom because it was useless.",
-					"Spark Profiler because it was not needed.",
-					"Custom Crafting and WolfyUtilities because they were unused and difficult to manage.",
-					"VillageDefense dev build because it had issues.",
-					"MurderMystery dev build because it had issues.",
-					"RealisticSeasons because it conflicted with custom generation.",
-					"WeaponMechanics guns because it was unused and broken.",
-				],
-			},
-		],
-	},
-	{
-		date: "September 5, 2022",
-		version: "1.15.1",
-		kind: "Update",
-		size: "Small",
-		sections: [{ title: "Notes", items: ["Some things may be readded.", "Custom generation was planned to be revamped for a better experience."] }],
-	},
-	{
-		date: "September 16, 2022",
-		version: "1.15.1",
-		kind: "Update",
-		size: "Normal",
-		sections: [{ title: "Added", items: ["A better Nations system using Towny.", "A tutorial was planned for later."] }],
-	},
-	{
-		date: "September 17, 2022",
-		version: "1.15.2",
-		kind: "Update",
-		size: "Revamp",
-		sections: [
-			{ title: "Changed", items: ["Improved user experience by ditching the spawn idea and making GUI navigation the main way to move around."] },
-			{ title: "Added", items: ["Player rooms where players can see themselves and their stats.", "GUI-based navigation using CommandPanels."] },
-			{ title: "Removed", items: ["FakePlayers.", "JumpPads."] },
-		],
-	},
-	{
-		date: "September 21, 2022",
-		version: "1.15.3",
-		kind: "Update",
-		size: "Very Small",
-		sections: [{ title: "Changed", items: ["Changed server hardware and added 20GB of storage."] }],
-	},
-	{
-		date: "October 10, 2022",
-		version: "1.16",
-		kind: "Update",
-		size: "Normal",
-		sections: [
-			{ title: "Added", items: ["Oneblock.", "Skyblock, planned to release a few days later.", "Custom ESC menu.", "Custom picks, swords, armor, and emerald gear.", "Parkour.", "Duels.", "Custom food.", "Quests.", "Crates.", "More maps for minigames."] },
-			{ title: "Planned", items: ["Tower Defense.", "Hide n Seek.", "More minigames.", "Possibly enhanced survival.", "Suggested things likely coming in 1.16.1."] },
-			{ title: "Notes", items: ["Optional resource packs were linked for cars and custom food.", "Players could use /o pack send [username] in-game.", "Server supported versions 1.12 through 1.19.2."] },
-		],
-	},
-	{
-		date: "November 6, 2022",
-		version: "1.16.1",
-		kind: "Update",
-		size: "Small",
-		sections: [
-			{ title: "Readded", items: ["Computers.", "Leveled mobs.", "Slimefun, planned for the next day.", "Player shops.", "Enhanced survival."] },
-			{ title: "Added", items: ["Paintball minigame.", "More maps.", "Some suggested things."] },
-			{ title: "Fixed", items: ["Towny.", "Village Defense was about 80% done."] },
-		],
-	},
-	{
-		date: "January 8, 2023",
-		version: "1.17",
-		kind: "Update",
-		size: "Continued",
-		sections: [
-			{ title: "Added", items: ["A better fishing system where players can earn money.", "Box server partly done.", "Server name changing soon.", "Server host change soon."] },
-			{ title: "Removed", items: ["Everything readded from 1.16.1.", "QAV cars.", "Unnecessary resource packs and datapacks."] },
-			{ title: "Fixed", items: ["Everything seemed to be in shape."] },
-		],
-	},
-	{
-		date: "January 29, 2023",
-		version: "1.17.1",
-		kind: "Update",
-		size: "Big",
-		sections: [
-			{ title: "Added", items: ["The Box server."] },
-			{ title: "Removed", items: ["Nothing."] },
-			{ title: "Fixed", items: ["Nothing."] },
-			{ title: "Next", items: ["1.18 was expected to improve the Box server drastically with help from player testing.", "Server supported versions 1.12 through 1.19.2."] },
-		],
-	},
-	{
-		date: "June 25, 2023",
-		version: "1.18",
-		kind: "Update",
-		size: "Huge",
-		sections: [
-			{ title: "Survival", items: ["Added RealEstate and purchasable prebuilds.", "Added a new and improved nations system.", "Added a new server shop.", "Added the new survival spawn.", "Added custom structures and monuments around the world with lore. Count started at 2 and was planned to increase every week.", "Revamped and improved the survival menu."] },
-			{ title: "Minigames", items: ["Readded Village Defense.", "Readded Murder Mystery.", "Added a new minigames lobby.", "Added new minigame maps."] },
-			{ title: "BoxServer", items: ["Added a new lobby.", "Added Classic BoxServer mode.", "Added new things to UniqueBoxServer, though it was down at the time.", "Fixed spawn.", "Fixed being unable to trade things.", "Fixed duping."] },
-			{ title: "Server Wide", items: ["Revamped the GUI menu.", "Fixed multiple bugs.", "Added new join messages.", "Added new leave messages.", "Added clickable links.", "Added cutscenes, coming soon.", "Customized the TAB menu.", "Added update logs to the GUI interface.", "Added compatibility from 1.12 through 1.19.4."] },
-			{ title: "Notes", items: ["A tutorial and showcase video were planned.", "Survival menu could be accessed through the information slide.", "Nations could be created with /team create [name]."] },
-		],
-	},
-	{
-		date: "November 5, 2023",
-		version: "1.18.1",
-		kind: "Update",
-		size: "Normal",
-		sections: [
-			{ title: "Survival", items: ["Money stations.", "Seasons.", "Slimefun research using /sf guide.", "New and improved economy, planned to fully function the next day.", "New ambience sounds.", "Vehicles, planned to function the next day.", "Daily rewards."] },
-			{ title: "Minigames", items: ["Work continued on PartyGames.", "Work continued on Tower Defense.", "Work continued on Battle Royale.", "Minigames were shut down for major bug fixing and planned to return by 1.19."] },
-			{ title: "Server Wide", items: ["Added the new Sandbox gamemode.", "Fixed major bugs such as money dropping where it should not."] },
-			{ title: "Removed", items: ["BoxServer.", "Unused things."] },
-		],
-	},
-	{
-		date: "November 10, 2023",
-		version: "1.18.2",
-		kind: "Update",
-		size: "Tiny",
-		sections: [{ title: "Added", items: ["Auction House."] }, { title: "Removed", items: ["Nothing."] }],
-	},
-	{
-		date: "January 24, 2024",
-		version: "1.18.3",
-		kind: "Update",
-		size: "Medium",
-		sections: [
-			{ title: "Added", items: ["Commission System.", "Daily commissions with custom rewards.", "Money rewards.", "XP rewards.", "Commission Tokens.", "A commission shop near spawn."] },
-			{ title: "Winter Season Items", items: ["Phase 1: Winter Gear, Ricketeer Sword, and Ice-Cold Snowball.", "Phase 2: The Enchantment Book, Hard Ice, and upgraded Winter Gear.", "Phase 3: Frozen Sword as the expensive OP item."] },
-			{ title: "Notes", items: ["Seasonal items were limited-time and would not be obtainable from the commission shop after the season ended.", "Phases were planned every week or two."] },
-		],
-	},
-	{
-		date: "April 14, 2024",
-		version: "1.0.0",
-		kind: "Update",
-		size: "Massive Revamp",
-		sections: [
-			{ title: "Survival", items: ["Tweaked and fixed major bugs.", "Added PlayerShop.", "Added RealisticVillagers.", "Added custom terrain.", "Added custom structures.", "Added skills or powers.", "Added Slimefun.", "Added movable and better armor stands.", "Added commissions.", "Added crates.", "Added 200+ quality-of-life features, including features brought back from 1.14.", "Fixed Slimefun bugs.", "Fixed Towny bugs.", "Fixed shop bugs.", "Fixed economy.", "Fixed custom enchants."] },
-			{ title: "Minigames", items: ["Added PartyGames, a group of 23 minigames compressed into one.", "Fixed all bugs related to minigames.", "Noted that the next minigame update would be bigger."] },
-			{ title: "RPG", items: ["RPG was set as a work in progress for the next update."] },
-			{ title: "Server Wide", items: ["Added new lobbies and spawns.", "Fixed all bugs.", "Fixed NPC bugs.", "Fixed permission bugs.", "Added cosmetics for free for the next 1-2 weeks using /cosmetics."] },
-		],
-	},
-	{
-		date: "April 15, 2024",
-		version: "1.0.1",
-		kind: "Update",
-		size: "Small Bugfix",
-		sections: [{ title: "Added", items: ["Nothing."] }, { title: "Removed", items: ["Removed the annoying healing system.", "Removed the annoying craftable system.", "Nerfed mobs."] }],
-	},
-	{
-		date: "April 18, 2024",
-		version: "1.0.2",
-		kind: "Update",
-		size: "Big Bugfix",
-		sections: [
-			{ title: "Added", items: ["If players die from hostiles, armor, tools, and weapons will not drop.", "Restart schedule for the server, one restart every two hours.", "Players should be notified five minutes before restarts."] },
-			{ title: "Removed", items: ["Nothing."] },
-			{ title: "Fixed", items: ["Fixed builds and inventories getting removed, with an estimated 85% chance to work."] },
-		],
-	},
-	{
-		date: "May 19, 2024",
-		version: "1.0.3",
-		kind: "Update",
-		size: "Small Nerfs",
-		sections: [{ title: "Nerfed", items: ["Curse enchantment spawn rates were reduced from 50% to 5% for most things."] }],
-	},
-	{
-		date: "May 24, 2024",
-		version: "1.0.4",
-		kind: "Update",
-		size: "Removal",
-		sections: [{ title: "Added", items: ["Nothing."] }, { title: "Removed", items: ["Towny, with a new system planned later."] }],
-	},
-	{
-		date: "May 25, 2024",
-		version: "1.1.0",
-		kind: "Update",
-		size: "Big",
-		sections: [
-			{ title: "Theme", items: ["The Fight or Flee update, Part 1.", "Combat-based update with minor bug fixes."] },
-			{ title: "Added", items: ["New particles for breaking blocks and damaging players.", "Loot boxes, noted as not pay-to-win.", "Ability to sit, crawl, and bellyflop using /sit, /crawl, and /bellyflop.", "New physics for blocks, such as cutting trees.", "New revamped Towny replacement using /land."] },
-			{ title: "Fixed", items: ["Nether and End having RPG healthbars.", "Different currencies in Nether and End.", "Players not showing in tab while in Nether or End."] },
-			{ title: "Removed", items: ["Old Towny system."] },
-			{ title: "Notes", items: ["A new boss was teased with a recipe.", "A simple explanation for the revamped land system was attached in the original announcement."] },
-		],
-	},
-	{
-		date: "May 28, 2024",
-		version: "1.1.1",
-		kind: "Update",
-		size: "Small",
-		sections: [{ title: "Changed", items: ["Added trapdoor animations.", "Removed breaking block animations.", "Removed hurting mob animations."] }],
-	},
-	{
-		date: "June 6, 2024",
-		version: "1.1.2",
-		kind: "Update",
-		size: "Small",
-		sections: [{ title: "Removed", items: ["Slimefun was removed while investigating inventory or item reset issues.", "If the issue persisted, Slimefun would be added back while the bug was found."] }],
-	},
-	{
-		date: "June 7, 2024",
-		version: "1.1.3",
-		kind: "Update",
-		size: "Small",
-		sections: [{ title: "Added", items: ["Readded a stable version of Slimefun."] }],
-	},
-	{
-		date: "June 7, 2024",
-		version: "1.1.4",
-		kind: "Update",
-		size: "Big",
-		sections: [{ title: "Changed", items: ["Server hardware upgraded from 12GB to 16GB RAM."] }],
-	},
-	{
-		date: "June 12, 2024",
-		version: "1.1.5",
-		kind: "Update",
-		size: "Biggest Ever",
-		sections: [{ title: "New", items: ["Phantoms are now removed."] }],
-	},
-	{
-		date: "June 16, 2024",
-		version: "1.2.0",
-		kind: "Update",
-		size: "Big",
-		sections: [
-			{ title: "Added", items: ["MoFI, a gamemode found inside Survival next to The Adventurer.", "Five MoFI difficulties: Easy, Normal, Hard, Insane, and Hardcore.", "Rewards scale as the difficulty increases.", "MoFI is intended for late-end game players.", "Hardcore Mode MoFI as a rotating gamemode.", "Hardcore Mode rewards include 1000 Commission Crate Keys, 100 Dealer Crate Keys, and a special suffix that changes each rotation.", "The Dealer, an NPC with quests that change every few months.", "Dealer quests give rewards and are intended for early-mid game players."] },
-			{ title: "Coming Soon", items: ["Casual Mode was planned for 1.2.1.", "Hardcore Mode was also planned for 1.2.1."] },
-		],
-	},
-	{
-		date: "August 7, 2024",
-		version: "1.3.0",
-		kind: "Update",
-		size: "Medium",
-		sections: [
-			{ title: "Survival", items: ["Updated to 1.20.6.", "Added MoFI Hardcore Mode.", "Added Commission Crate rotation.", "Reworked Golden Crate.", "Added more ways to get Golden Keys.", "Added new Commission Quest.", "Added cannons.", "Added vehicles.", "Added custom food."] },
-			{ title: "Commands", items: ["Vehicle commands: /carshop, /racingcarshop, /planeshop, and /helicoptershop.", "Custom food command: /uf menu."] },
-			{ title: "Notes", items: ["The update was smaller than planned because 1.20.6 caused issues.", "Scoreboard and balance were temporarily disabled.", "The rest of 1.3.0 was planned for later versions."] },
-		],
-	},
-	{
-		date: "August 12, 2024",
-		version: "1.3.1 / 1.4.0 / 1.4.1",
-		kind: "Update",
-		size: "Mentioned",
-		sections: [{ title: "Notes", items: ["The versions 1.3.1, 1.4.0, and 1.4.1 were mentioned without detailed notes in the provided log."] }],
-	},
-];
+const compressedUpdates =
+	"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";
+
+const rawUpdates = gunzipSync(Buffer.from(compressedUpdates, "base64")).toString("utf8");
+
+function cleanHeading(text: string) {
+	return text
+		.replace(/&#x20;/g, " ")
+		.replace(/^\s*#+\s*/, "")
+		.replace(/^\s*\*\*/, "")
+		.replace(/\*\*\s*$/, "")
+		.replace(/^\s*#\s*/, "")
+		.replace(/\\/g, "")
+		.replace(/\s+/g, " ")
+		.trim();
+}
+
+function isUpdateHeading(title: string) {
+	if (/^(Added|Removed|Changed|Fixed|Important|What's new|What's added|Custom Generation Has Been Added to:)$/i.test(title)) return false;
+	if (/^Minecraft Update(?:\s*\(.*\))?$/i.test(title)) return false;
+	return /\b(?:patchnote|update|version|verison)\b/i.test(title) || /^\d+(?:\.\d+)+\b/.test(title);
+}
+
+const headingPattern = /^#{1,6}\s*(.*)$/gm;
+const headings: { title: string; index: number; end: number }[] = [];
+let match: RegExpExecArray | null;
+while ((match = headingPattern.exec(rawUpdates)) !== null) {
+	const title = cleanHeading(match[1]);
+	if (isUpdateHeading(title)) headings.push({ title, index: match.index, end: headingPattern.lastIndex });
+}
+
+const updates: UpdateEntry[] = headings.map((heading, index) => {
+	const nextIndex = headings[index + 1]?.index ?? rawUpdates.length;
+	const body = rawUpdates.slice(heading.end, nextIndex).trim();
+	const versionMatch = heading.title.match(/(?:v(?:ersion|erison)?\s*[: ]*)?(\d+(?:\.\d+)+)/i);
+	return {
+		title: heading.title,
+		version: versionMatch ? versionMatch[1] : heading.title,
+		kind: /patchnote/i.test(heading.title) ? "Patchnote" : "Update",
+		lines: body.split("\n").filter((line) => line.trim()).length,
+		body,
+	};
+});
+
+const totalLines = updates.reduce((sum, update) => sum + update.lines, 0);
 ---
 
 <MainLayout title="Updates" description="Glitched SMP update history and patch notes.">
 	<section id="updates" class="updates-page min-h-screen text-white">
 		<div class="updates-backdrop"></div>
 		<div class="relative z-5 mx-auto w-full max-w-6xl px-4 pt-28 pb-16">
-			<div class="max-w-3xl">
-				<p class="mb-3 inline-flex border-2 border-emerald-200/40 bg-black/45 px-3 py-2 text-xs uppercase text-emerald-100 shadow-[0_4px_0_rgba(0,0,0,0.35)] backdrop-blur font-PressStart2P">
-					Update Archive
-				</p>
-				<h1 class="text-4xl leading-tight md:text-6xl font-PressStart2P">
-					Latest Updates
-				</h1>
-				<p class="mt-5 text-lg leading-8 text-white/85 md:text-xl">
-					A cleaned-up archive of the server updates, keeping the details from the original posts while cutting out pings, chatter, and duplicate noise.
-				</p>
+			<div class="updates-hero grid gap-6 lg:grid-cols-[1fr_280px] lg:items-end">
+				<div class="max-w-3xl">
+					<p class="mb-3 inline-flex border-2 border-emerald-200/40 bg-black/45 px-3 py-2 text-xs uppercase text-emerald-100 shadow-[0_4px_0_rgba(0,0,0,0.35)] backdrop-blur font-PressStart2P">
+						Full Archive
+					</p>
+					<h1 class="text-4xl leading-tight md:text-6xl font-PressStart2P">
+						Latest Updates
+					</h1>
+					<p class="mt-5 text-lg leading-8 text-white/85 md:text-xl">
+						Every update from the original archive, kept intact and tucked into expandable cards so the bigger posts do not eat the whole page at once.
+					</p>
+				</div>
+				<div class="archive-stats border-2 border-emerald-100/35 bg-black/55 p-5 shadow-[0_8px_0_rgba(0,0,0,0.42)] backdrop-blur-md">
+					<span class="block text-xs uppercase text-emerald-100/75 font-PressStart2P">Archive Size</span>
+					<strong class="mt-3 block text-4xl text-lime-200 font-PressStart2P">{updates.length}</strong>
+					<p class="mt-2 text-white/70">updates and patchnotes</p>
+					<p class="mt-4 border-t border-white/10 pt-4 text-sm text-white/58">{totalLines.toLocaleString()} original content lines preserved.</p>
+				</div>
 			</div>
 
-			<div class="mt-10 grid gap-5">
-				{updates.map((update) => (
-					<article class="update-card border-2 border-white/15 bg-black/55 p-5 shadow-[0_7px_0_rgba(0,0,0,0.35)] backdrop-blur-md transition-transform hover:-translate-y-1 md:p-6">
-						<div class="flex flex-col gap-3 border-b border-white/15 pb-4 md:flex-row md:items-start md:justify-between">
+			<div class="mt-10 grid gap-4">
+				{updates.map((update, index) => (
+					<details class="update-card group border-2 border-white/15 bg-black/60 shadow-[0_7px_0_rgba(0,0,0,0.35)] backdrop-blur-md" open={index === 0}>
+						<summary class="update-summary grid cursor-pointer gap-4 p-5 md:grid-cols-[92px_1fr_auto] md:items-center md:p-6">
+							<div class="update-number text-lime-200 font-PressStart2P">#{updates.length - index}</div>
 							<div>
-								<span class="text-sm uppercase text-emerald-200">{update.date}</span>
-								<h2 class="mt-2 text-2xl font-PressStart2P">{update.version}</h2>
+								<div class="flex flex-wrap gap-2">
+									<span class="w-max border border-cyan-200/60 bg-cyan-300/15 px-3 py-1 text-sm text-cyan-100">{update.kind}</span>
+									<span class="w-max border border-amber-200/60 bg-amber-300/15 px-3 py-1 text-sm text-amber-100">{update.lines} lines</span>
+								</div>
+								<h2 class="mt-3 text-xl leading-8 md:text-2xl font-PressStart2P">{update.title}</h2>
 							</div>
-							<div class="flex flex-wrap gap-2">
-								<span class="w-max border border-cyan-200/60 bg-cyan-300/15 px-3 py-1 text-sm text-cyan-100">
-									{update.kind}
-								</span>
-								<span class="w-max border border-amber-200/60 bg-amber-300/15 px-3 py-1 text-sm text-amber-100">
-									{update.size}
-								</span>
-							</div>
+							<span class="open-label border-2 border-lime-200/50 bg-lime-300/15 px-3 py-2 text-sm text-lime-100">View full post</span>
+						</summary>
+						<div class="update-body border-t border-white/12 p-5 md:p-6">
+							<pre class="whitespace-pre-wrap break-words leading-7 text-white/82">{update.body}</pre>
 						</div>
-						<div class="mt-5 grid gap-5 md:grid-cols-2">
-							{update.sections.map((section) => (
-								<section class="update-section border border-white/10 bg-white/[0.04] p-4">
-									<h3 class="text-sm uppercase text-lime-200 font-PressStart2P">{section.title}</h3>
-									<ul class="mt-4 grid gap-3">
-										{section.items.map((item) => (
-											<li class="relative pl-5 leading-7 text-white/82 before:absolute before:left-0 before:top-2 before:h-2 before:w-2 before:bg-lime-300">
-												{item}
-											</li>
-										))}
-									</ul>
-								</section>
-							))}
-						</div>
-					</article>
+					</details>
 				))}
 			</div>
 		</div>
@@ -479,7 +122,7 @@ const updates: UpdateEntry[] = [
 		background-image: url("/updates-bg.svg");
 		background-size: cover;
 		background-position: center;
-		filter: saturate(1.08) contrast(1.05);
+		filter: saturate(1.1) contrast(1.08);
 		transform: scale(1.04);
 	}
 
@@ -487,12 +130,79 @@ const updates: UpdateEntry[] = [
 		position: fixed;
 		inset: 0;
 		background:
-			linear-gradient(90deg, rgba(0, 0, 0, 0.78), rgba(0, 0, 0, 0.44)),
-			linear-gradient(180deg, rgba(0, 0, 0, 0.28), rgba(0, 0, 0, 0.84));
+			radial-gradient(circle at 18% 14%, rgba(34, 197, 94, 0.18), transparent 24%),
+			radial-gradient(circle at 84% 18%, rgba(14, 165, 233, 0.14), transparent 22%),
+			linear-gradient(90deg, rgba(0, 0, 0, 0.82), rgba(0, 0, 0, 0.5)),
+			linear-gradient(180deg, rgba(0, 0, 0, 0.22), rgba(0, 0, 0, 0.88));
 	}
 
-	.update-card,
-	.update-section {
-		image-rendering: auto;
+	.updates-hero h1 {
+		color: #d9fff2;
+		text-shadow:
+			0 3px 0 #064e3b,
+			0 6px 0 #052e16,
+			0 12px 24px rgba(0, 0, 0, 0.62);
+	}
+
+	.archive-stats,
+	.update-card {
+		position: relative;
+		overflow: hidden;
+		box-shadow:
+			inset 0 0 0 2px rgba(255, 255, 255, 0.1),
+			0 8px 0 rgba(0, 0, 0, 0.36),
+			0 18px 36px rgba(0, 0, 0, 0.3);
+	}
+
+	.update-card {
+		background:
+			linear-gradient(135deg, rgba(5, 28, 36, 0.92), rgba(8, 38, 24, 0.86)),
+			linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px),
+			linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+		background-size: auto, 22px 22px, 22px 22px;
+	}
+
+	.update-summary {
+		list-style: none;
+	}
+
+	.update-summary::-webkit-details-marker {
+		display: none;
+	}
+
+	.update-number {
+		text-shadow: 0 3px 0 rgba(0, 0, 0, 0.7);
+	}
+
+	.open-label {
+		justify-self: start;
+		white-space: nowrap;
+		box-shadow: 0 4px 0 rgba(0, 0, 0, 0.28);
+	}
+
+	.update-card[open] .open-label {
+		background: rgba(250, 204, 21, 0.18);
+		border-color: rgba(254, 240, 138, 0.62);
+		color: #fef9c3;
+	}
+
+	.update-card[open] .open-label::before {
+		content: "Viewing ";
+	}
+
+	.update-body pre {
+		max-height: 72vh;
+		overflow: auto;
+		border: 1px solid rgba(255, 255, 255, 0.1);
+		background: rgba(0, 0, 0, 0.28);
+		padding: 1rem;
+		font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+		font-size: 0.95rem;
+	}
+
+	@media (max-width: 767px) {
+		.open-label {
+			white-space: normal;
+		}
 	}
 </style>
