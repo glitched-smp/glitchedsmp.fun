@@ -34,5 +34,78 @@ const title = subtitle
     <body class="w-full min-h-screen">
         <NavBar />
         <slot />
+        <script is:inline>
+            (() => {
+                const page = document.querySelector(".updates-page");
+                if (!page) return;
+
+                const sectionNames = new Set([
+                    "added", "removed", "changed", "fixed", "important", "features", "bug fixes", "custom generation", "server map", "teams recode"
+                ]);
+
+                const cleanLine = (line) => line
+                    .replace(/&#x20;/g, " ")
+                    .replace(/&amp;#x20;/g, " ")
+                    .replace(/\\-/g, "-")
+                    .replace(/^\s*[-*]\s+/, "")
+                    .replace(/^\s*\\\s*/, "")
+                    .replace(/\*\*/g, "")
+                    .replace(/\\/g, "")
+                    .replace(/\s+/g, " ")
+                    .trim();
+
+                const isSection = (line) => {
+                    const normalized = line.replace(/:$/, "").toLowerCase();
+                    return sectionNames.has(normalized) || /^[A-Z][A-Za-z ]{2,24}:$/.test(line);
+                };
+
+                document.querySelectorAll(".update-body pre").forEach((pre) => {
+                    const raw = pre.textContent || "";
+                    const wrapper = document.createElement("div");
+                    wrapper.className = "archive-entry";
+
+                    let currentList = null;
+                    const closeList = () => {
+                        currentList = null;
+                    };
+
+                    raw.split(/\r?\n/).forEach((originalLine) => {
+                        const trimmedOriginal = originalLine.trim();
+                        const line = cleanLine(trimmedOriginal);
+                        if (!line) {
+                            closeList();
+                            return;
+                        }
+
+                        if (isSection(line)) {
+                            closeList();
+                            const heading = document.createElement("h4");
+                            heading.textContent = line.replace(/:$/, "");
+                            wrapper.appendChild(heading);
+                            return;
+                        }
+
+                        const lookedLikeBullet = /^\s*(?:\\-|-|\*)\s*/.test(trimmedOriginal);
+                        if (lookedLikeBullet || currentList) {
+                            if (!currentList) {
+                                currentList = document.createElement("ul");
+                                wrapper.appendChild(currentList);
+                            }
+                            const item = document.createElement("li");
+                            item.textContent = line;
+                            currentList.appendChild(item);
+                            return;
+                        }
+
+                        closeList();
+                        const paragraph = document.createElement("p");
+                        paragraph.textContent = line;
+                        wrapper.appendChild(paragraph);
+                    });
+
+                    pre.replaceWith(wrapper);
+                });
+            })();
+        </script>
     </body>
 </html>
