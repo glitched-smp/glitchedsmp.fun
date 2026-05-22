@@ -50,6 +50,10 @@ const title = subtitle
                         "#6b3f2b", "#6b3f2b", "#321d13", "#8e5144", "#9b5b4d", "#321d13", "#6b3f2b", "#6b3f2b",
                         "#2b180f", "#2b180f", "#2b180f", "#2d190f", "#2d190f", "#2b180f", "#2b180f", "#2b180f"
                     ];
+                    const staffBios = {
+                        Plumbaskett: "The strongest master baiter of all time.",
+                        Yzopontop: "Hi I am yzopontop, and here to help you out."
+                    };
                     const avatarMarkup = `<div class="staff-avatar" aria-hidden="true">${avatarPixels
                         .map((color) => `<i style="--c:${color}"></i>`)
                         .join("")}</div>`;
@@ -60,6 +64,7 @@ const title = subtitle
                             const name = member.textContent?.trim();
                             if (!name) return;
 
+                            const bio = staffBios[name] || "placeholder";
                             const personCard = document.createElement("article");
                             personCard.className = card.className;
                             personCard.dataset.role = role;
@@ -69,7 +74,7 @@ const title = subtitle
                                 <div class="mt-4 flex flex-wrap gap-2">
                                     <span class="border border-white/20 bg-white/10 px-3 py-1 text-sm text-white/88">${role}</span>
                                 </div>
-                                <p class="mt-4 leading-7 text-white/68">placeholder</p>
+                                <p class="mt-4 leading-7 text-white/68">${bio}</p>
                             `;
                             personCards.push(personCard);
                         });
