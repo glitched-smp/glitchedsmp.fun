@@ -121,7 +121,10 @@ const title = subtitle
                         Plumbaskett: "The strongest master baiter of all time.",
                         Yzopontop: "Hi I am yzopontop, and here to help you out."
                     };
-                    const avatarMarkup = `<div class="staff-avatar" aria-hidden="true">${avatarPixels
+                    const staffAvatars = {
+                        Lobexerion: `<img class="staff-avatar staff-avatar-image" src="/staff/lobexerion.svg" alt="" loading="lazy" decoding="async" />`
+                    };
+                    const defaultAvatarMarkup = `<div class="staff-avatar" aria-hidden="true">${avatarPixels
                         .map((color) => `<i style="--c:${color}"></i>`)
                         .join("")}</div>`;
                     const personCards = [];
@@ -132,6 +135,7 @@ const title = subtitle
                             if (!name) return;
 
                             const bio = staffBios[name] || "placeholder";
+                            const avatarMarkup = staffAvatars[name] || defaultAvatarMarkup;
                             const personCard = document.createElement("article");
                             personCard.className = card.className;
                             personCard.dataset.role = role;
