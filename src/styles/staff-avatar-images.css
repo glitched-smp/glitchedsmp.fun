@@ -23,6 +23,7 @@
 }
 
 .staff-section .staff-card.has-player-head .staff-avatar:not(.staff-avatar-image) i,
+.staff-section .staff-card:nth-child(1) .staff-avatar:not(.staff-avatar-image) i,
 .staff-section .staff-card:nth-child(3) .staff-avatar:not(.staff-avatar-image) i,
 .staff-section .staff-card:nth-child(4) .staff-avatar:not(.staff-avatar-image) i,
 .staff-section .staff-card:nth-child(5) .staff-avatar:not(.staff-avatar-image) i,
@@ -30,8 +31,13 @@
 .staff-section .staff-card:nth-child(9) .staff-avatar:not(.staff-avatar-image) i,
 .staff-section .staff-card:nth-child(12) .staff-avatar:not(.staff-avatar-image) i,
 .staff-section .staff-card:nth-child(13) .staff-avatar:not(.staff-avatar-image) i,
-.staff-section .staff-card:nth-child(14) .staff-avatar:not(.staff-avatar-image) i {
+.staff-section .staff-card:nth-child(14) .staff-avatar:not(.staff-avatar-image) i,
+.staff-section .staff-card:nth-child(15) .staff-avatar:not(.staff-avatar-image) i {
   opacity: 0;
+}
+
+.staff-section .staff-card:nth-child(1) .staff-avatar:not(.staff-avatar-image) {
+  background-image: url("https://mc-heads.net/avatar/Messey_Mess1/128");
 }
 
 .staff-section .staff-card:nth-child(3) .staff-avatar:not(.staff-avatar-image) {
@@ -64,4 +70,8 @@
 
 .staff-section .staff-card:nth-child(14) .staff-avatar:not(.staff-avatar-image) {
   background-image: url("https://mc-heads.net/avatar/Plumbasket/128");
+}
+
+.staff-section .staff-card:nth-child(15) .staff-avatar:not(.staff-avatar-image) {
+  background-image: url("https://mc-heads.net/avatar/minminer2011/128");
 }
