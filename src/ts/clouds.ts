@@ -12,24 +12,44 @@ type ActiveCloud = {
 }
 
 const activeClouds: ActiveCloud[] = []
+let cloudInterval: number | undefined
+let cloudFrame = 0
+
+function cloudsDisabled() {
+    return document.documentElement.classList.contains("clouds-off")
+}
+
+function clearClouds() {
+    while (activeClouds.length) {
+        activeClouds.pop()?.element.remove()
+    }
+}
 
 function spawnCloud(parent: HTMLElement) {
+    if (cloudsDisabled()) return
+
     const element = document.createElement("img")
     element.id = `${Math.random()}${Math.random()}${Math.random()}`
 
     const clouds = [Cloud0, Cloud1, Cloud2, Cloud3, Cloud4]
     element.src = clouds[Math.floor(Math.random() * clouds.length)].src
-    element.className = "opacity-75 absolute z-4"
+    element.className = "opacity-75 absolute z-4 site-cloud"
     parent.appendChild(element)
     activeClouds.push({
         element,
-        speed: Math.floor(Math.random() * 1.5) * .5,
+        speed: Math.max(0.35, Math.random() * 0.75),
         x: window.innerWidth,
         y: Math.floor(Math.random() * (window.innerHeight - 101)) + 100,
     })
 }
 
 function updateClouds() {
+    if (cloudsDisabled()) {
+        clearClouds()
+        cloudFrame = 0
+        return
+    }
+
     for (let i = activeClouds.length - 1; i >= 0; i--) {
         const cloud = activeClouds[i]
         if (!cloud.element) continue
@@ -44,12 +64,48 @@ function updateClouds() {
         cloud.element.style.top = `${cloud.y}px`
     }
 
-    requestAnimationFrame(updateClouds)
+    cloudFrame = requestAnimationFrame(updateClouds)
+}
+
+function startClouds(parent: HTMLElement) {
+    if (cloudsDisabled()) {
+        clearClouds()
+        return
+    }
+
+    if (!cloudInterval) {
+        cloudInterval = window.setInterval(() => spawnCloud(parent), 500)
+    }
+
+    if (!cloudFrame) updateClouds()
+}
+
+function stopClouds() {
+    if (cloudInterval) {
+        window.clearInterval(cloudInterval)
+        cloudInterval = undefined
+    }
+
+    if (cloudFrame) {
+        cancelAnimationFrame(cloudFrame)
+        cloudFrame = 0
+    }
+
+    clearClouds()
 }
 
 document.addEventListener("DOMContentLoaded", () => {
     const homeSection = document.getElementById("home")
     if (!homeSection) return
-    setInterval(() => spawnCloud(homeSection), 500)
-    updateClouds()
+
+    startClouds(homeSection)
+
+    window.addEventListener("glitched-settings-change", () => {
+        if (cloudsDisabled()) {
+            stopClouds()
+            return
+        }
+
+        startClouds(homeSection)
+    })
 })
