@@ -31,11 +31,78 @@ const title = subtitle
             rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
         />
+        <script is:inline>
+            (() => {
+                try {
+                    const root = document.documentElement;
+                    if (localStorage.getItem("glitched-clouds") === "off") root.classList.add("clouds-off");
+                    if (localStorage.getItem("glitched-animations") === "off") root.classList.add("animations-off");
+                } catch {}
+            })();
+        </script>
     </head>
     <body class="w-full min-h-screen">
         <NavBar />
         <slot />
         <Footer />
+        <aside class="performance-controls" aria-label="Visual settings">
+            <button class="performance-controls-tab" type="button" aria-expanded="false" aria-controls="performance-controls-panel">
+                Settings
+            </button>
+            <div id="performance-controls-panel" class="performance-controls-panel" hidden>
+                <p class="performance-controls-title font-PressStart2P">Visuals</p>
+                <label>
+                    <span>Clouds</span>
+                    <input id="clouds-toggle" type="checkbox" checked />
+                </label>
+                <label>
+                    <span>Animations</span>
+                    <input id="animations-toggle" type="checkbox" checked />
+                </label>
+            </div>
+        </aside>
+        <script is:inline>
+            (() => {
+                const root = document.documentElement;
+                const controls = document.querySelector(".performance-controls");
+                const tab = document.querySelector(".performance-controls-tab");
+                const panel = document.getElementById("performance-controls-panel");
+                const cloudsToggle = document.getElementById("clouds-toggle");
+                const animationsToggle = document.getElementById("animations-toggle");
+                if (!controls || !tab || !panel || !cloudsToggle || !animationsToggle) return;
+
+                const setStored = (key, enabled) => {
+                    try {
+                        localStorage.setItem(key, enabled ? "on" : "off");
+                    } catch {}
+                };
+
+                const sync = () => {
+                    cloudsToggle.checked = !root.classList.contains("clouds-off");
+                    animationsToggle.checked = !root.classList.contains("animations-off");
+                };
+
+                tab.addEventListener("click", () => {
+                    const isOpen = controls.classList.toggle("is-open");
+                    tab.setAttribute("aria-expanded", String(isOpen));
+                    panel.hidden = !isOpen;
+                });
+
+                cloudsToggle.addEventListener("change", () => {
+                    root.classList.toggle("clouds-off", !cloudsToggle.checked);
+                    setStored("glitched-clouds", cloudsToggle.checked);
+                    window.dispatchEvent(new CustomEvent("glitched-settings-change"));
+                });
+
+                animationsToggle.addEventListener("change", () => {
+                    root.classList.toggle("animations-off", !animationsToggle.checked);
+                    setStored("glitched-animations", animationsToggle.checked);
+                    window.dispatchEvent(new CustomEvent("glitched-settings-change"));
+                });
+
+                sync();
+            })();
+        </script>
         <script is:inline>
             (() => {
                 const staffGrid = document.querySelector(".staff-section .mt-8.grid");
