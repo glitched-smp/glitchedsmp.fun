@@ -8,3 +8,60 @@
 .staff-section .staff-card:hover .staff-avatar-image {
   transform: translateY(-3px) scale(1.02) !important;
 }
+
+.staff-section .staff-card .staff-avatar:not(.staff-avatar-image) {
+  background-color: rgba(6, 18, 14, 0.72);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 88%;
+  image-rendering: pixelated;
+  overflow: hidden;
+}
+
+.staff-section .staff-card .staff-avatar:not(.staff-avatar-image) i {
+  opacity: 1;
+}
+
+.staff-section .staff-card.has-player-head .staff-avatar:not(.staff-avatar-image) i,
+.staff-section .staff-card:nth-child(3) .staff-avatar:not(.staff-avatar-image) i,
+.staff-section .staff-card:nth-child(4) .staff-avatar:not(.staff-avatar-image) i,
+.staff-section .staff-card:nth-child(5) .staff-avatar:not(.staff-avatar-image) i,
+.staff-section .staff-card:nth-child(7) .staff-avatar:not(.staff-avatar-image) i,
+.staff-section .staff-card:nth-child(9) .staff-avatar:not(.staff-avatar-image) i,
+.staff-section .staff-card:nth-child(12) .staff-avatar:not(.staff-avatar-image) i,
+.staff-section .staff-card:nth-child(13) .staff-avatar:not(.staff-avatar-image) i,
+.staff-section .staff-card:nth-child(14) .staff-avatar:not(.staff-avatar-image) i {
+  opacity: 0;
+}
+
+.staff-section .staff-card:nth-child(3) .staff-avatar:not(.staff-avatar-image) {
+  background-image: url("https://mc-heads.net/avatar/gemerboyg/128");
+}
+
+.staff-section .staff-card:nth-child(4) .staff-avatar:not(.staff-avatar-image) {
+  background-image: url("https://mc-heads.net/avatar/Ect0fox/128");
+}
+
+.staff-section .staff-card:nth-child(5) .staff-avatar:not(.staff-avatar-image) {
+  background-image: url("https://mc-heads.net/avatar/Silverbullet1991/128");
+}
+
+.staff-section .staff-card:nth-child(7) .staff-avatar:not(.staff-avatar-image) {
+  background-image: url("https://mc-heads.net/avatar/PZstorm/128");
+}
+
+.staff-section .staff-card:nth-child(9) .staff-avatar:not(.staff-avatar-image) {
+  background-image: url("https://mc-heads.net/avatar/Floormann15/128");
+}
+
+.staff-section .staff-card:nth-child(12) .staff-avatar:not(.staff-avatar-image) {
+  background-image: url("https://mc-heads.net/avatar/_therealfaceless/128");
+}
+
+.staff-section .staff-card:nth-child(13) .staff-avatar:not(.staff-avatar-image) {
+  background-image: url("https://mc-heads.net/avatar/Maxboi152/128");
+}
+
+.staff-section .staff-card:nth-child(14) .staff-avatar:not(.staff-avatar-image) {
+  background-image: url("https://mc-heads.net/avatar/Plumbasket/128");
+}
