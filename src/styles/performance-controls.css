@@ -1,0 +1,149 @@
+.performance-controls {
+  position: fixed;
+  top: 46%;
+  right: 0;
+  z-index: 80;
+  display: flex;
+  align-items: stretch;
+  font-family: Roboto, system-ui, sans-serif;
+  transform: translateY(-50%);
+}
+
+.performance-controls-tab {
+  writing-mode: vertical-rl;
+  border: 2px solid rgba(254, 240, 138, 0.5);
+  border-right: 0;
+  background: rgba(8, 36, 28, 0.86);
+  color: #fef3c7;
+  padding: 0.8rem 0.45rem;
+  font-family: "Press Start 2P", system-ui, sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0;
+  box-shadow: -5px 5px 0 rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+}
+
+.performance-controls-panel {
+  width: min(240px, calc(100vw - 58px));
+  border: 2px solid rgba(254, 240, 138, 0.5);
+  background:
+    linear-gradient(135deg, rgba(5, 28, 24, 0.96), rgba(9, 55, 39, 0.92)),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: auto, 18px 18px, 18px 18px;
+  padding: 1rem;
+  color: rgba(255, 255, 255, 0.88);
+  box-shadow: -7px 7px 0 rgba(0, 0, 0, 0.35), -18px 18px 42px rgba(0, 0, 0, 0.24);
+  backdrop-filter: blur(10px);
+}
+
+.performance-controls-title {
+  margin: 0 0 0.9rem;
+  color: #fef3c7;
+  font-size: 0.75rem;
+  line-height: 1.6;
+}
+
+.performance-controls label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 0.8rem 0;
+  font-size: 0.95rem;
+}
+
+.performance-controls label:last-child {
+  padding-bottom: 0;
+}
+
+.performance-controls input {
+  width: 2.75rem;
+  height: 1.45rem;
+  appearance: none;
+  border: 2px solid rgba(254, 240, 138, 0.52);
+  background: rgba(0, 0, 0, 0.42);
+  cursor: pointer;
+  image-rendering: pixelated;
+}
+
+.performance-controls input::before {
+  display: block;
+  width: 0.85rem;
+  height: 0.85rem;
+  margin: 0.17rem;
+  content: "";
+  background: #f87171;
+  transition: transform 120ms ease, background 120ms ease;
+}
+
+.performance-controls input:checked::before {
+  background: #bef264;
+  transform: translateX(1.25rem);
+}
+
+html.clouds-off .site-cloud {
+  display: none !important;
+}
+
+html.animations-off *,
+html.animations-off *::before,
+html.animations-off *::after {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}
+
+html.animations-off .home-hero .hero-copy:hover,
+html.animations-off .server-panel:hover,
+html.animations-off .about-card:hover,
+html.animations-off .rating-card:hover,
+html.animations-off .staff-card:hover,
+html.animations-off .update-card:hover,
+html.animations-off .staff-card:hover .staff-avatar,
+html.animations-off .update-card[open] {
+  transform: none !important;
+  filter: none !important;
+}
+
+html.animations-off .about-section::after,
+html.animations-off .ratings-section::after,
+html.animations-off .staff-section::after,
+html.animations-off .updates-page::after,
+html.animations-off .about-section > div::before,
+html.animations-off .ratings-section > div::before,
+html.animations-off .staff-section > div::before,
+html.animations-off .updates-page main::before,
+html.animations-off .server-panel > div::after,
+html.animations-off .about-card::after,
+html.animations-off .rating-card::after,
+html.animations-off .staff-card::after,
+html.animations-off .update-card::before,
+html.animations-off .footer-brand::after,
+html.animations-off .footer-links::after {
+  opacity: 0.18 !important;
+}
+
+@media (max-width: 767px) {
+  .performance-controls {
+    top: auto;
+    right: 0.75rem;
+    bottom: 0.75rem;
+    transform: none;
+  }
+
+  .performance-controls-tab {
+    writing-mode: horizontal-tb;
+    border-right: 2px solid rgba(254, 240, 138, 0.5);
+    font-size: 0.58rem;
+  }
+
+  .performance-controls.is-open {
+    left: 0.75rem;
+  }
+
+  .performance-controls.is-open .performance-controls-panel {
+    width: 100%;
+  }
+}
