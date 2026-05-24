@@ -3,6 +3,7 @@
 @import "./staff-overhaul.css";
 @import "./life.css";
 @import "./performance-controls.css";
+@import "./staff-avatar-images.css";
 
 a:not(.nolink) {
   position: relative;
