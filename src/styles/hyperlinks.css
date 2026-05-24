@@ -2,6 +2,7 @@
 @import "./footer.css";
 @import "./staff-overhaul.css";
 @import "./life.css";
+@import "./performance-controls.css";
 
 a:not(.nolink) {
   position: relative;
