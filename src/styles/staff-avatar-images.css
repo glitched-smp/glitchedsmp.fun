@@ -1,0 +1,10 @@
+.staff-section .staff-avatar-image {
+  display: block !important;
+  object-fit: cover;
+  object-position: center;
+  image-rendering: pixelated;
+}
+
+.staff-section .staff-card:hover .staff-avatar-image {
+  transform: translateY(-3px) scale(1.02) !important;
+}
