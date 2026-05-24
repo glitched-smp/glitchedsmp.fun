@@ -1,0 +1,254 @@
+@keyframes ambient-drift {
+  0% { background-position: 0 0, 0 0, 0 0; }
+  100% { background-position: 128px -160px, -96px 144px, 0 0; }
+}
+
+@keyframes torch-flicker {
+  0%, 100% { opacity: 0.62; transform: scale(1); }
+  35% { opacity: 0.82; transform: scale(1.05); }
+  68% { opacity: 0.52; transform: scale(0.98); }
+}
+
+@keyframes status-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.36); }
+  50% { box-shadow: 0 0 0 8px rgba(52, 211, 153, 0); }
+}
+
+@keyframes star-breathe {
+  0%, 100% { filter: brightness(1); transform: translateY(0); }
+  50% { filter: brightness(1.28); transform: translateY(-1px); }
+}
+
+@keyframes grass-sway {
+  0%, 100% { transform: translateY(0) skewX(0deg); }
+  50% { transform: translateY(-2px) skewX(-2deg); }
+}
+
+.home-hero,
+.about-section,
+.ratings-section,
+.staff-section,
+.updates-page {
+  isolation: isolate;
+}
+
+.home-hero .hero-copy,
+.server-panel,
+.about-section .about-card,
+.ratings-section .rating-card,
+.staff-section .staff-card,
+.updates-page .update-card {
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    filter 180ms ease;
+}
+
+.home-hero .hero-copy:hover,
+.server-panel:hover {
+  transform: translateY(-3px);
+}
+
+.about-section::after,
+.ratings-section::after,
+.staff-section::after,
+.updates-page::after {
+  animation: ambient-drift 34s linear infinite;
+}
+
+.about-section > div::before,
+.ratings-section > div::before,
+.staff-section > div::before,
+.updates-page main::before {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  content: "";
+  background:
+    radial-gradient(circle at 16% 24%, rgba(250, 204, 21, 0.16) 0 2px, transparent 3px),
+    radial-gradient(circle at 76% 34%, rgba(190, 242, 100, 0.16) 0 2px, transparent 3px),
+    radial-gradient(circle at 52% 76%, rgba(125, 211, 252, 0.12) 0 2px, transparent 3px);
+  background-size: 180px 180px, 220px 220px, 260px 260px;
+  opacity: 0.72;
+  pointer-events: none;
+  animation: ambient-drift 42s linear infinite;
+}
+
+.about-section > div,
+.ratings-section > div,
+.staff-section > div,
+.updates-page main {
+  position: relative;
+}
+
+.about-section h2,
+.ratings-section h2,
+.staff-section h2,
+.updates-page h1 {
+  position: relative;
+}
+
+.about-section h2::after,
+.ratings-section h2::after,
+.staff-section h2::after,
+.updates-page h1::after {
+  display: block;
+  width: min(260px, 70vw);
+  height: 4px;
+  margin-top: 1rem;
+  content: "";
+  background: linear-gradient(90deg, #facc15, #84cc16, transparent);
+  box-shadow: 0 0 18px rgba(250, 204, 21, 0.24);
+}
+
+.server-panel > div,
+.about-card,
+.rating-card,
+.staff-card,
+.update-card,
+.footer-brand,
+.footer-links {
+  position: relative;
+}
+
+.server-panel > div::after,
+.about-card::after,
+.rating-card::after,
+.staff-card::after,
+.update-card::before,
+.footer-brand::after,
+.footer-links::after {
+  position: absolute;
+  width: 72px;
+  height: 72px;
+  right: 14px;
+  bottom: 12px;
+  content: "";
+  background: radial-gradient(circle, rgba(250, 204, 21, 0.22), transparent 62%);
+  pointer-events: none;
+  animation: torch-flicker 3.6s ease-in-out infinite;
+}
+
+.server-panel > div::after {
+  right: 18px;
+  top: 18px;
+  bottom: auto;
+}
+
+.about-card:hover,
+.rating-card:hover,
+.staff-card:hover,
+.update-card:hover {
+  filter: saturate(1.08) brightness(1.04);
+  transform: translateY(-6px) rotateX(1deg);
+}
+
+.about-card:hover,
+.rating-card:hover,
+.staff-card:hover,
+.update-card:hover,
+.server-panel:hover > div {
+  box-shadow:
+    inset 0 0 0 2px rgba(255, 255, 255, 0.14),
+    0 8px 0 rgba(0, 0, 0, 0.38),
+    0 22px 42px rgba(0, 0, 0, 0.34),
+    0 0 28px rgba(190, 242, 100, 0.12) !important;
+}
+
+#server-status-display {
+  position: relative;
+  animation: status-pulse 2.4s ease-out infinite;
+}
+
+#server-status-display::before {
+  display: inline-block;
+  width: 0.55rem;
+  height: 0.55rem;
+  margin-right: 0.45rem;
+  content: "";
+  background: currentColor;
+  vertical-align: 0.02em;
+}
+
+#online-players-display {
+  text-shadow:
+    0 3px 0 rgba(0, 0, 0, 0.58),
+    0 0 16px rgba(190, 242, 100, 0.38);
+}
+
+.rating-card .text-yellow-300,
+.rating-star,
+.ratings-section .rating-card .text-yellow-300 {
+  display: inline-block;
+  animation: star-breathe 2.8s ease-in-out infinite;
+}
+
+.rating-card .text-yellow-300:nth-child(2n),
+.rating-star:nth-child(2n) {
+  animation-delay: 0.35s;
+}
+
+.rating-card .text-yellow-300:nth-child(3n),
+.rating-star:nth-child(3n) {
+  animation-delay: 0.7s;
+}
+
+.ground-grass {
+  animation: grass-sway 5.5s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
+.staff-avatar {
+  box-shadow:
+    inset 0 0 0 3px rgba(0, 0, 0, 0.2),
+    0 8px 0 rgba(0, 0, 0, 0.36),
+    0 20px 32px rgba(0, 0, 0, 0.28),
+    0 0 22px rgba(250, 204, 21, 0.12) !important;
+}
+
+.staff-card:hover .staff-avatar {
+  filter: brightness(1.1) saturate(1.1);
+}
+
+.update-card[open] {
+  transform: translateY(-4px);
+}
+
+.update-card[open]::before {
+  width: 120px;
+  height: 120px;
+  opacity: 0.9;
+}
+
+.nolink:hover {
+  filter: brightness(1.08) saturate(1.08);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .home-hero .hero-copy:hover,
+  .server-panel:hover,
+  .about-card:hover,
+  .rating-card:hover,
+  .staff-card:hover,
+  .update-card:hover {
+    transform: translateY(-3px);
+  }
+
+  .about-section > div::before,
+  .ratings-section > div::before,
+  .staff-section > div::before,
+  .updates-page main::before {
+    opacity: 0.45;
+  }
+}
