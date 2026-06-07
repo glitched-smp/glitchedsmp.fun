@@ -1,0 +1,36 @@
+.staff-section .staff-card p {
+  font-size: 0 !important;
+}
+
+.staff-section .staff-card p::after {
+  content: "No bio, they're pretty shy.";
+  font-size: 0.98rem;
+}
+
+.staff-section .staff-card:nth-child(1) p::after {
+  content: "This is my cool server.";
+}
+
+.staff-section .staff-card:nth-child(2) p::after {
+  content: "I am Lobex... what are you doing here?";
+}
+
+.staff-section .staff-card:nth-child(3) p::after {
+  content: "I code and code and code.";
+}
+
+.staff-section .staff-card:nth-child(4) p::after {
+  content: "Fuck it, it's fine.";
+}
+
+.staff-section .staff-card:nth-child(5) p::after {
+  content: "Retired co-owner/dom, but still active as a volunteer admin and always down to greet new players!";
+}
+
+.staff-section .staff-card:nth-child(8) p::after {
+  content: "I am the GOAT of HR.";
+}
+
+.staff-section .staff-card:nth-child(13) p::after {
+  content: "I build, build, and build.";
+}
