@@ -5,6 +5,7 @@
 @import "./performance-controls.css";
 @import "./staff-avatar-images.css";
 @import "./staff-bios.css";
+@import "./visual-cleanup.css";
 
 a:not(.nolink) {
   position: relative;
