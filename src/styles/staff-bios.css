@@ -34,3 +34,11 @@
 .staff-section .staff-card:nth-child(13) p::after {
   content: "I build, build, and build.";
 }
+
+.staff-section .staff-card:nth-child(14) p::after {
+  content: "The strongest master baiter of all time.";
+}
+
+.staff-section .staff-card:nth-child(15) p::after {
+  content: "Hi I am yzopontop, and here to help you out.";
+}
